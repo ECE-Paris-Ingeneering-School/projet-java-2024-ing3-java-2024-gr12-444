@@ -4,12 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import controller.*;
+
 public class LoginInterface extends JFrame implements ActionListener {
 
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JCheckBox showPasswordCheckBox;
     private JButton loginButton;
+
+    Controller controller =new Controller();
 
     public LoginInterface() {
         setTitle("Login");
@@ -44,17 +48,23 @@ public class LoginInterface extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    private String username;
+    private String password;
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            String username = usernameField.getText();
-            String password = String.valueOf(passwordField.getPassword());
+            username = usernameField.getText();
+            password = String.valueOf(passwordField.getPassword());
+
+            controller.verifUser();
+            this.dispose();
+
 
             // Vérifier les informations de connexion ici
-            if (username.equals("admin") && password.equals("admin")) {
-                JOptionPane.showMessageDialog(this, "Login Successful!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid username or password");
-            }
+//            if (username.equals("admin") && password.equals("admin")) {
+//                JOptionPane.showMessageDialog(this, "Login Successful!");
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Invalid username or password");
+//            }
         }else if (e.getSource() == showPasswordCheckBox) {
             JCheckBox checkBox = (JCheckBox) e.getSource();
             if (checkBox.isSelected()) {
@@ -63,6 +73,14 @@ public class LoginInterface extends JFrame implements ActionListener {
                 passwordField.setEchoChar('*'); // Masquer le mot de passe
             }
         }
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 //    public static void main(String[] args) {
 //        SwingUtilities.invokeLater(new Runnable() {
