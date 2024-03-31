@@ -1,14 +1,17 @@
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+package vue;
 
-public class LoginForm extends JFrame implements ActionListener {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Form extends JFrame implements ActionListener {
     private JButton connexionButton, inscriptionButton, inviteButton;
 
-    public LoginForm() {
+    public Form() {
         // Set up the frame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-    setLayout(new FlowLayout(FlowLayout.CENTER));
+        setLayout(new FlowLayout(FlowLayout.CENTER));
         setSize(300, 200);
         setLocationRelativeTo(null);
 
@@ -48,7 +51,7 @@ public class LoginForm extends JFrame implements ActionListener {
             // Code for inscription form
             //JOptionPane.showMessageDialog(this, "Inscription form displayed.");
         }else if (e.getSource() == inviteButton) {
-            SpringBox springBox = new SpringBox();
+            Acceuil acceuil = new Acceuil();
             this.dispose();
             // Code for inscription form
             //JOptionPane.showMessageDialog(this, "Inscription form displayed.");

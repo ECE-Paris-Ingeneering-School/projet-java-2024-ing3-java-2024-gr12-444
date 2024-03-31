@@ -1,15 +1,17 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+package vue;
 
-public class SpringBox extends JFrame implements ActionListener {
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Acceuil extends JFrame implements ActionListener {
 
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JCheckBox showPasswordCheckBox;
     private JButton loginButton;
 
-    public SpringBox() {
+    public Acceuil() {
         setTitle("Ecran");
         setSize(1000, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
