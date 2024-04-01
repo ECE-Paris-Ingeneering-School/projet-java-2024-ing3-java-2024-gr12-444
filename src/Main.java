@@ -1,8 +1,10 @@
 import controller.*;
-import vue.Form;
+import vue.*;
+// import vue.Form;
 
 public class Main {
     public static void main(String[] args) {
-        Controller controller =new Controller(new Form());
+        Controller controller = new Controller();
+        Form form = new Form(controller);
     }
 }

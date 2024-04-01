@@ -1,34 +1,34 @@
 package controller;
 
 import model.DAOUser;
-import vue.*;
+
 //import model.*;
 public class Controller {
 
-    LoginInterface loginInterface;
-    DAOUser daoUser;
+    private final DAOUser daoUser;
 
-    public Controller(){
-
-    }
-    public Controller(Form form){
-        Form from = new Form();
+    public Controller() {
+        this.daoUser = new DAOUser();
     }
 
-    public String username(){
-        return loginInterface.getUsername();
-    }
-    public String password(){
-        return loginInterface.getPassword();
-    }
-    public void pass(){
-        System.out.println(password());
-        System.out.println(username());
+    public void setUsername(String username) {
+        daoUser.setUsername(username);
     }
 
-    public void verifUser() {
-        DAOUser daoUser= new DAOUser();
-        daoUser.verifUser();
-        System.out.println("user exist");
+    public void setPassword(String password) {
+        daoUser.setPassword(password);
     }
+
+    public String getUsername() {
+        return daoUser.getUsername();
+    }
+
+    public String getPassword() {
+        return daoUser.getPassword();
+    }
+
+    public Boolean verifUser() {
+        return daoUser.verifUser(this);
+    }
+
 }

@@ -13,15 +13,16 @@ public class LoginInterface extends JFrame implements ActionListener {
     private JCheckBox showPasswordCheckBox;
     private JButton loginButton;
 
-    Controller controller =new Controller();
+    private Controller controller;
 
-    public LoginInterface() {
+    public LoginInterface(Controller controller) {
+        this.controller = controller;
         setTitle("Login");
         setSize(300, 200);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel panel = new JPanel(new GridLayout(3, 1,10,30));
+        JPanel panel = new JPanel(new GridLayout(3, 1, 10, 30));
         add(panel);
 
         JLabel usernameLabel = new JLabel("Username:");
@@ -50,22 +51,24 @@ public class LoginInterface extends JFrame implements ActionListener {
 
     private String username;
     private String password;
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
-            username = usernameField.getText();
-            password = String.valueOf(passwordField.getPassword());
 
-            controller.verifUser();
+            this.controller.setUsername(usernameField.getText());
+            this.controller.setPassword(String.valueOf(passwordField.getPassword()));
+
+            System.out.println("Username: " + this.controller.getUsername());
+            System.out.println("Password: " + this.controller.getPassword());
+
+            if (this.controller.verifUser()) {
+                System.out.println("User found");
+                redirectToHome();
+            } else {
+                System.out.println("User not found");
+            }
             this.dispose();
-
-
-            // Vérifier les informations de connexion ici
-//            if (username.equals("admin") && password.equals("admin")) {
-//                JOptionPane.showMessageDialog(this, "Login Successful!");
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Invalid username or password");
-//            }
-        }else if (e.getSource() == showPasswordCheckBox) {
+        } else if (e.getSource() == showPasswordCheckBox) {
             JCheckBox checkBox = (JCheckBox) e.getSource();
             if (checkBox.isSelected()) {
                 passwordField.setEchoChar((char) 0); // Afficher le mot de passe
@@ -82,11 +85,15 @@ public class LoginInterface extends JFrame implements ActionListener {
     public String getPassword() {
         return password;
     }
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-//                new LoginInterface();
-//            }
-//        });
-//    }
+
+    public void redirectToHome() {
+        Acceuil acceuil = new Acceuil();
+    }
+    // public static void main(String[] args) {
+    // SwingUtilities.invokeLater(new Runnable() {
+    // public void run() {
+    // new LoginInterface();
+    // }
+    // });
+    // }
 }

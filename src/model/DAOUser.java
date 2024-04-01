@@ -2,21 +2,44 @@ package model;
 
 import controller.*;
 import database.Database;
-import vue.LoginInterface;
 
+import javax.swing.plaf.synth.SynthStyle;
 import java.sql.*;
 
 public class DAOUser {
 
-    public void verifUser() {
+    private String username;
+    private String password;
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    private Controller controller;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean verifUser(Controller controller) {
+        this.controller = controller;
+        System.out.println("caca");
         Connection dbConnection = null;
         Statement statement = null;
 
-        Controller controller =new Controller();
-        controller.pass();
+        // controller.pass();
 
-        String sql = "SELECT * FROM user WHERE username = '" + controller.username()+ "' AND password = '" + controller.password() + "'";
-        //SELECT * FROM user WHERE username = 'mama' AND password= "mama";
+        String sql = "SELECT * FROM user WHERE username = '" + this.controller.getUsername() + "' AND password = '"
+                + this.controller.getPassword() + "'";
+        // SELECT * FROM user WHERE username = 'mama' AND password= "mama";
 
         try {
             Database database = new Database();
@@ -24,7 +47,16 @@ public class DAOUser {
             try {
                 statement = dbConnection.createStatement();
                 statement.executeQuery(sql);
-                System.out.println("read");
+                ResultSet rs = statement.getResultSet();
+                if (rs.next()) {
+                    System.out.println("User found");
+                    return true;
+                } else {
+                    System.out.println("User not found");
+                    return false;
+                }
+
+                // System.out.println("read");
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             } finally {
