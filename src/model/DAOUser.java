@@ -7,7 +7,6 @@ import javax.swing.plaf.synth.SynthStyle;
 import java.sql.*;
 
 public class DAOUser {
-
     private String username;
     private String password;
 
@@ -18,7 +17,6 @@ public class DAOUser {
     public String getPassword() {
         return this.password;
     }
-
     private Controller controller;
 
     public void setUsername(String username) {
