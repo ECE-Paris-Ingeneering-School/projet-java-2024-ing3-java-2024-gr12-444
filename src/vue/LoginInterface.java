@@ -66,6 +66,7 @@ public class LoginInterface extends JFrame implements ActionListener {
                 redirectToHome();
             } else {
                 System.out.println("User not found");
+                retirectToForm();
             }
             this.dispose();
         } else if (e.getSource() == showPasswordCheckBox) {
@@ -87,13 +88,9 @@ public class LoginInterface extends JFrame implements ActionListener {
     }
 
     public void redirectToHome() {
-        Acceuil acceuil = new Acceuil();
+        Accueil acceuil = new Accueil();
     }
-    // public static void main(String[] args) {
-    // SwingUtilities.invokeLater(new Runnable() {
-    // public void run() {
-    // new LoginInterface();
-    // }
-    // });
-    // }
+
+    public void retirectToForm(){ Form form = new Form(controller);
+    }
 }

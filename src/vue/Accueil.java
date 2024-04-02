@@ -4,14 +4,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Acceuil extends JFrame implements ActionListener {
+public class Accueil extends JFrame implements ActionListener {
 
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JCheckBox showPasswordCheckBox;
     private JButton loginButton;
 
-    public Acceuil() {
+    public Accueil() {
         setTitle("Ecran");
         setSize(1000, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

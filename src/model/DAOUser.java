@@ -31,7 +31,6 @@ public class DAOUser {
 
     public Boolean verifUser(Controller controller) {
         this.controller = controller;
-        System.out.println("caca");
         Connection dbConnection = null;
         Statement statement = null;
 
