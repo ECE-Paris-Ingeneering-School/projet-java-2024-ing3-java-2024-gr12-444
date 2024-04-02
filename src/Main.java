@@ -8,3 +8,5 @@ public class Main {
         Form form = new Form(controller);
     }
 }
+
+//test
