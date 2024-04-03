@@ -34,9 +34,11 @@ public class Controller {
         return daoUser.verifUser(this);
     }
 
-    public void film(){daoFilm.film(this);}
+    public void film(){
+        daoFilm.film(this);
+    }
 
-    public ArrayList<String> getList(){
+    public ArrayList<Film> getList(){
         return daoFilm.getList();
     }
 
