@@ -4,32 +4,49 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import controller.*;
 
-public class Accueil extends JFrame implements ActionListener {
+public class AccueilUser extends JFrame implements ActionListener {
 
     private Controller controller;
-    private JLabel titre;
+    private JLabel titre, user;
     private JButton buttonX,buttonY,buttonZ;
     private JButton quitter ,disconnect , plus;
-    
 
-    public Accueil(Controller controller) {
+    private ArrayList<String> list;
+
+
+    public AccueilUser(Controller controller) {
         this.controller=controller;
+        controller.film();
+        list= controller.getList();
+
+        System.out.println("page film");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+
+        }
+
+
         setTitle("Ecran");
         setSize(1000, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(0,1));
 
-        //titre
-        JPanel titrePanel = new JPanel();
+        //titre et user
+        JPanel titrePanel = new JPanel(new GridLayout(1,2));
         titrePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         titre = new JLabel("Cinema de Grenelle");
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titre);
+        user= new JLabel(controller.getUsername());
+        user.setFont(new Font("Serif", Font.BOLD, 20));
+        user.setHorizontalAlignment(SwingConstants.RIGHT);
+        titrePanel.add(user);
         add(titrePanel, BorderLayout.NORTH);
 
         //Deconection ou quitter etc

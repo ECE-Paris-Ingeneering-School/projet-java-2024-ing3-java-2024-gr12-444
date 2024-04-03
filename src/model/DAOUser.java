@@ -3,7 +3,6 @@ package model;
 import controller.*;
 import database.Database;
 
-import javax.swing.plaf.synth.SynthStyle;
 import java.sql.*;
 
 public class DAOUser {

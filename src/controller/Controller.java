@@ -1,14 +1,17 @@
 package controller;
 
-import model.DAOUser;
+import model.*;
 
-//import model.*;
+import java.util.ArrayList;
+
 public class Controller {
 
     private final DAOUser daoUser;
+    private final DAOFilm daoFilm;
 
     public Controller() {
         this.daoUser = new DAOUser();
+        this.daoFilm = new DAOFilm();
     }
 
     public void setUsername(String username) {
@@ -29,6 +32,12 @@ public class Controller {
 
     public Boolean verifUser() {
         return daoUser.verifUser(this);
+    }
+
+    public void film(){daoFilm.film(this);}
+
+    public ArrayList<String> getList(){
+        return daoFilm.getList();
     }
 
 }
