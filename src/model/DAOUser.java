@@ -34,7 +34,7 @@ public class DAOUser {
 
         // controller.pass();
 
-        String sql = "SELECT * FROM user WHERE username = '" + this.controller.getUsername() + "' AND password = '"
+        String sql = "SELECT * FROM user WHERE Email = '" + this.controller.getUsername() + "' AND MotDePasse = '"
                 + this.controller.getPassword() + "'";
         // SELECT * FROM user WHERE username = 'mama' AND password= "mama";
 
@@ -46,6 +46,9 @@ public class DAOUser {
                 statement.executeQuery(sql);
                 ResultSet rs = statement.getResultSet();
                 if (rs.next()) {
+                    System.out.println(rs.getMetaData());
+                    System.out.println("ID :"+rs.getInt("UserID"));
+                    System.out.println("Statut :"+rs.getInt("Statut"));
                     System.out.println("User found");
                     return true;
                 } else {

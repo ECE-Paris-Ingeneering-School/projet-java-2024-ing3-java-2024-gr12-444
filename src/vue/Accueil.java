@@ -13,9 +13,10 @@ public class Accueil extends JFrame implements ActionListener {
     private JLabel titre;
     private JButton buttonX,buttonY,buttonZ;
     private JButton quitter ,disconnect , plus;
+    
 
-
-    public Accueil() {
+    public Accueil(Controller controller) {
+        this.controller=controller;
         setTitle("Ecran");
         setSize(1000, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -125,7 +126,7 @@ public class Accueil extends JFrame implements ActionListener {
         }
         else if (e.getSource() == disconnect) {
             this.dispose();
-            //fontionne pas ca
+            //ça fontionne pas encore
             Form form = new Form(controller);
 
         }

@@ -88,7 +88,7 @@ public class LoginInterface extends JFrame implements ActionListener {
     }
 
     public void redirectToHome() {
-        Accueil acceuil = new Accueil();
+        Accueil acceuil = new Accueil(this.controller);
     }
 
     public void retirectToForm(){ Form form = new Form(controller);
