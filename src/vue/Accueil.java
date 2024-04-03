@@ -18,51 +18,75 @@ public class Accueil extends JFrame implements ActionListener {
         setSize(1000, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout(0,1));
 
-        
 
-        JPanel panel1 = new JPanel();
-        panel1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        add(panel1, BorderLayout.NORTH);
-
+        //titre
+        JPanel titrePanel = new JPanel();
+        titrePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         titre = new JLabel("Cinema de Grenelle");
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
+        titrePanel.add(titre,BorderLayout.CENTER);
+        add(titrePanel, BorderLayout.NORTH);
 
-        panel1.add(titre,BorderLayout.CENTER);
+        //sections
 
-        JPanel panel2 = new JPanel();
-        panel2.setBorder(BorderFactory.createLineBorder(Color.RED));
-        add(panel2);
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(5, 1));
+        panel.setBorder(BorderFactory.createLineBorder(Color.RED));
 
-        String urText="<html>You can<br>use basic HTML<br>in Swing<br> components,"
-                +"Hope<br> I helped!";
-        JLabel lac=new JLabel(urText);
-        lac.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        panel2.add(lac);
-        JButton button = new JButton("Reserver");
-        panel2.add(button);
+        JScrollPane scrollPanel = new JScrollPane(panel);
+        scrollPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        add(scrollPanel, BorderLayout.CENTER);
 
-        JPanel panel3 = new JPanel();
-        panel3.setBorder(BorderFactory.createLineBorder(Color.RED));
-        add(panel3, BorderLayout.CENTER);
 
-        String urText2="<html>You can<br>use basic HTML<br>in Swing<br> components,"
+        //Panel 1 : premier film
+        JPanel panelX = new JPanel();
+        panelX.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+
+        String urText2="<html>PANEL X You can<br>use basic HTML<br>in Swing<br> components,"
                 +"Hope<br> I helped!";
         JLabel lac2=new JLabel(urText2);
+        lac2.setIcon(new ImageIcon("images/test.jpeg"));
         lac2.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        panel3.add(lac2);
+        panelX.add(lac2);
         JButton button2 = new JButton("Reserver");
-        panel3.add(button2);
+        panelX.add(button2);
+
+
+        //Panel 2 : 2eme film
+        JPanel panelY = new JPanel();
+        panelY.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+
+        String urTextY="<html>PANEL Y You can<br>use basic HTML<br>in Swing<br> components,"
+                +"Hope<br> I helped!";
+        JLabel lacY=new JLabel(urTextY);
+        lacY.setIcon(new ImageIcon("images/test.jpeg"));
+        lacY.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        panelY.add(lacY);
+        JButton buttonY = new JButton("Reserver");
+        panelY.add(buttonY);
+
+        //Panel 3 : 3eme film
+        JPanel panelZ = new JPanel();
+        panelZ.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+
+        String urTextZ="<html>PANEL Z You can<br>use basic HTML<br>in Swing<br> components,"
+                +"Hope<br> I helped!";
+        JLabel lacZ=new JLabel(urTextZ);
+        lacZ.setIcon(new ImageIcon("images/test.jpeg"));
+        lacZ.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        panelZ.add(lacZ);
+        JButton buttonZ = new JButton("Reserver");
+        panelZ.add(buttonZ);
 
 
 
-
-
-
-
-
+        //ajout des panels de fiche de film
+        panel.add(panelX);
+        panel.add(panelY);
+        panel.add(panelZ);
 
 
         setVisible(true);
@@ -71,11 +95,4 @@ public class Accueil extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
     }
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-//                new Inscription();
-//            }
-//        });
-//    }
 }
