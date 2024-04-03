@@ -5,12 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import controller.*;
+
 public class Accueil extends JFrame implements ActionListener {
 
+    private Controller controller;
     private JLabel titre;
-    private JPasswordField passwordField;
-    private JCheckBox showPasswordCheckBox;
-    private JButton loginButton;
+    private JButton buttonX,buttonY,buttonZ;
+    private JButton quitter ,disconnect , plus;
 
 
     public Accueil() {
@@ -20,18 +22,31 @@ public class Accueil extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(0,1));
 
-
         //titre
         JPanel titrePanel = new JPanel();
         titrePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         titre = new JLabel("Cinema de Grenelle");
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
-        titrePanel.add(titre,BorderLayout.CENTER);
+        titrePanel.add(titre);
         add(titrePanel, BorderLayout.NORTH);
 
-        //sections
+        //Deconection ou quitter etc
+        JPanel menu = new JPanel(new GridLayout(0,3, 10,3));
+        menu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+        quitter = new JButton("Quitter");
+        quitter.addActionListener(this);
+        menu.add(quitter);
+        disconnect= new JButton("Se déconnecter");
+        disconnect.addActionListener(this);
+        menu.add(disconnect);
+        plus= new JButton("+");
+        plus.addActionListener(this);
+        menu.add(plus);
+        add(menu, BorderLayout.SOUTH);
+
+        //sections
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5, 1));
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -51,8 +66,9 @@ public class Accueil extends JFrame implements ActionListener {
         lac2.setIcon(new ImageIcon("images/test.jpeg"));
         lac2.setAlignmentX(Component.RIGHT_ALIGNMENT);
         panelX.add(lac2);
-        JButton button2 = new JButton("Reserver");
-        panelX.add(button2);
+        buttonX = new JButton("Reserver");
+        buttonX.addActionListener(this);
+        panelX.add(buttonX);
 
 
         //Panel 2 : 2eme film
@@ -65,7 +81,8 @@ public class Accueil extends JFrame implements ActionListener {
         lacY.setIcon(new ImageIcon("images/test.jpeg"));
         lacY.setAlignmentX(Component.RIGHT_ALIGNMENT);
         panelY.add(lacY);
-        JButton buttonY = new JButton("Reserver");
+        buttonY = new JButton("Reserver");
+        buttonY.addActionListener(this);
         panelY.add(buttonY);
 
         //Panel 3 : 3eme film
@@ -78,7 +95,8 @@ public class Accueil extends JFrame implements ActionListener {
         lacZ.setIcon(new ImageIcon("images/test.jpeg"));
         lacZ.setAlignmentX(Component.RIGHT_ALIGNMENT);
         panelZ.add(lacZ);
-        JButton buttonZ = new JButton("Reserver");
+        buttonZ = new JButton("Reserver");
+        buttonZ.addActionListener(this);
         panelZ.add(buttonZ);
 
 
@@ -93,6 +111,25 @@ public class Accueil extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == buttonX) {
+            JOptionPane.showMessageDialog(this, "Reserver");
+        }
+        else if (e.getSource() == buttonY) {
+            JOptionPane.showMessageDialog(this, "Reserver");
+        }
+        else if (e.getSource() == buttonZ) {
+            JOptionPane.showMessageDialog(this, "Reserver");
+        }
+        else if (e.getSource() == quitter) {
+            this.dispose();
+        }
+        else if (e.getSource() == disconnect) {
+            this.dispose();
+            //fontionne pas ca
+            Form form = new Form(controller);
+
+        }
+
 
     }
 }
