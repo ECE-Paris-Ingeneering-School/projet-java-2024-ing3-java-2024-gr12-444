@@ -8,10 +8,14 @@ public class Controller {
 
     private final DAOUser daoUser;
     private final DAOFilm daoFilm;
+    private final DAOSeance daoSeance;
+    private Seance seance;
 
     public Controller() {
         this.daoUser = new DAOUser();
         this.daoFilm = new DAOFilm();
+        this.daoSeance= new DAOSeance();
+
     }
 
     public void setUsername(String username) {
@@ -37,9 +41,40 @@ public class Controller {
     public void film(){
         daoFilm.film(this);
     }
+    public void seance(){
+        daoSeance.seance(this);
+    }
 
-    public ArrayList<Film> getList(){
+    public int getfilmid() {
+        return daoSeance.getFilmid();
+    }
+    public void setFilmid(int filmid) {
+        daoSeance.setFilmid(filmid);
+    }
+
+    public ArrayList<Film> getListFilm(){
         return daoFilm.getList();
+    }
+
+
+    //getter seance
+    public int getSeanceId(){
+        return seance.getSeanceId();
+    }
+    public int getFilmId(){
+        return seance.getFilmId();
+    }
+    public int getSalleId(){
+        return seance.getSalleID();
+    }
+    public String getHeure(){
+        return seance.getHeureDeDebut();
+    }
+    public String getDate(){
+        return seance.getDate();
+    }
+    public int getNbPlace(){
+        return seance.getNbplace();
     }
 
 }

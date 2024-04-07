@@ -13,7 +13,6 @@ public class AccueilUser extends JFrame implements ActionListener {
 
     private Controller controller;
     private JLabel titre, user;
-    private JButton buttonX, buttonY, buttonZ;
     private JButton quitter, disconnect, plus;
 
     private ArrayList<Film> list;
@@ -22,14 +21,13 @@ public class AccueilUser extends JFrame implements ActionListener {
     public AccueilUser(Controller controller) {
         this.controller = controller;
         controller.film();
-        list = controller.getList();
-
+        list = controller.getListFilm();
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i).getTitre());
         }
 
 
-        setTitle("Ecran");
+        setTitle("Acceuil");
         setSize(1000, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -97,7 +95,7 @@ public class AccueilUser extends JFrame implements ActionListener {
 
         for (int i = 0; i < list.size(); i++) {
             JPanel panelt = new JPanel();
-            Card card1 = new Card(list.get(i).getTitre(), list.get(i).getTime(), list.get(i).getGenre(), list.get(i).getDescription(), list.get(i).getClassification(), list.get(i).getDate(), list.get(i).getPoster(), panelt);
+            Card card = new Card(list.get(i).getTitre(), list.get(i).getTime(), list.get(i).getGenre(), list.get(i).getDescription(), list.get(i).getClassification(), list.get(i).getDate(), list.get(i).getPoster(), panelt, this.controller, list.get(i).getFilmId());
             panel.add(panelt);
 
         }
@@ -107,19 +105,12 @@ public class AccueilUser extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == buttonX) {
-            JOptionPane.showMessageDialog(this, "Reserver");
-        } else if (e.getSource() == buttonY) {
-            JOptionPane.showMessageDialog(this, "Reserver");
-        } else if (e.getSource() == buttonZ) {
-            JOptionPane.showMessageDialog(this, "Reserver");
-        } else if (e.getSource() == quitter) {
+        if (e.getSource() == quitter) {
             this.dispose();
         } else if (e.getSource() == disconnect) {
             this.dispose();
             list.clear();
             Form form = new Form(controller);
-
         }
 
 

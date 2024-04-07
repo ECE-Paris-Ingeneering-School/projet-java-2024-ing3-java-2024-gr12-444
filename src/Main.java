@@ -1,12 +1,12 @@
 import controller.*;
 import model.DAOFilm;
+import model.DAOSeance;
 import vue.*;
 // import vue.Form;
 
 public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller();
-        DAOFilm film= new DAOFilm();
         Form form = new Form(controller);
 
     }
