@@ -117,7 +117,7 @@ public class AccueilUser extends JFrame implements ActionListener {
             this.dispose();
         } else if (e.getSource() == disconnect) {
             this.dispose();
-            //ça fontionne pas encore
+            list.clear();
             Form form = new Form(controller);
 
         }
