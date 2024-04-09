@@ -47,7 +47,6 @@ public class DAOUser {
                 if (rs.next()) {
                     System.out.println(rs.getMetaData());
                     System.out.println("ID :"+rs.getInt("UserID"));
-                    System.out.println("Statut :"+rs.getInt("Statut"));
                     System.out.println("User found");
                     return true;
                 } else {

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class DAOSeance {
     private Controller controller;
     private int filmid;
+    private Seance seance;
+    private ArrayList<Seance> list= new ArrayList<>();
 
     public int getFilmid() {
         return filmid;
@@ -36,11 +38,11 @@ public class DAOSeance {
                 ResultSet rs = statement.getResultSet();
                 while (rs.next()) {
 
-                    Seance seance= new Seance(rs.getInt(1),
+                    seance= new Seance(rs.getInt(1),
                             rs.getInt(2),(rs.getInt(3)),
                             String.valueOf(rs.getTime(4)), String.valueOf(rs.getDate(5)),
                             rs.getInt(6));
-
+                    list.add(seance);
                 }
 
                System.out.println("readSeance");
@@ -66,4 +68,10 @@ public class DAOSeance {
         }
     }
 
+    public Seance getSeance() {
+        return seance;
+    }
+    public ArrayList<Seance> getList() {
+        return list;
+    }
 }

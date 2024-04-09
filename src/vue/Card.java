@@ -17,7 +17,6 @@ public class Card
         String Text="<html>"+titre+"<br>"+date+"<br>"+genre+"<br>"+description+"<br>"+classification+"<br>"+time;
         JLabel label=new JLabel(Text);
         label.setIcon(new ImageIcon(imgPath));
-        label.setAlignmentX(Component.RIGHT_ALIGNMENT);
         panelX.add(label);
         buttonX = new JButton("Reserver");
         buttonX.addActionListener(new ActionListener() {

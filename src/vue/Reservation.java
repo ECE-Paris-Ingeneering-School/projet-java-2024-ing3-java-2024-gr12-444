@@ -2,6 +2,8 @@ package vue;
 
 import controller.Controller;
 
+import model.Seance;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,10 +14,23 @@ public class Reservation extends JFrame implements ActionListener{
     private JLabel titrePage, user;
     private Controller controller;
     private JButton close;
+    private ArrayList<Seance> list;
 
 
     public Reservation(String titre, String time, String genre, String description, String classification, String date, String imgPath, Controller controller, int filmId){
         this.controller = controller;
+        controller.setFilmid(filmId);
+
+        controller.seance();
+        //controller.getSeance();
+
+        list = controller.getListSeance();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("seanceid");
+            System.out.println(list.get(i).getSeanceId());
+        }
+
+
 
 
 
@@ -46,8 +61,8 @@ public class Reservation extends JFrame implements ActionListener{
         menu.add(close);
         add(menu, BorderLayout.SOUTH);
 
-        JPanel frame = new JPanel(new GridLayout(2,1));
-        frame.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
+        JPanel grille = new JPanel(new GridLayout(2,0));
+        grille.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
 
         //Rappel du film
         JPanel panel = new JPanel(new FlowLayout());
@@ -58,27 +73,32 @@ public class Reservation extends JFrame implements ActionListener{
         label.setIcon(new ImageIcon(imgPath));
         label.setAlignmentX(Component.RIGHT_ALIGNMENT);
         panel.add(label);
-        frame.add(panel);
+        grille.add(panel);
 
         //Choix de la seance
-        JPanel panel1 = new JPanel(new FlowLayout());
+        JPanel panel1 = new JPanel(new GridLayout(1, list.size()));
         panel1.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
-        String Text1="<html>"+this.controller.getSeanceId()+"<br>"+this.controller.getfilmid()+"<br>"+this.controller.getSalleId()+
-                "<br>"+this.controller.getHeure()+"<br>"+this.controller.getDate()+"<br>"+this.controller.getNbPlace();
 
-        JLabel label1=new JLabel("Choix seance");
-        JLabel label2=new JLabel(Text1);
+        for (int i = 0; i < list.size(); i++) {
+            JPanel panelX = new JPanel();
+            CarteSeance carteSeance= new CarteSeance(list.get(i).getSeanceId(),list.get(i).getFilmId(),titre,list.get(i).getSalleID(), list.get(i).getHeureDeDebut(), list.get(i).getDate(), list.get(i).getNbplace(), panelX, this.controller );
+            panel1.add(panelX);
+        }
+//        String Text1=
+//                "<html><b>Choix seance</b><br>ID Seance :"+this.controller.getSeance().getSeanceId()+"<br>Film ID :"+this.controller.getSeance().getFilmId()+"<br>Nom du film :"+titre+"<br>Salle ID :"+this.controller.getSeance().getSalleID()+
+//                "<br>Heure de début :"+this.controller.getSeance().getHeureDeDebut()+"<br>Date :"+this.controller.getSeance().getDate()+"<br> Nombre de place:"+this.controller.getSeance().getNbplace();
+//
+//
+//        JLabel label2=new JLabel(Text1);
 
-
-        add(frame, BorderLayout.CENTER);
-
-        this.controller.setFilmid(filmId);
-        //controller.seance();
+        grille.add(panel1);
+        add(grille, BorderLayout.CENTER);
 
         setVisible(true);
     }
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == close) {
+            list.clear();
             this.dispose();
         }
 

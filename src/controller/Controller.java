@@ -58,6 +58,10 @@ public class Controller {
 
 
     //getter seance
+    public Seance getSeance(){return daoSeance.getSeance();}
+    public ArrayList<Seance> getListSeance(){
+        return daoSeance.getList();
+    }
     public int getSeanceId(){
         return seance.getSeanceId();
     }
