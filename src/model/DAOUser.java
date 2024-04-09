@@ -8,6 +8,7 @@ import java.sql.*;
 public class DAOUser {
     private String username;
     private String password;
+    private int typemembre;
 
     public String getUsername() {
         return this.username;
@@ -47,6 +48,9 @@ public class DAOUser {
                 if (rs.next()) {
                     System.out.println(rs.getMetaData());
                     System.out.println("ID :"+rs.getInt("UserID"));
+                    System.out.println("Type membre :"+rs.getInt("TypeMembre"));
+                    typemembre = rs.getInt("TypeMembre");
+
                     System.out.println("User found");
                     return true;
                 } else {
@@ -75,5 +79,9 @@ public class DAOUser {
                 }
             }
         }
+    }
+
+    public int getTypemembre() {
+        return typemembre;
     }
 }

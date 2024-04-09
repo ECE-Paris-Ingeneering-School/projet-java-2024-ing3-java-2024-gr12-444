@@ -46,7 +46,7 @@ public class Form extends JFrame implements ActionListener {
             Inscription inscription = new Inscription();
             this.dispose();
         } else if (e.getSource() == inviteButton) {
-            AccueilUser acceuil = new AccueilUser(this.controller);
+            AccueilInvite acceuil = new AccueilInvite(this.controller);
             this.dispose();
         }
     }

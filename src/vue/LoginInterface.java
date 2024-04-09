@@ -63,7 +63,14 @@ public class LoginInterface extends JFrame implements ActionListener {
 
             if (this.controller.verifUser()) {
                 System.out.println("User found");
-                redirectToHome();
+
+                if(controller.getTypemembre() == 1 || controller.getTypemembre() == 2 || controller.getTypemembre() == 3 ){
+                    redirectToHome();
+                }
+                else if(controller.getTypemembre() == 0 ){
+                    redirectToEmploye();
+                }
+
             } else {
                 System.out.println("User not found");
                 retirectToForm();
@@ -88,7 +95,11 @@ public class LoginInterface extends JFrame implements ActionListener {
     }
 
     public void redirectToHome() {
-        AccueilUser acceuil = new AccueilUser(this.controller);
+        AccueilMembre acceuil = new AccueilMembre(this.controller);
+    }
+
+    public void redirectToEmploye() {
+        AccueilEmploye acceuil = new AccueilEmploye(this.controller);
     }
 
     public void retirectToForm(){ Form form = new Form(controller);

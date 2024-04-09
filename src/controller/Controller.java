@@ -38,6 +38,8 @@ public class Controller {
         return daoUser.verifUser(this);
     }
 
+    public int getTypemembre(){return daoUser.getTypemembre();}
+
     public void film(){
         daoFilm.film(this);
     }

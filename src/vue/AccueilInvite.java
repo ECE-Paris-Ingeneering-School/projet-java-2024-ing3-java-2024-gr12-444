@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import controller.*;
 import model.Film;
 
-public class AccueilUser extends JFrame implements ActionListener {
+public class AccueilInvite extends JFrame implements ActionListener {
 
     private Controller controller;
     private JLabel titre, user;
-    private JButton quitter, disconnect, plus;
+    private JButton quitter, disconnect, connect;
 
     private ArrayList<Film> list;
 
 
-    public AccueilUser(Controller controller) {
+    public AccueilInvite(Controller controller) {
         this.controller = controller;
         controller.film();
         list = controller.getListFilm();
@@ -40,7 +40,7 @@ public class AccueilUser extends JFrame implements ActionListener {
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titre);
-        user = new JLabel(controller.getUsername());
+        user = new JLabel("Compte invité");
         user.setFont(new Font("Serif", Font.BOLD, 20));
         user.setHorizontalAlignment(SwingConstants.RIGHT);
         titrePanel.add(user);
@@ -53,12 +53,12 @@ public class AccueilUser extends JFrame implements ActionListener {
         quitter = new JButton("Quitter");
         quitter.addActionListener(this);
         menu.add(quitter);
-        disconnect = new JButton("Se déconnecter");
+        disconnect = new JButton("Se déconnecter du compte invité");
         disconnect.addActionListener(this);
         menu.add(disconnect);
-        plus = new JButton("+");
-        plus.addActionListener(this);
-        menu.add(plus);
+        connect = new JButton("Se connecter");
+        connect.addActionListener(this);
+        menu.add(connect);
         add(menu, BorderLayout.SOUTH);
 
         //sections
@@ -107,12 +107,17 @@ public class AccueilUser extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();
-        } else if (e.getSource() == disconnect) {
+        }
+        else if (e.getSource() == disconnect) {
             this.dispose();
             list.clear();
             Form form = new Form(controller);
         }
-
-
+        else if (e.getSource() == connect) {
+            this.dispose();
+            list.clear();
+            LoginInterface loginInterface = new LoginInterface(this.controller);
+        }
     }
+
 }
