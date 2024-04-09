@@ -61,16 +61,16 @@ public class AccueilEmploye extends JFrame implements ActionListener {
         menu.add(profil);
         add(menu, BorderLayout.SOUTH);
 
-        JPanel menuEmploye = new JPanel(new GridLayout(3, 0, 10, 3));
+        JPanel menuEmploye = new JPanel(new GridLayout(3, 0, 3, 10));
         menuEmploye.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        ajouter = new JButton("Ajouter");
+        ajouter = new JButton("<html>Ajouter :<br>- Film <br>- Séance <br>- Réduction");
         ajouter.addActionListener(this);
         menuEmploye.add(ajouter);
-        supprimer = new JButton("Supprimer");
+        supprimer = new JButton("<html>Supprimer<br>Film");
         supprimer.addActionListener(this);
         menuEmploye.add(supprimer);
-        modifier = new JButton("Modifier");
+        modifier = new JButton("<html>Modifier :<br>- Film <br>- Séance <br>- Réduction");
         modifier.addActionListener(this);
         menuEmploye.add(modifier);
         add(menuEmploye, BorderLayout.WEST);
@@ -127,19 +127,15 @@ public class AccueilEmploye extends JFrame implements ActionListener {
             Form form = new Form(controller);
         }
         else if (e.getSource() == profil) {
-            list.clear();
             Profil profil = new Profil(controller);
         }
         else if (e.getSource() == ajouter) {
-            list.clear();
             Ajouter ajouter = new Ajouter(controller);
         }
         else if (e.getSource() == modifier) {
-            list.clear();
             Modifier modifier = new Modifier(controller);
         }
         else if (e.getSource() == supprimer) {
-            list.clear();
             Supprimer supprimer = new Supprimer(controller);
         }
 
