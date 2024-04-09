@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import controller.*;
 import model.Film;
 
-public class AccueilUser extends JFrame implements ActionListener {
+public class AccueilMembre extends JFrame implements ActionListener {
 
     private Controller controller;
     private JLabel titre, user;
@@ -18,7 +18,7 @@ public class AccueilUser extends JFrame implements ActionListener {
     private ArrayList<Film> list;
 
 
-    public AccueilUser(Controller controller) {
+    public AccueilMembre(Controller controller) {
         this.controller = controller;
         controller.film();
         list = controller.getListFilm();
