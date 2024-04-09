@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import controller.*;
 import model.Film;
 
-public class AccueilEmploye extends JFrame implements ActionListener {
+public class Ajouter extends JFrame implements ActionListener {
 
     private Controller controller;
     private JLabel titre, user;
-    private JButton quitter, disconnect, profil, ajouter, supprimer, modifier;
+    private JButton quitter;
 
     private ArrayList<Film> list;
 
 
-    public AccueilEmploye(Controller controller) {
+    public Ajouter(Controller controller) {
         this.controller = controller;
         controller.film();
         list = controller.getListFilm();
@@ -27,8 +27,8 @@ public class AccueilEmploye extends JFrame implements ActionListener {
         }
 
 
-        setTitle("AcceuilEmploye");
-        setSize(1000, 800);
+        setTitle("Ajouter");
+        setSize(600, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(0, 1));
@@ -36,44 +36,25 @@ public class AccueilEmploye extends JFrame implements ActionListener {
         //titre et user
         JPanel titrePanel = new JPanel(new GridLayout(1, 2));
         titrePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        titre = new JLabel("Cinema de Grenelle");
+        titre = new JLabel("Ajouter : ");
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titre);
         user = new JLabel(controller.getUsername());
         user.setFont(new Font("Serif", Font.BOLD, 20));
-        user.setHorizontalAlignment(SwingConstants.RIGHT);
+        user.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(user);
         add(titrePanel, BorderLayout.NORTH);
 
         //Deconection ou quitter etc
-        JPanel menu = new JPanel(new GridLayout(0, 3, 10, 3));
+        JPanel menu = new JPanel(new FlowLayout(FlowLayout.CENTER));
         menu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         quitter = new JButton("Quitter");
         quitter.addActionListener(this);
         menu.add(quitter);
-        disconnect = new JButton("Se déconnecter");
-        disconnect.addActionListener(this);
-        menu.add(disconnect);
-        profil = new JButton("Votre Profil");
-        profil.addActionListener(this);
-        menu.add(profil);
+
         add(menu, BorderLayout.SOUTH);
-
-        JPanel menuEmploye = new JPanel(new GridLayout(3, 0, 10, 3));
-        menuEmploye.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-        ajouter = new JButton("Ajouter");
-        ajouter.addActionListener(this);
-        menuEmploye.add(ajouter);
-        supprimer = new JButton("Supprimer");
-        supprimer.addActionListener(this);
-        menuEmploye.add(supprimer);
-        modifier = new JButton("Modifier");
-        modifier.addActionListener(this);
-        menuEmploye.add(modifier);
-        add(menuEmploye, BorderLayout.WEST);
 
         //sections
         JPanel panel = new JPanel();
@@ -107,12 +88,12 @@ public class AccueilEmploye extends JFrame implements ActionListener {
         // Card card1 = new Card("a", "a");
 
 
-        for (int i = 0; i < list.size(); i++) {
+        /*for (int i = 0; i < list.size(); i++) {
             JPanel panelt = new JPanel();
             Card card = new Card(list.get(i).getTitre(), list.get(i).getTime(), list.get(i).getGenre(), list.get(i).getDescription(), list.get(i).getClassification(), list.get(i).getDate(), list.get(i).getPoster(), panelt, this.controller, list.get(i).getFilmId());
             panel.add(panelt);
 
-        }
+        }*/
 
 
         setVisible(true);
@@ -121,29 +102,7 @@ public class AccueilEmploye extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();
-        } else if (e.getSource() == disconnect) {
-            this.dispose();
-            list.clear();
-            Form form = new Form(controller);
         }
-        else if (e.getSource() == profil) {
-            list.clear();
-            Profil profil = new Profil(controller);
-        }
-        else if (e.getSource() == ajouter) {
-            list.clear();
-            Ajouter ajouter = new Ajouter(controller);
-        }
-        else if (e.getSource() == modifier) {
-            list.clear();
-            Modifier modifier = new Modifier(controller);
-        }
-        else if (e.getSource() == supprimer) {
-            list.clear();
-            Supprimer supprimer = new Supprimer(controller);
-        }
-
-
 
     }
 }

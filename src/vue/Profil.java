@@ -13,7 +13,7 @@ public class Profil extends JFrame implements ActionListener {
 
     private Controller controller;
     private JLabel titre, user;
-    private JButton quitter, disconnect;
+    private JButton quitter;
 
     private ArrayList<Film> list;
 
@@ -27,7 +27,7 @@ public class Profil extends JFrame implements ActionListener {
         }
 
 
-        setTitle("Acceuil");
+        setTitle("Profil");
         setSize(1000, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -50,13 +50,9 @@ public class Profil extends JFrame implements ActionListener {
         JPanel menu = new JPanel(new FlowLayout(FlowLayout.CENTER));
         menu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        quitter = new JButton("Quitter");
+        quitter = new JButton("Quitter votre profil");
         quitter.addActionListener(this);
         menu.add(quitter);
-
-        disconnect = new JButton("Se déconnecter");
-        disconnect.addActionListener(this);
-        menu.add(disconnect);
 
         add(menu, BorderLayout.SOUTH);
 
@@ -106,18 +102,7 @@ public class Profil extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();
-        } else if (e.getSource() == disconnect) {
-            this.dispose();
-            list.clear();
-            Form form = new Form(controller);
         }
-        else if (e.getSource() == disconnect) {
-            this.dispose();
-            list.clear();
-            Form form = new Form(controller);
-        }
-
-
 
     }
 }

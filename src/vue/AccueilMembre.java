@@ -27,7 +27,7 @@ public class AccueilMembre extends JFrame implements ActionListener {
         }
 
 
-        setTitle("Acceuil");
+        setTitle("AcceuilMembre");
         setSize(1000, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
