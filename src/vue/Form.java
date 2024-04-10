@@ -40,7 +40,18 @@ public class Form extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == connexionButton) {
-            LoginInterface loginInterface = new LoginInterface(this.controller);
+            //LoginInterface loginInterface = new LoginInterface(this.controller);
+            ConnexionGUI connexionGUI = new ConnexionGUI(null);
+            User user = connexionGUI.user;
+            if (user != null){
+                System.out.println("Connexion réussie pour : " + user.prenom + " " + user.nom);
+                System.out.println("Age : " + user.age);
+                System.out.println("Email : " + user.mail);
+                System.out.println("Mot De Passe : " + user.motDePasse);
+            }
+            else {
+                System.out.println("Connexion annulée");
+            }
             this.dispose();
         } else if (e.getSource() == inscriptionButton) {
             InscriptionGUI inscription = new InscriptionGUI(null);
