@@ -43,7 +43,14 @@ public class Form extends JFrame implements ActionListener {
             LoginInterface loginInterface = new LoginInterface(this.controller);
             this.dispose();
         } else if (e.getSource() == inscriptionButton) {
-            Inscription inscription = new Inscription();
+            InscriptionGUI inscription = new InscriptionGUI(null);
+            User user = inscription.user;
+            if (user != null) {
+                System.out.println("Inscription réussie pour : " + user.prenom);
+            }
+            else {
+                System.out.println("Inscription annulée");
+            }
             this.dispose();
         } else if (e.getSource() == inviteButton) {
             AccueilInvite acceuil = new AccueilInvite(this.controller);
