@@ -7,11 +7,8 @@ import vue.*;
 public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller();
-        Form form = new Form(controller);
+        //Form form = new Form(controller);
+        MenuGUI menuGUI = new MenuGUI(controller);
 
     }
 }
-
-//test
-//test2
-//test3

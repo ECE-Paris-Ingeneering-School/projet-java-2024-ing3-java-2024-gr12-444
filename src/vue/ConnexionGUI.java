@@ -1,5 +1,7 @@
 package vue;
 
+import controller.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,9 +15,11 @@ public class ConnexionGUI extends JDialog {
     private JButton btnConnecter;
     private JButton btnAnnuler;
     private JPanel connexionPanel;
+    private Controller controller;
 
-    public ConnexionGUI(JFrame p) {
+    public ConnexionGUI(JFrame p, Controller controller) {
         super(p);
+        this.controller = controller;
         setTitle("Connexion");
         setContentPane(connexionPanel);
         setMinimumSize(new Dimension(800, 600));
@@ -33,6 +37,23 @@ public class ConnexionGUI extends JDialog {
                 user = getValidUser(email, motDePasse);
 
                 if (user != null) {
+                    //EMPLOYE
+                    //faut changer le type jsp c quoi le bon
+                    if (Integer.parseInt(user.typeMembre) == 0) {
+                        new AccueilEmploye(controller);
+                    }
+                    //ENFANT
+                    else if (Integer.parseInt(user.age) > 0 || Integer.parseInt(user.age) <= 14) {
+                        new AccueilMembre(controller); //à changer
+                    }
+                    //REGULAR
+                    else if (Integer.parseInt(user.age) >= 15 || Integer.parseInt(user.age) < 60) {
+                        new AccueilMembre(controller); //à changer
+                    }
+                    //SENIOR
+                    else {
+                        new AccueilMembre(controller); //à changer
+                    }
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(ConnexionGUI.this, "Email ou mot de passe invalide", "Essayer encore", JOptionPane.ERROR_MESSAGE);
@@ -44,6 +65,7 @@ public class ConnexionGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 dispose();
+                MenuGUI menuGUI = new MenuGUI(null);
             }
         });
 
@@ -77,6 +99,7 @@ public class ConnexionGUI extends JDialog {
                 user.age = resultSet.getString("Age");
                 user.mail = resultSet.getString("Email");
                 user.motDePasse = resultSet.getString("motDePasse");
+                user.typeMembre = resultSet.getString("typeMembre");
             }
 
             //fermeture

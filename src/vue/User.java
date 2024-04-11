@@ -6,4 +6,5 @@ public class User {
     public String age;
     public String mail;
     public String motDePasse;
+    public String typeMembre;
 }

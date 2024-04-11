@@ -124,7 +124,8 @@ public class AccueilEmploye extends JFrame implements ActionListener {
         } else if (e.getSource() == disconnect) {
             this.dispose();
             list.clear();
-            Form form = new Form(controller);
+            //Form form = new Form(controller);
+            MenuGUI menuGUI = new MenuGUI(controller);
         }
         else if (e.getSource() == profil) {
             Profil profil = new Profil(controller);

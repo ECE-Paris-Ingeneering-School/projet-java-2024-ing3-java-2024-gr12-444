@@ -99,24 +99,22 @@ public class AccueilInvite extends JFrame implements ActionListener {
             panel.add(panelt);
 
         }
-
-
         setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();
-        }
-        else if (e.getSource() == disconnect) {
+        } else if (e.getSource() == disconnect) {
             this.dispose();
             list.clear();
-            Form form = new Form(controller);
-        }
-        else if (e.getSource() == connect) {
+            //Form form = new Form(controller);
+            MenuGUI menuGUI = new MenuGUI(controller);
+        } else if (e.getSource() == connect) {
             this.dispose();
             list.clear();
-            LoginInterface loginInterface = new LoginInterface(this.controller);
+            //LoginInterface loginInterface = new LoginInterface(this.controller);
+            ConnexionGUI connexionGUI = new ConnexionGUI(null, this.controller);
         }
     }
 

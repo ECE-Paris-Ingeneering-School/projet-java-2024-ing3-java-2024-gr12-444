@@ -1,5 +1,7 @@
 package vue;
 
+import controller.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,9 +21,11 @@ public class InscriptionGUI extends JDialog {
     private JButton btnConfirmer;
     private JButton btnAnnuler;
     private JPanel inscriptionPanel;
+    private Controller controller;
 
-    public InscriptionGUI(JFrame p) {
+    public InscriptionGUI(JFrame p, Controller controller) {
         super(p);
+        this.controller = controller;
         setTitle("Créer un nouveau compte");
         setContentPane(inscriptionPanel);
         setMinimumSize(new Dimension(800, 600));
@@ -41,6 +45,7 @@ public class InscriptionGUI extends JDialog {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 dispose();
+                MenuGUI menuGUI = new MenuGUI(null);
             }
         });
 
@@ -68,6 +73,7 @@ public class InscriptionGUI extends JDialog {
         user = ajouterUserToDatabase(prenom, nom, age, mail, motDePasse);
         if (user != null) {
             dispose();
+            MenuGUI menuGUI = new MenuGUI(controller);
         } else {
             JOptionPane.showMessageDialog(this, "Erreur pour s'inscrire", "Essayer encore", JOptionPane.ERROR_MESSAGE);
         }
