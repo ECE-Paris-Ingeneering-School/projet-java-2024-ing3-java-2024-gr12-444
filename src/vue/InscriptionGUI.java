@@ -93,13 +93,14 @@ public class InscriptionGUI extends JDialog {
             System.out.println("connection success");
 
             Statement statement = conn.createStatement();
-            String sql = "INSERT INTO user (Prenom, Nom, Age, Email, MotDePasse)" + "VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO user (Prenom, Nom, Age, Email, MotDePasse, TypeMembre)" + "VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, prenom);
             preparedStatement.setString(2, nom);
             preparedStatement.setString(3, age);
             preparedStatement.setString(4, mail);
             preparedStatement.setString(5, motDePasse);
+            preparedStatement.setInt(6, 3);
 
             int verif = preparedStatement.executeUpdate();
             //Si les informations sont bien dans la bdd on remplit le user qui va etre return

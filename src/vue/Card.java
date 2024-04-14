@@ -27,7 +27,7 @@ public class Card {
             }
         });
         buttonPanel.add(buttonX);
-        panelX.add(buttonPanel, BorderLayout.SOUTH); // Changer BorderLayout.EAST à BorderLayout.SOUTH
+        panelX.add(buttonPanel, BorderLayout.SOUTH);
     }
 }
 
