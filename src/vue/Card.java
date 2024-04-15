@@ -14,9 +14,17 @@ public class Card {
         panelX.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         panelX.setLayout(new BorderLayout());
 
-        String Text = "<html>" + titre + "<br>" + date + "<br>" + genre + "<br>" + description + "<br>" + classification + "<br>" + time;
+        String[] lines= description.split("\\.");
+        StringBuilder miseEnPage = new StringBuilder("<html>");
+        for (String line : lines) {
+            miseEnPage.append(line).append("<br>");
+        }
+        //miseEnPage.append("</html>");
+
+        String Text = "<html><h1>" + titre + "</h1><br>Date de Sortie : " + date + "<br><i>" + genre + "</i><br>Synopsis :<br>" + miseEnPage.toString() + "<br><strong>" + classification + "</strong><br>" + time;
         JLabel label = new JLabel(Text);
         label.setIcon(new ImageIcon(imgPath));
+        label.setVerticalAlignment(SwingConstants.TOP);
         panelX.add(label, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));

@@ -28,7 +28,7 @@ public class AccueilEmploye extends JFrame implements ActionListener {
 
 
         setTitle("AcceuilEmploye");
-        setSize(1000, 800);
+        setSize(1650, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(0, 1));

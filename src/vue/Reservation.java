@@ -36,7 +36,7 @@ public class Reservation extends JFrame implements ActionListener{
 
 
         setTitle("Reservation");
-        setSize(800, 600);
+        setSize(1000, 600);
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(0, 1));
@@ -66,14 +66,22 @@ public class Reservation extends JFrame implements ActionListener{
         grille.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
 
         //Rappel du film
-        JPanel panel = new JPanel(new FlowLayout());
+        JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
 
-        String Text="<html>"+filmId+"<br>"+titre+"<br>"+date+"<br>"+genre+"<br>"+description+"<br>"+classification+"<br>"+time;
-        JLabel label=new JLabel(Text);
+        String[] lines= description.split("\\.");
+        StringBuilder miseEnPage = new StringBuilder("<html>");
+        for (String line : lines) {
+            miseEnPage.append(line).append("<br>");
+        }
+        //miseEnPage.append("</html>");
+
+        String Text = "<html><h1>" + titre + "</h1><br>Date de Sortie : " + date + "<br><i>" + genre + "</i><br>Synopsis :<br>" + miseEnPage.toString() + "<br><strong>" + classification + "</strong><br>" + time;
+        JLabel label = new JLabel(Text);
         label.setIcon(new ImageIcon(imgPath));
-        label.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        panel.add(label);
+        label.setVerticalAlignment(SwingConstants.TOP);
+        panel.add(label, BorderLayout.CENTER);
+
         grille.add(panel);
 
         //Choix de la seance
