@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Reservation extends JFrame implements ActionListener{
-    private JLabel titrePage, user;
+    private JLabel titrePage, user, sectionChoix;
     private Controller controller;
     private JButton close;
     private ArrayList<Seance> list;
@@ -22,7 +22,8 @@ public class Reservation extends JFrame implements ActionListener{
         controller.setFilmid(filmId);
 
         controller.seance();
-        //controller.getSeance();
+
+
 
         list = controller.getListSeance();
         for (int i = 0; i < list.size(); i++) {
@@ -76,12 +77,19 @@ public class Reservation extends JFrame implements ActionListener{
         grille.add(panel);
 
         //Choix de la seance
+        JPanel choixSeance = new JPanel(new BorderLayout());
         JPanel panel1 = new JPanel(new GridLayout(1, list.size()));
         panel1.setBorder(BorderFactory.createLineBorder(Color.MAGENTA));
 
         for (int i = 0; i < list.size(); i++) {
             JPanel panelX = new JPanel();
-            CarteSeance carteSeance= new CarteSeance(list.get(i).getSeanceId(),list.get(i).getFilmId(),titre,list.get(i).getSalleID(), list.get(i).getHeureDeDebut(), list.get(i).getDate(), list.get(i).getNbplace(), panelX, this.controller );
+            controller.getSalle();
+            controller.setSalleid(list.get(i).getSalleID());
+            System.out.println(controller.getSalleidSalle());
+            controller.salle();
+            System.out.println(controller.getSalle().getNom());
+
+            CarteSeance carteSeance= new CarteSeance(controller.getSalle().getNom(),list.get(i).getSeanceId(),list.get(i).getFilmId(),titre,list.get(i).getSalleID(), list.get(i).getHeureDeDebut(), list.get(i).getDate(), list.get(i).getNbplace(), panelX, this.controller );
             panel1.add(panelX);
         }
 //        String Text1=
@@ -91,7 +99,13 @@ public class Reservation extends JFrame implements ActionListener{
 //
 //        JLabel label2=new JLabel(Text1);
 
-        grille.add(panel1);
+        sectionChoix = new JLabel("Choix de votre Seance");
+        sectionChoix.setFont(new Font("Serif", Font.BOLD, 22));
+        sectionChoix.setHorizontalAlignment(SwingConstants.LEFT);
+        choixSeance.add(sectionChoix, BorderLayout.NORTH);
+
+        choixSeance.add(panel1, BorderLayout.CENTER);
+        grille.add(choixSeance);
         add(grille, BorderLayout.CENTER);
 
         setVisible(true);

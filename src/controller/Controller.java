@@ -10,11 +10,16 @@ public class Controller {
     private final DAOFilm daoFilm;
     private final DAOSeance daoSeance;
     private Seance seance;
+    private Salle salle;
+
+    private final DOASalle daoSalle;
 
     public Controller() {
         this.daoUser = new DAOUser();
         this.daoFilm = new DAOFilm();
         this.daoSeance= new DAOSeance();
+        this.daoSalle = new DOASalle();
+
 
     }
 
@@ -70,7 +75,7 @@ public class Controller {
     public int getFilmId(){
         return seance.getFilmId();
     }
-    public int getSalleId(){
+    public int getSalleIdSeance(){
         return seance.getSalleID();
     }
     public String getHeure(){
@@ -82,5 +87,20 @@ public class Controller {
     public int getNbPlace(){
         return seance.getNbplace();
     }
+
+    public Salle getSalle(){
+        return daoSalle.getSalle();
+    }
+    public int getSalleidSalle() {
+        return daoSalle.getSalleid();
+    }
+    public void setSalleid(int salleID) {
+        daoSalle.setSalleid(salleID);
+
+    }
+    public void salle(){
+        daoSalle.salle(this);
+    }
+
 
 }
