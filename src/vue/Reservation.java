@@ -97,7 +97,7 @@ public class Reservation extends JFrame implements ActionListener{
             controller.salle();
             System.out.println(controller.getSalle().getNom());
 
-            CarteSeance carteSeance= new CarteSeance(controller.getSalle().getNom(),list.get(i).getSeanceId(),list.get(i).getFilmId(),titre,list.get(i).getSalleID(), list.get(i).getHeureDeDebut(), list.get(i).getDate(), list.get(i).getNbplace(), panelX, this.controller );
+            CarteSeance carteSeance= new CarteSeance(controller.getSalle().getNom(),list.get(i).getSeanceId(),list.get(i).getFilmId(),titre,list.get(i).getSalleID(), list.get(i).getHeureDeDebut(), list.get(i).getDate(), list.get(i).getNbplace(), panelX, this.controller);
             panel1.add(panelX);
         }
 //        String Text1=

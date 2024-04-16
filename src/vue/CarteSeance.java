@@ -14,16 +14,17 @@ public class CarteSeance {
 
 
         String Text=
-                "<html>"+nom+"<br>ID Seance :"+seanceId+"<br>Film ID :"+filmId+"<br>Salle ID :"+salleId+
+                "<html><h2>"+nom+"</h2>ID Seance :"+seanceId+"<br>Film ID :"+filmId+"<br>Salle ID :"+salleId+
                         "<br>Heure de début :"+heure+"<br>Date :"+date+"<br> Nombre de place:"+nbplace;
 
         JLabel label=new JLabel(Text);
         panelX.add(label);
         buttonX = new JButton("Reserver");
         buttonX.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(label, "Reserver");
+                //JOptionPane.showMessageDialog(label, "Reserver");
+                PaimentInterface paimentInterface= new PaimentInterface(titre, nom, date,heure,seanceId);
+
             }
         });
         panelX.add(buttonX);
