@@ -1,8 +1,8 @@
 package vue;
 
 import controller.Controller;
+import model.User;
 
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,36 +31,22 @@ public class MenuGUI extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 dispose();
                 ConnexionGUI connexionGUI = new ConnexionGUI(null, controller);
-                User user = connexionGUI.user;
-                if (user != null) {
-                    System.out.println("Connexion réussie pour : " + user.prenom + " " + user.nom);
-                    System.out.println("Age : " + user.age);
-                    System.out.println("Email : " + user.mail);
-                    System.out.println("Mot De Passe : " + user.motDePasse);
-                } else {
-                    System.out.println("Connexion annulée");
-                }
             }
         });
+
         //BOUTON S'INSCRIRE
         btnInscrire.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 dispose();
                 InscriptionGUI inscriptionGUI = new InscriptionGUI(null, controller);
-                User user = inscriptionGUI.user;
-                if (user != null) {
-                    System.out.println("Inscription réussie pour : " + user.prenom);
-                } else {
-                    System.out.println("Inscription annulée");
-                }
             }
         });
         //BOUTON INVITE
         btnInvite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                AccueilInvite acceuil = new AccueilInvite(controller);
+                AccueilInvite accueil = new AccueilInvite(controller);
             }
         });
         setVisible(true);

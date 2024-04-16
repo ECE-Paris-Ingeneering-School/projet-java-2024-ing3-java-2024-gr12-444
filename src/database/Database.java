@@ -19,7 +19,7 @@ public class Database {
             //Class.forName("com.mysql.jdbc.Driver");
             // create a connection to the database
             conn = DriverManager.getConnection(url, user, password);
-            System.out.println("connection success");
+            //System.out.println("connection success");
         }
         catch( Exception e )
         {

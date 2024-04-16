@@ -5,7 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import controller.*;
-
+import model.User;
+/*
 public class Form extends JFrame implements ActionListener {
     private JButton connexionButton, inscriptionButton, inviteButton;
     private Controller controller;
@@ -70,3 +71,4 @@ public class Form extends JFrame implements ActionListener {
     }
 
 }
+ */

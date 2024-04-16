@@ -2,7 +2,7 @@ package vue;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+/*
 public class Inscription extends JFrame implements ActionListener {
 
     private JTextField usernameField;
@@ -67,3 +67,4 @@ public class Inscription extends JFrame implements ActionListener {
 //        });
 //    }
 }
+*/

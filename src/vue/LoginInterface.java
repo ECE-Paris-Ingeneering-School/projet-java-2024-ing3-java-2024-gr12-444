@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import controller.*;
-
+/*
 public class LoginInterface extends JFrame implements ActionListener {
 
     private JTextField usernameField;
@@ -105,3 +105,4 @@ public class LoginInterface extends JFrame implements ActionListener {
     public void retirectToForm(){ Form form = new Form(controller);
     }
 }
+*/

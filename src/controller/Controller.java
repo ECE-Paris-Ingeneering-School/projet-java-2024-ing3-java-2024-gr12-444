@@ -39,11 +39,19 @@ public class Controller {
         return daoUser.getPassword();
     }
 
+    public User connect(String email, String motDePasse) {
+        return DAOUser.getUser(email, motDePasse);
+    }
+
+    public User registerUser(String prenom, String nom, String age, String mail, String motDePasse) {
+        return DAOUser.addUser(prenom, nom, age, mail, motDePasse);
+    }
+/*
     public Boolean verifUser() {
         return daoUser.verifUser(this);
     }
-
-    public int getTypemembre(){return daoUser.getTypemembre();}
+*/
+    /*public int getTypemembre(){return daoUser.getTypemembre();}*/
 
     public void film(){
         daoFilm.film(this);

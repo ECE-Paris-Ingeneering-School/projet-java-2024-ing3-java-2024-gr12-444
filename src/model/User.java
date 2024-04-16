@@ -1,4 +1,4 @@
-package vue;
+package model;
 
 public class User {
     public String prenom;

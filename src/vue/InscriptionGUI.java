@@ -1,15 +1,12 @@
 package vue;
 
 import controller.Controller;
+import model.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 
 public class InscriptionGUI extends JDialog {
     private JTextField tfPrenom;
@@ -37,22 +34,23 @@ public class InscriptionGUI extends JDialog {
         btnConfirmer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                inscriptionUser();
+                registerUser();
             }
         });
         //BOUTON ANNULER
         btnAnnuler.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println("Inscription annulée");
                 dispose();
-                MenuGUI menuGUI = new MenuGUI(null);
+                MenuGUI menuGUI = new MenuGUI(controller);
             }
         });
 
         setVisible(true);
     }
 
-    private void inscriptionUser() {
+    private void registerUser() {
         String prenom = tfPrenom.getText();
         String nom = tfNom.getText();
         String age = tfAge.getText();
@@ -70,55 +68,13 @@ public class InscriptionGUI extends JDialog {
             return;
         }
 
-        user = ajouterUserToDatabase(prenom, nom, age, mail, motDePasse);
+        User user = controller.registerUser(prenom, nom, age, mail, motDePasse);
         if (user != null) {
+            JOptionPane.showMessageDialog(this, "Inscription réussie pour : " + user.prenom, "Succès", JOptionPane.INFORMATION_MESSAGE);
             dispose();
             MenuGUI menuGUI = new MenuGUI(controller);
         } else {
             JOptionPane.showMessageDialog(this, "Erreur pour s'inscrire", "Essayer encore", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    public User user;
-
-    private User ajouterUserToDatabase(String prenom, String nom, String age, String mail, String motDePasse) {
-        User user = null;
-
-        try {
-            String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
-            String username = "root";
-            String password = "";
-
-            Connection conn = DriverManager.getConnection(url, username, password);
-            System.out.println("connection success");
-
-            Statement statement = conn.createStatement();
-            String sql = "INSERT INTO user (Prenom, Nom, Age, Email, MotDePasse, TypeMembre)" + "VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, prenom);
-            preparedStatement.setString(2, nom);
-            preparedStatement.setString(3, age);
-            preparedStatement.setString(4, mail);
-            preparedStatement.setString(5, motDePasse);
-            preparedStatement.setInt(6, 3);
-
-            int verif = preparedStatement.executeUpdate();
-            //Si les informations sont bien dans la bdd on remplit le user qui va etre return
-            if (verif > 0) {
-                user = new User();
-                user.prenom = prenom;
-                user.nom = nom;
-                user.age = age;
-                user.mail = mail;
-                user.motDePasse = motDePasse;
-            }
-
-            //fermeture
-            statement.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return user;
     }
 }
