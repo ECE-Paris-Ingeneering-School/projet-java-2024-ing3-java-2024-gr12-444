@@ -19,11 +19,39 @@ public class MenuGUI extends JFrame {
     public MenuGUI(Controller controller) {
         this.controller = controller;
         setTitle("Menu");
-        setContentPane(menuPanel);
-        setMinimumSize(new Dimension(600, 400));
-        setSize(1200, 700);
+        setResizable(false);
+        setSize(1024, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        ImageIcon imageIcon = new ImageIcon("images\\menu_background.jpg");
+        JLabel background = new JLabel(imageIcon);
+        background.setBounds(0, 0, imageIcon.getIconWidth(), imageIcon.getIconHeight());
+
+        menuPanel = new JPanel();
+        menuPanel.setLayout(null);
+
+
+        btnConnecter = new JButton("Se connecter");
+        btnConnecter.setBounds(400, 300, 200, 50);
+        addIconButton(btnConnecter, "images\\cle.png");
+        btnConnecter.setFocusPainted(false);
+        menuPanel.add(btnConnecter);
+
+        btnInscrire = new JButton("S'inscrire");
+        btnInscrire.setBounds(400, 400, 200, 50);
+        addIconButton(btnInscrire, "images\\contrat.png");
+        menuPanel.add(btnInscrire);
+
+        btnInvite = new JButton("Invité");
+        btnInvite.setBounds(400, 500, 200, 50);
+        addIconButton(btnInvite, "images\\anonyme.png");
+        menuPanel.add(btnInvite);
+
+        menuPanel.add(background);
+        background.setBounds(0, 0, getWidth(), getHeight());
+
+        setContentPane(menuPanel);
 
         //BOUTON SE CONNECTER
         btnConnecter.addActionListener(new ActionListener() {
@@ -50,5 +78,13 @@ public class MenuGUI extends JFrame {
             }
         });
         setVisible(true);
+    }
+
+    private void addIconButton(JButton btn, String path) {
+        ImageIcon icon = new ImageIcon(path);
+        Image image = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(image);
+        btn.setIcon(scaledIcon);
+        btn.setHorizontalTextPosition(SwingConstants.RIGHT);
     }
 }
