@@ -22,7 +22,7 @@ public class Ajouter extends JFrame implements ActionListener {
     private JLabel titre, user;
     private JButton quitter, ajoutFilm, ajoutReduc, ajoutSeance;
 
-    private JTextField tfTitre, tfGenre, tfClassification, tfDescription, tfPoster;
+    private JTextField tfTitre, tfGenre, tfClassification, tfDescription, tfPoster, tfIDSeanceReduc, tfReduc;
 
     private JXDatePicker datePicker;
     private JSpinner timeSpinner;
@@ -152,13 +152,35 @@ public class Ajouter extends JFrame implements ActionListener {
         JPanel sectionReduc = new JPanel(new GridBagLayout());
         JLabel titreSection2 = new JLabel("Ajout d'une reduction");
         JButton boutonSection2 = new JButton("Ajout de la réduction");
-        boutonSection2.addActionListener(this);
+        JLabel reducIDSeance = new JLabel("ID de la seance pour la reduction :");
+        tfIDSeanceReduc = new JTextField(10);
+        JLabel pourcentReduc = new JLabel("Pourcentage de la reduction :");
+        tfReduc = new JTextField(10);
+        boutonSection2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                ajoutReduc();
+                Ajouter.this.dispose();
+            }
+
+        });
         GridBagConstraints gbc2 = new GridBagConstraints();
         gbc2.gridx = 0;
         gbc2.gridy = 0;
         gbc2.insets = new Insets(0, 0, 10, 0);
         sectionReduc.add(titreSection2, gbc2);
+
         gbc2.gridy = 1;
+        sectionReduc.add(reducIDSeance, gbc2);
+        gbc2.gridy = 2;
+        sectionReduc.add(tfIDSeanceReduc, gbc2);
+
+        gbc2.gridy = 3;
+        sectionReduc.add(pourcentReduc, gbc2);
+        gbc2.gridy = 4;
+        sectionReduc.add(tfReduc, gbc2);
+
+        gbc2.gridy = 5;
         sectionReduc.add(boutonSection2, gbc2);
         sections.add(sectionReduc);
 
@@ -248,6 +270,48 @@ public class Ajouter extends JFrame implements ActionListener {
             preparedStatement.setTime(5, duree);
             preparedStatement.setDate(6, date);
             preparedStatement.setString(7, poster);
+
+            preparedStatement.executeUpdate();
+
+
+            //fermeture
+            statement.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void ajoutReduc() {
+
+        String idSeance = tfIDSeanceReduc.getText();
+        String reduc = tfReduc.getText();
+
+        if (idSeance.isEmpty() || reduc.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        ajouterReducToDatabase(idSeance, reduc);
+
+
+    }
+
+    private void ajouterReducToDatabase(String idSeance, String reduc) {
+
+        try {
+            String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
+            String username = "root";
+            String password = "";
+
+            Connection conn = DriverManager.getConnection(url, username, password);
+            System.out.println("connection success");
+
+            Statement statement = conn.createStatement();
+            String sql = "INSERT INTO réductions (IDseance, Réduction)" + "VALUES (?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, idSeance);
+            preparedStatement.setString(2, reduc);
 
             preparedStatement.executeUpdate();
 
