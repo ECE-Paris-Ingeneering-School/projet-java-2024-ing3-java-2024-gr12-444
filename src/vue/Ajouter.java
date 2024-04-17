@@ -22,10 +22,16 @@ public class Ajouter extends JFrame implements ActionListener {
     private JLabel titre, user;
     private JButton quitter, ajoutFilm, ajoutReduc, ajoutSeance;
 
-    private JTextField tfTitre, tfGenre, tfClassification, tfDescription, tfPoster, tfIDSeanceReduc, tfReduc;
+    private JTextField tfTitre, tfGenre, tfClassification, tfDescription, tfPoster;
+
+    private JTextField  tfIDSeanceReduc, tfReduc;
+    private JTextField tfFilmID, tfSalleID;
 
     private JXDatePicker datePicker;
     private JSpinner timeSpinner;
+
+    private JXDatePicker datePicker2;
+    private JSpinner timeSpinner2;
 
 
     private ArrayList<Film> list;
@@ -188,13 +194,61 @@ public class Ajouter extends JFrame implements ActionListener {
         JPanel sectionSeance = new JPanel(new GridBagLayout());
         JLabel titreSection3 = new JLabel("Ajout d'une seance");
         JButton boutonSection3 = new JButton("Ajout de la seance");
-        boutonSection3.addActionListener(this);
+
+        JLabel filmID = new JLabel("ID du film pour la séance :");
+        tfFilmID = new JTextField(10);
+
+        JLabel salleID = new JLabel("ID de la salle pour la séance :");
+        tfSalleID = new JTextField(10);
+
+        JLabel dateSeance = new JLabel("Date de la séance :");
+        datePicker2 = new JXDatePicker();
+        sectionSeance.add(dateSeance);
+        sectionSeance.add(datePicker2);
+
+        JLabel heureSeance = new JLabel("Heure de début de la séance :");
+        SpinnerDateModel spinnerModel2 = new SpinnerDateModel();
+        timeSpinner2 = new JSpinner(spinnerModel2);
+        JSpinner.DateEditor dateEditor2 = new JSpinner.DateEditor(timeSpinner2, "HH:mm:ss");
+        timeSpinner2.setEditor(dateEditor2);
+        sectionSeance.add(heureSeance);
+        sectionSeance.add(timeSpinner2);
+
+        boutonSection3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                ajoutSeance();
+                Ajouter.this.dispose();
+            }
+
+        });
         GridBagConstraints gbc3 = new GridBagConstraints();
         gbc3.gridx = 0;
         gbc3.gridy = 0;
         gbc3.insets = new Insets(0, 0, 10, 0);
         sectionSeance.add(titreSection3, gbc3);
+
         gbc3.gridy = 1;
+        sectionSeance.add(filmID, gbc3);
+        gbc3.gridy = 2;
+        sectionSeance.add(tfFilmID, gbc3);
+
+        gbc3.gridy = 3;
+        sectionSeance.add(salleID, gbc3);
+        gbc3.gridy = 4;
+        sectionSeance.add(tfSalleID, gbc3);
+
+        gbc3.gridy = 5;
+        sectionSeance.add(dateSeance, gbc3);
+        gbc3.gridy = 6;
+        sectionSeance.add(datePicker2, gbc3);
+
+        gbc3.gridy = 7;
+        sectionSeance.add(heureSeance, gbc3);
+        gbc3.gridy = 8;
+        sectionSeance.add(timeSpinner2, gbc3);
+
+        gbc3.gridy = 9;
         sectionSeance.add(boutonSection3, gbc3);
         sections.add(sectionSeance);
 
@@ -312,6 +366,75 @@ public class Ajouter extends JFrame implements ActionListener {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, idSeance);
             preparedStatement.setString(2, reduc);
+
+            preparedStatement.executeUpdate();
+
+
+            //fermeture
+            statement.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void ajoutSeance() {
+        String idfilm = tfFilmID.getText();
+        String idsalle = tfSalleID.getText();
+
+        java.util.Date selectedDate2 = datePicker2.getDate();
+        java.util.Date selectedTime2 = (java.util.Date) timeSpinner2.getValue();
+
+        Date date2 = new Date(selectedDate2.getTime());
+        Time debut = new Time(selectedTime2.getTime());
+        String nbplaces = "";
+
+        if (idfilm.isEmpty() || idsalle.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if("1".equals(idsalle)){
+            nbplaces = "150";
+        }
+        else if("2".equals(idsalle)){
+            nbplaces = "100";
+        }
+        else if("3".equals(idsalle)){
+            nbplaces = "2800";
+        }
+        else if("4".equals(idsalle)){
+            nbplaces = "300";
+        }
+        else if("5".equals(idsalle)){
+            nbplaces = "430";
+        }
+        else if("6".equals(idsalle)){
+            nbplaces = "10";
+        }
+
+        ajouterSeanceToDatabase(idfilm, idsalle, debut, date2, nbplaces);
+
+    }
+
+
+    private void ajouterSeanceToDatabase(String idfilm, String idsalle, Time debut, Date date, String nbplaces) {
+
+        try {
+            String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
+            String username = "root";
+            String password = "";
+
+            Connection conn = DriverManager.getConnection(url, username, password);
+            System.out.println("connection success");
+
+            Statement statement = conn.createStatement();
+            String sql = "INSERT INTO séance (FilmID, SalleID, HeureDeDebut, Date, NbPlacesRestantes)" + "VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, idfilm);
+            preparedStatement.setString(2, idsalle);
+            preparedStatement.setTime(3, debut);
+            preparedStatement.setDate(4, date);
+            preparedStatement.setString(5, nbplaces);
 
             preparedStatement.executeUpdate();
 
