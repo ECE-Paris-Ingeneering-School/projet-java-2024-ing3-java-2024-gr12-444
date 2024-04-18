@@ -13,6 +13,7 @@ import model.User;
 public class AccueilEmploye extends JFrame implements ActionListener {
 
     private Controller controller;
+    private User user;
     private JLabel titre, userLabel;
     private JButton quitter, disconnect, profil, ajouter, supprimer, modifier;
 
@@ -21,6 +22,7 @@ public class AccueilEmploye extends JFrame implements ActionListener {
 
     public AccueilEmploye(Controller controller, User user) {
         this.controller = controller;
+        this.user = user;
         controller.film();
         list = controller.getListFilm();
         for (int i = 0; i < list.size(); i++) {
@@ -129,7 +131,7 @@ public class AccueilEmploye extends JFrame implements ActionListener {
             MenuGUI menuGUI = new MenuGUI(controller);
         }
         else if (e.getSource() == profil) {
-            Profil profil = new Profil(controller);
+            Profil profil = new Profil(controller, user);
         }
         else if (e.getSource() == ajouter) {
             Ajouter ajouter = new Ajouter(controller);

@@ -13,6 +13,7 @@ import model.User;
 public class AccueilMembre extends JFrame implements ActionListener {
 
     private Controller controller;
+    private User user;
     private JLabel titre, userLabel;
     private JButton quitter, disconnect, profil;
 
@@ -21,6 +22,7 @@ public class AccueilMembre extends JFrame implements ActionListener {
 
     public AccueilMembre(Controller controller, User user) {
         this.controller = controller;
+        this.user = user;
         System.out.println(user.userId);
 
 
@@ -119,7 +121,7 @@ public class AccueilMembre extends JFrame implements ActionListener {
         }
         else if (e.getSource() == profil) {
             list.clear();
-            Profil profil = new Profil(controller);
+            Profil profil = new Profil(controller, user);
         }
 
 

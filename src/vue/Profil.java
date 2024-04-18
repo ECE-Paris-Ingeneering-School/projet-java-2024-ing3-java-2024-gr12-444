@@ -8,18 +8,22 @@ import java.util.ArrayList;
 
 import controller.*;
 import model.Film;
+import model.Reservation;
+import model.User;
 
 public class Profil extends JFrame implements ActionListener {
 
     private Controller controller;
-    private JLabel titre, user;
+    private User user;
+    private JLabel titre, username;
     private JButton quitter;
-
     private ArrayList<Film> list;
+    private ArrayList<Reservation> reservations;
+    private JList<String> reservationsList;
 
-
-    public Profil(Controller controller) {
+    public Profil(Controller controller, User user) {
         this.controller = controller;
+        this.user = user;
         controller.film();
         list = controller.getListFilm();
         for (int i = 0; i < list.size(); i++) {
@@ -40,31 +44,35 @@ public class Profil extends JFrame implements ActionListener {
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titre);
-        user = new JLabel(controller.getUsername());
-        user.setFont(new Font("Serif", Font.BOLD, 20));
-        user.setHorizontalAlignment(SwingConstants.LEFT);
-        titrePanel.add(user);
+        username = new JLabel(controller.getUsername());
+        System.out.println(user);
+        username.setFont(new Font("Serif", Font.BOLD, 20));
+        username.setHorizontalAlignment(SwingConstants.RIGHT);
+        titrePanel.add(username);
         add(titrePanel, BorderLayout.NORTH);
 
         //Deconection ou quitter etc
         JPanel menu = new JPanel(new FlowLayout(FlowLayout.CENTER));
         menu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
         quitter = new JButton("Quitter votre profil");
         quitter.addActionListener(this);
         menu.add(quitter);
-
         add(menu, BorderLayout.SOUTH);
-
+/*
         //sections
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(list.size(), 1));
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
+*/
+        JPanel reservationsPanel = new JPanel(new BorderLayout());
+        reservationsPanel.setBorder(BorderFactory.createTitledBorder("Vos réservations"));
+        reservationsList = new JList<>();
+        JScrollPane scrollPanel = new JScrollPane(reservationsList);
+        reservationsPanel.add(scrollPanel, BorderLayout.CENTER);
+        add(reservationsPanel, BorderLayout.CENTER);
 
-        JScrollPane scrollPanel = new JScrollPane(panel);
-        scrollPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-        add(scrollPanel, BorderLayout.CENTER);
-
+        reservations = controller.getReservations(user.userId);
+        updateReservationList();
 
         //Panel 1 : premier film
         // JPanel panelX = new JPanel();
@@ -99,6 +107,13 @@ public class Profil extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    private void updateReservationList() {
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for (model.Reservation reservation : reservations) {
+            model.addElement(reservation.toString());
+        }
+        reservationsList.setModel(model);
+    }
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();

@@ -1,7 +1,10 @@
 package controller;
 
+import database.Database;
 import model.*;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Controller {
@@ -9,6 +12,7 @@ public class Controller {
     private final DAOUser daoUser;
     private final DAOFilm daoFilm;
     private final DAOSeance daoSeance;
+    private DAOReservation daoReservation;
     private Seance seance;
     private Salle salle;
     private User user;
@@ -20,11 +24,9 @@ public class Controller {
     public Controller() {
         this.daoUser = new DAOUser();
         this.daoFilm = new DAOFilm();
-        this.daoSeance= new DAOSeance();
+        this.daoSeance = new DAOSeance();
         this.daoSalle = new DOASalle();
-        this.daoPaiment =new DAOPaiment();
-
-
+        //this.daoPaiment = new DAOPaiment();
     }
 
     public void setUsername(String username) {
@@ -43,13 +45,26 @@ public class Controller {
         return daoUser.getPassword();
     }
 
-
     public User connect(String email, String motDePasse) {
         return DAOUser.getUser(email, motDePasse);
     }
 
     public User registerUser(String prenom, String nom, String age, String mail, String motDePasse) {
         return DAOUser.addUser(prenom, nom, age, mail, motDePasse);
+    }
+
+    public ArrayList<Reservation> getReservations(int userId) {
+        Connection conn = null;
+        conn = new Database().createConnection();
+        daoReservation = new DAOReservation(conn);
+
+        try {
+            ArrayList<Reservation> reservations = DAOReservation.getReservations(userId);
+            return reservations;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 /*
     public Boolean verifUser() {
@@ -58,65 +73,79 @@ public class Controller {
 */
     /*public int getTypemembre(){return daoUser.getTypemembre();}*/
 
-    public void film(){
+    public void film() {
         daoFilm.film(this);
     }
-    public void seance(){
+
+    public void seance() {
         daoSeance.seance(this);
     }
 
     public int getfilmid() {
         return daoSeance.getFilmid();
     }
+
     public void setFilmid(int filmid) {
         daoSeance.setFilmid(filmid);
     }
 
-    public ArrayList<Film> getListFilm(){
+    public ArrayList<Film> getListFilm() {
         return daoFilm.getList();
     }
 
 
     //getter seance
-    public Seance getSeance(){return daoSeance.getSeance();}
-    public ArrayList<Seance> getListSeance(){
+    public Seance getSeance() {
+        return daoSeance.getSeance();
+    }
+
+    public ArrayList<Seance> getListSeance() {
         return daoSeance.getList();
     }
-    public int getSeanceId(){
+
+    public int getSeanceId() {
         return seance.getSeanceId();
     }
-    public int getFilmId(){
+
+    public int getFilmId() {
         return seance.getFilmId();
     }
-    public int getSalleIdSeance(){
+
+    public int getSalleIdSeance() {
         return seance.getSalleID();
     }
-    public String getHeure(){
+
+    public String getHeure() {
         return seance.getHeureDeDebut();
     }
-    public String getDate(){
+
+    public String getDate() {
         return seance.getDate();
     }
-    public int getNbPlace(){
+
+    public int getNbPlace() {
         return seance.getNbplace();
     }
 
-    public Salle getSalle(){
+    public Salle getSalle() {
         return daoSalle.getSalle();
     }
+
     public int getSalleidSalle() {
         return daoSalle.getSalleid();
     }
+
     public void setSalleid(int salleID) {
         daoSalle.setSalleid(salleID);
 
     }
-    public void salle(){
+
+    public void salle() {
         daoSalle.salle(this);
     }
 
 
-    public void reservation(int userId, int seanceId, int nbBillet, double prix){
-        daoPaiment.reservation(this, userId,seanceId,nbBillet, prix);
+    public void reservation(int userId, int seanceId, int nbBillet, double prix) {
+        daoPaiment.reservation(this, userId, seanceId, nbBillet, prix);
     }
 }
