@@ -8,18 +8,22 @@ import java.util.ArrayList;
 
 import controller.*;
 import model.Film;
+import model.User;
 
 public class AccueilMembre extends JFrame implements ActionListener {
 
     private Controller controller;
-    private JLabel titre, user;
+    private JLabel titre, userLabel;
     private JButton quitter, disconnect, profil;
 
     private ArrayList<Film> list;
 
 
-    public AccueilMembre(Controller controller) {
+    public AccueilMembre(Controller controller, User user) {
         this.controller = controller;
+        System.out.println(user.userId);
+
+
         controller.film();
         list = controller.getListFilm();
         for (int i = 0; i < list.size(); i++) {
@@ -40,10 +44,10 @@ public class AccueilMembre extends JFrame implements ActionListener {
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titre);
-        user = new JLabel(controller.getUsername());
-        user.setFont(new Font("Serif", Font.BOLD, 20));
-        user.setHorizontalAlignment(SwingConstants.RIGHT);
-        titrePanel.add(user);
+        userLabel = new JLabel(user.nom +" "+ user.prenom);
+        userLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        userLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        titrePanel.add(userLabel);
         add(titrePanel, BorderLayout.NORTH);
 
         //Deconection ou quitter etc
@@ -95,7 +99,7 @@ public class AccueilMembre extends JFrame implements ActionListener {
 
         for (int i = 0; i < list.size(); i++) {
             JPanel panelt = new JPanel();
-            Card card = new Card(list.get(i).getTitre(), list.get(i).getTime(), list.get(i).getGenre(), list.get(i).getDescription(), list.get(i).getClassification(), list.get(i).getDate(), list.get(i).getPoster(), panelt, this.controller, list.get(i).getFilmId());
+            Card card = new Card(user, list.get(i).getTitre(), list.get(i).getTime(), list.get(i).getGenre(), list.get(i).getDescription(), list.get(i).getClassification(), list.get(i).getDate(), list.get(i).getPoster(), panelt, this.controller, list.get(i).getFilmId());
             panel.add(panelt);
 
         }

@@ -1,6 +1,7 @@
 package vue;
 
 import controller.Controller;
+import model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 public class Card {
     private JButton buttonX;
 
-    public Card(String titre, String time, String genre, String description, String classification, String date, String imgPath, JPanel panelX, Controller controller, int filmId) {
+    public Card(User user, String titre, String time, String genre, String description, String classification, String date, String imgPath, JPanel panelX, Controller controller, int filmId) {
         panelX.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         panelX.setLayout(new BorderLayout());
 
@@ -31,7 +32,7 @@ public class Card {
         buttonX = new JButton("Reserver");
         buttonX.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Reservation reservation = new Reservation(titre, time, genre, description, classification, date, imgPath, controller, filmId);
+                Reservation reservation = new Reservation(user,titre, time, genre, description, classification, date, imgPath, controller, filmId);
             }
         });
         buttonPanel.add(buttonX);

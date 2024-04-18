@@ -41,6 +41,7 @@ public class DAOUser {
 
             if (resultSet.next()) {
                 user = new User();
+                user.userId = resultSet.getInt("UserID");
                 user.prenom = resultSet.getString("Prenom");
                 user.nom = resultSet.getString("Nom");
                 user.age = resultSet.getString("Age");

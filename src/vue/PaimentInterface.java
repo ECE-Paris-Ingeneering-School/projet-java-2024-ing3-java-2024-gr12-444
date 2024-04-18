@@ -1,6 +1,8 @@
 package vue;
 
 import com.mysql.cj.util.StringInspector;
+import controller.Controller;
+import model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +19,9 @@ public class PaimentInterface extends JFrame implements ActionListener {
     private JButton validateButton;
     private JLabel totalLabel;
 
-    public PaimentInterface(String titre, String nomSalle, String date, String heure, int seanceId) {
+    private Controller controller;
+    public PaimentInterface(User user, String titre, String nomSalle, String date, String heure, int seanceId, Controller controller) {
+        this.controller= controller;
         setTitle("Interface de paiement - Séance de cinéma");
         setSize(800, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -165,6 +169,9 @@ public class PaimentInterface extends JFrame implements ActionListener {
         validateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 validatePayment();
+
+
+                controller.reservation(user.userId, seanceId, nbBillet(), updateTotalPrice());
             }
         });
         panel.add(validateButton, gbc);
@@ -179,7 +186,7 @@ public class PaimentInterface extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    private void updateTotalPrice() {
+    private double updateTotalPrice() {
         try {
             int adultTickets = Integer.parseInt(adultTicketsField.getText());
             int childTickets = Integer.parseInt(childTicketsField.getText());
@@ -187,9 +194,20 @@ public class PaimentInterface extends JFrame implements ActionListener {
 
             double totalPrice = calculateTotalPrice(adultTickets, childTickets, seniorTickets);
             totalLabel.setText("Total à payer : " + totalPrice + " euros");
+            return totalPrice;
         } catch (NumberFormatException ex) {
             totalLabel.setText("Veuillez saisir un nombre valide de billets.");
         }
+        return 0;
+    }
+
+    private int nbBillet(){
+        int adultTickets = Integer.parseInt(adultTicketsField.getText());
+        int childTickets = Integer.parseInt(childTicketsField.getText());
+        int seniorTickets = Integer.parseInt(seniorTicketsField.getText());
+
+        int nbBillet= adultTickets+childTickets+seniorTickets;
+        return nbBillet;
     }
 
     private double calculateTotalPrice(int adultTickets, int childTickets, int seniorTickets) {
@@ -235,6 +253,7 @@ public class PaimentInterface extends JFrame implements ActionListener {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
+
 
 
 }

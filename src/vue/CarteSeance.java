@@ -1,6 +1,7 @@
 package vue;
 
 import controller.Controller;
+import model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 public class CarteSeance {
 
     private JButton buttonX;
-    public CarteSeance(String nom,int seanceId, int filmId, String titre ,int salleId,String heure, String date, int nbplace, JPanel panelX , Controller controller){
+    public CarteSeance(User user , String nom, int seanceId, int filmId, String titre , int salleId, String heure, String date, int nbplace, JPanel panelX , Controller controller){
 
 
         String Text=
@@ -23,7 +24,7 @@ public class CarteSeance {
         buttonX.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //JOptionPane.showMessageDialog(label, "Reserver");
-                PaimentInterface paimentInterface= new PaimentInterface(titre, nom, date,heure,seanceId);
+                PaimentInterface paimentInterface= new PaimentInterface(user ,titre, nom, date,heure,seanceId, controller);
 
             }
         });

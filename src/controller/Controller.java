@@ -11,14 +11,18 @@ public class Controller {
     private final DAOSeance daoSeance;
     private Seance seance;
     private Salle salle;
+    private User user;
 
     private final DOASalle daoSalle;
+
+    private DAOPaiment daoPaiment;
 
     public Controller() {
         this.daoUser = new DAOUser();
         this.daoFilm = new DAOFilm();
         this.daoSeance= new DAOSeance();
         this.daoSalle = new DOASalle();
+        this.daoPaiment =new DAOPaiment();
 
 
     }
@@ -38,6 +42,7 @@ public class Controller {
     public String getPassword() {
         return daoUser.getPassword();
     }
+
 
     public User connect(String email, String motDePasse) {
         return DAOUser.getUser(email, motDePasse);
@@ -111,4 +116,7 @@ public class Controller {
     }
 
 
+    public void reservation(int userId, int seanceId, int nbBillet, double prix){
+        daoPaiment.reservation(this, userId,seanceId,nbBillet, prix);
+    }
 }

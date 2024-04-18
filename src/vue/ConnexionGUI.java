@@ -42,13 +42,14 @@ public class ConnexionGUI extends JDialog {
                     System.out.println("Age : " + user.age);
                     System.out.println("Email : " + user.mail);
                     System.out.println("Mot De Passe : " + user.motDePasse);
+                    System.out.println("user id " + user.userId);
                     //EMPLOYE
                     if (Integer.parseInt(user.typeMembre) == 0) {
-                        new AccueilEmploye(controller);
+                        new AccueilEmploye(controller, user);
                     }
                     //MEMBRE
                     else {
-                        new AccueilMembre(controller);
+                        new AccueilMembre(controller, user);
                     }
                     dispose();
                 } else {

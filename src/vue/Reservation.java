@@ -3,6 +3,7 @@ package vue;
 import controller.Controller;
 
 import model.Seance;
+import model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +12,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Reservation extends JFrame implements ActionListener{
-    private JLabel titrePage, user, sectionChoix;
+    private JLabel titrePage, userLabel, sectionChoix;
     private Controller controller;
     private JButton close;
     private ArrayList<Seance> list;
 
 
-    public Reservation(String titre, String time, String genre, String description, String classification, String date, String imgPath, Controller controller, int filmId){
+    public Reservation(User user, String titre, String time, String genre, String description, String classification, String date, String imgPath, Controller controller, int filmId){
         this.controller = controller;
         controller.setFilmid(filmId);
 
@@ -48,10 +49,10 @@ public class Reservation extends JFrame implements ActionListener{
         titrePage.setFont(new Font("Serif", Font.BOLD, 32));
         titrePage.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titrePage);
-        user = new JLabel(controller.getUsername());
-        user.setFont(new Font("Serif", Font.BOLD, 20));
-        user.setHorizontalAlignment(SwingConstants.RIGHT);
-        titrePanel.add(user);
+        userLabel = new JLabel(user.nom +" "+ user.prenom);
+        userLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        userLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        titrePanel.add(userLabel);
         add(titrePanel, BorderLayout.NORTH);
 
         JPanel menu = new JPanel(new GridLayout(0, 3, 10, 3));
@@ -97,7 +98,7 @@ public class Reservation extends JFrame implements ActionListener{
             controller.salle();
             System.out.println(controller.getSalle().getNom());
 
-            CarteSeance carteSeance= new CarteSeance(controller.getSalle().getNom(),list.get(i).getSeanceId(),list.get(i).getFilmId(),titre,list.get(i).getSalleID(), list.get(i).getHeureDeDebut(), list.get(i).getDate(), list.get(i).getNbplace(), panelX, this.controller);
+            CarteSeance carteSeance= new CarteSeance(user,controller.getSalle().getNom(),list.get(i).getSeanceId(),list.get(i).getFilmId(),titre,list.get(i).getSalleID(), list.get(i).getHeureDeDebut(), list.get(i).getDate(), list.get(i).getNbplace(), panelX, this.controller);
             panel1.add(panelX);
         }
 //        String Text1=
