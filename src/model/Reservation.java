@@ -35,6 +35,10 @@ public class Reservation {
         return nbDeBillets;
     }
 
+    public double getPrix() {
+        return prix;
+    }
+
     @Override
     public String toString() {
         return "Réservation pour l'utilisateur avec l'ID : " + userId + " : " + "Séance ID : " + seanceId + ", Nombre de billets : " + nbDeBillets + ", Prix : " + prix;

@@ -92,16 +92,37 @@ public class Profil extends JFrame implements ActionListener {
     }
 
     private JPanel createReservationPanel(Reservation reservation) {
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel(new GridLayout(4, 2));
         panel.setBorder(BorderFactory.createEtchedBorder());
 
-        JLabel titre = new JLabel("Titre du film : " + reservation.getFilmTitle());
-        JLabel date = new JLabel("Date de la séance : " + reservation.getDate());
-        JLabel billets = new JLabel("Nombre de billets : " + reservation.getNbDeBillets());
+        JLabel titreLabel = new JLabel("Titre du film : ");
+        titreLabel.setFont(new Font("Serif", Font.BOLD, 16));
+        JLabel titre = new JLabel(reservation.getFilmTitle());
+        titre.setFont(new Font("Serif", Font.PLAIN, 16));
 
-        panel.add(titre, BorderLayout.NORTH);
-        panel.add(date, BorderLayout.CENTER);
-        panel.add(billets, BorderLayout.SOUTH);
+        JLabel dateLabel = new JLabel("Date de la séance : ");
+        dateLabel.setFont(new Font("Serif", Font.BOLD, 16));
+        JLabel date = new JLabel(reservation.getDate());
+        date.setFont(new Font("Serif", Font.PLAIN, 16));
+
+        JLabel billetsLabel = new JLabel("Nombre de billets : ");
+        billetsLabel.setFont(new Font("Serif", Font.BOLD, 16));
+        JLabel billets = new JLabel(Integer.toString(reservation.getNbDeBillets()));
+        billets.setFont(new Font("Serif", Font.PLAIN, 16));
+
+        JLabel prixLabel = new JLabel("Prix : ");
+        prixLabel.setFont(new Font("Serif", Font.BOLD, 16));
+        JLabel prix = new JLabel(String.format("%.2f", reservation.getPrix()) + " €");
+        prix.setFont(new Font("Serif", Font.PLAIN, 16));
+
+        panel.add(titreLabel);
+        panel.add(titre);
+        panel.add(dateLabel);
+        panel.add(date);
+        panel.add(billetsLabel);
+        panel.add(billets);
+        panel.add(prixLabel);
+        panel.add(prix);
 
         return panel;
     }
