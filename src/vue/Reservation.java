@@ -45,7 +45,11 @@ public class Reservation extends JFrame implements ActionListener {
         titrePage.setFont(new Font("Serif", Font.BOLD, 32));
         titrePage.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titrePage);
-        userLabel = new JLabel(user.nom + " " + user.prenom);
+        if (user != null) {
+            userLabel = new JLabel(user.nom + " " + user.prenom);
+        } else {
+            userLabel = new JLabel("Invité");
+        }
         userLabel.setFont(new Font("Serif", Font.BOLD, 20));
         userLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         titrePanel.add(userLabel);
