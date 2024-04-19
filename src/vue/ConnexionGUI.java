@@ -16,6 +16,7 @@ public class ConnexionGUI extends JDialog {
     private JButton btnConnecter;
     private JButton btnAnnuler;
     private JPanel connexionPanel;
+    private JCheckBox voirMotDePasseCheckBox;
     private Controller controller;
 
     public ConnexionGUI(JFrame p, Controller controller) {
@@ -64,6 +65,18 @@ public class ConnexionGUI extends JDialog {
                 System.out.println("Connexion annulée");
                 dispose();
                 MenuGUI menuGUI = new MenuGUI(controller);
+            }
+        });
+
+        //BOUTON VOIR MOT DE PASSE
+        voirMotDePasseCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (voirMotDePasseCheckBox.isSelected()) {
+                    pfMotDePasse.setEchoChar((char) 0);
+                } else {
+                    pfMotDePasse.setEchoChar('*');
+                }
             }
         });
 
