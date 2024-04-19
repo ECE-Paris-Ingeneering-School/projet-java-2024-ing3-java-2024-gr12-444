@@ -30,7 +30,7 @@ public class AccueilEmploye extends JFrame implements ActionListener {
         }
 
 
-        setTitle("AcceuilEmploye");
+        setTitle("AccueilEmploye");
         setSize(1650, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -43,7 +43,7 @@ public class AccueilEmploye extends JFrame implements ActionListener {
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titre);
-        userLabel = new JLabel(user.nom +" "+ user.prenom);
+        userLabel = new JLabel(user.nom + " " + user.prenom);
         userLabel.setFont(new Font("Serif", Font.BOLD, 20));
         userLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         titrePanel.add(userLabel);
@@ -112,7 +112,7 @@ public class AccueilEmploye extends JFrame implements ActionListener {
 
         for (int i = 0; i < list.size(); i++) {
             JPanel panelt = new JPanel();
-            Card card = new Card(user,list.get(i).getTitre(), list.get(i).getTime(), list.get(i).getGenre(), list.get(i).getDescription(), list.get(i).getClassification(), list.get(i).getDate(), list.get(i).getPoster(), panelt, this.controller, list.get(i).getFilmId());
+            Card card = new Card(user, list.get(i).getTitre(), list.get(i).getTime(), list.get(i).getGenre(), list.get(i).getDescription(), list.get(i).getClassification(), list.get(i).getDate(), list.get(i).getPoster(), panelt, this.controller, list.get(i).getFilmId());
             panel.add(panelt);
 
         }
@@ -129,20 +129,15 @@ public class AccueilEmploye extends JFrame implements ActionListener {
             list.clear();
             //Form form = new Form(controller);
             MenuGUI menuGUI = new MenuGUI(controller);
-        }
-        else if (e.getSource() == profil) {
+        } else if (e.getSource() == profil) {
             Profil profil = new Profil(controller, user);
-        }
-        else if (e.getSource() == ajouter) {
+        } else if (e.getSource() == ajouter) {
             Ajouter ajouter = new Ajouter(controller);
-        }
-        else if (e.getSource() == modifier) {
+        } else if (e.getSource() == modifier) {
             Modifier modifier = new Modifier(controller);
-        }
-        else if (e.getSource() == supprimer) {
+        } else if (e.getSource() == supprimer) {
             Supprimer supprimer = new Supprimer(controller);
         }
-
 
 
     }

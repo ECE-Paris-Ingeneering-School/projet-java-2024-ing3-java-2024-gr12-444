@@ -27,7 +27,7 @@ public class AccueilInvite extends JFrame implements ActionListener {
         }
 
 
-        setTitle("Acceuil");
+        setTitle("Accueil");
         setSize(1600, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

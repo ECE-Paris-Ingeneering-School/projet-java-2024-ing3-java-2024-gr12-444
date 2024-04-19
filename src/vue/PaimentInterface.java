@@ -20,8 +20,9 @@ public class PaimentInterface extends JFrame implements ActionListener {
     private JLabel totalLabel;
 
     private Controller controller;
+
     public PaimentInterface(User user, String titre, String nomSalle, String date, String heure, int seanceId, Controller controller) {
-        this.controller= controller;
+        this.controller = controller;
         setTitle("Interface de paiement - Séance de cinéma");
         setSize(800, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,10 +30,10 @@ public class PaimentInterface extends JFrame implements ActionListener {
 
         JPanel ecran = new JPanel(new GridLayout(2, 1));
         JPanel panelX = new JPanel();
-        String Text=
-                "<html><h2>"+titre+"</h2><h3>"+nomSalle+"</h3><br>Heure de début :"+heure+"<br>Date :"+date+"<br>Seance ID :"+seanceId;
+        String Text =
+                "<html><h2>" + titre + "</h2><h3>" + nomSalle + "</h3><br>Heure de début :" + heure + "<br>Date :" + date + "<br>Seance ID :" + seanceId;
 
-        JLabel label=new JLabel(Text);
+        JLabel label = new JLabel(Text);
         panelX.add(label);
         ecran.add(panelX);
 
@@ -201,12 +202,12 @@ public class PaimentInterface extends JFrame implements ActionListener {
         return 0;
     }
 
-    private int nbBillet(){
+    private int nbBillet() {
         int adultTickets = Integer.parseInt(adultTicketsField.getText());
         int childTickets = Integer.parseInt(childTicketsField.getText());
         int seniorTickets = Integer.parseInt(seniorTicketsField.getText());
 
-        int nbBillet= adultTickets+childTickets+seniorTickets;
+        int nbBillet = adultTickets + childTickets + seniorTickets;
         return nbBillet;
     }
 
@@ -253,7 +254,6 @@ public class PaimentInterface extends JFrame implements ActionListener {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
-
 
 
 }

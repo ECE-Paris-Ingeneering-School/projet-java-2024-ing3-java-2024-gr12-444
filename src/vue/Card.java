@@ -15,7 +15,7 @@ public class Card {
         panelX.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         panelX.setLayout(new BorderLayout());
 
-        String[] lines= description.split("\\.");
+        String[] lines = description.split("\\.");
         StringBuilder miseEnPage = new StringBuilder("<html>");
         for (String line : lines) {
             miseEnPage.append(line).append("<br>");
@@ -32,7 +32,7 @@ public class Card {
         buttonX = new JButton("Reserver");
         buttonX.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Reservation reservation = new Reservation(user,titre, time, genre, description, classification, date, imgPath, controller, filmId);
+                Reservation reservation = new Reservation(user, titre, time, genre, description, classification, date, imgPath, controller, filmId);
             }
         });
         buttonPanel.add(buttonX);

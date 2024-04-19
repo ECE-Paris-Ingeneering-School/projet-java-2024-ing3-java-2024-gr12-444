@@ -33,7 +33,7 @@ public class AccueilMembre extends JFrame implements ActionListener {
         }
 
 
-        setTitle("AcceuilMembre");
+        setTitle("AccueilMembre");
         setSize(1600, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -46,7 +46,7 @@ public class AccueilMembre extends JFrame implements ActionListener {
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titre);
-        userLabel = new JLabel(user.nom +" "+ user.prenom);
+        userLabel = new JLabel(user.nom + " " + user.prenom);
         userLabel.setFont(new Font("Serif", Font.BOLD, 20));
         userLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         titrePanel.add(userLabel);
@@ -118,13 +118,9 @@ public class AccueilMembre extends JFrame implements ActionListener {
             list.clear();
             //Form form = new Form(controller);
             MenuGUI menuGUI = new MenuGUI(controller);
-        }
-        else if (e.getSource() == profil) {
+        } else if (e.getSource() == profil) {
             list.clear();
             Profil profil = new Profil(controller, user);
         }
-
-
-
     }
 }

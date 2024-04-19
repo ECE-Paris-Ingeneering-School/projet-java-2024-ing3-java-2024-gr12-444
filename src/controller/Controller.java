@@ -17,7 +17,7 @@ public class Controller {
     private Salle salle;
     private User user;
 
-    private final DOASalle daoSalle;
+    private final DAOSalle daoSalle;
 
     private DAOPaiment daoPaiment;
 
@@ -25,7 +25,7 @@ public class Controller {
         this.daoUser = new DAOUser();
         this.daoFilm = new DAOFilm();
         this.daoSeance = new DAOSeance();
-        this.daoSalle = new DOASalle();
+        this.daoSalle = new DAOSalle();
         //this.daoPaiment = new DAOPaiment();
     }
 

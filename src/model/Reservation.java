@@ -6,7 +6,7 @@ public class Reservation {
     private int nbDeBillets;
     private double prix;
 
-    public Reservation (int userId, int seanceId, int nbDeBillets, double prix) {
+    public Reservation(int userId, int seanceId, int nbDeBillets, double prix) {
         this.userId = userId;
         this.seanceId = seanceId;
         this.nbDeBillets = nbDeBillets;

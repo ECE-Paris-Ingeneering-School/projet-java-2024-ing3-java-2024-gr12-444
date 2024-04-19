@@ -8,12 +8,12 @@ import java.sql.*;
 public class DAOPaiment {
     private Controller controller;
 
-    public void reservation(Controller controller, int userId, int seanceId, int nbBillet, double prix){
-        this.controller= controller;
+    public void reservation(Controller controller, int userId, int seanceId, int nbBillet, double prix) {
+        this.controller = controller;
 
         Connection dbConnection = null;
         Statement statement = null;
-        PreparedStatement preparedStatement =null;
+        PreparedStatement preparedStatement = null;
 
         //faire la requete
         String sql = "INSERT INTO `réservation`(`UserID`, `SeanceID`, `NbDeBillets`, `Prix`) VALUES (?,?,?,?)";
@@ -26,7 +26,7 @@ public class DAOPaiment {
                 statement = dbConnection.createStatement();
                 preparedStatement = dbConnection.prepareStatement(sql);
 
-                preparedStatement.setInt(1, userId );
+                preparedStatement.setInt(1, userId);
                 preparedStatement.setInt(2, seanceId);
                 preparedStatement.setInt(3, nbBillet);
                 preparedStatement.setDouble(4, prix);

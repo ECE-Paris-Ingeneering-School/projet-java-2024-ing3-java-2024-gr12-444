@@ -9,10 +9,10 @@ import java.util.ArrayList;
 public class DAOFilm {
     private Controller controller;
 
-    private ArrayList<Film> list= new ArrayList<>();
+    private ArrayList<Film> list = new ArrayList<>();
 
-    public void film(Controller controller){
-        this.controller= controller;
+    public void film(Controller controller) {
+        this.controller = controller;
 
         Connection dbConnection = null;
         Statement statement = null;
@@ -29,10 +29,10 @@ public class DAOFilm {
                 ResultSet rs = statement.getResultSet();
                 while (rs.next()) {
 
-                    Film film= new Film(rs.getInt(1),
-                            rs.getString(2),String.valueOf(rs.getTime(3)),
-                            rs.getString(4),rs.getString(5),
-                            rs.getString(6),String.valueOf(rs.getDate(7)),
+                    Film film = new Film(rs.getInt(1),
+                            rs.getString(2), String.valueOf(rs.getTime(3)),
+                            rs.getString(4), rs.getString(5),
+                            rs.getString(6), String.valueOf(rs.getDate(7)),
                             rs.getString(8));
                     list.add(film);
                 }

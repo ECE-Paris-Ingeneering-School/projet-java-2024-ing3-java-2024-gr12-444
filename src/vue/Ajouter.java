@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.*;
+
 import org.jdesktop.swingx.JXDatePicker;
 
 
@@ -24,7 +25,7 @@ public class Ajouter extends JFrame implements ActionListener {
 
     private JTextField tfTitre, tfGenre, tfClassification, tfDescription, tfPoster;
 
-    private JTextField  tfIDSeanceReduc, tfReduc;
+    private JTextField tfIDSeanceReduc, tfReduc;
     private JTextField tfFilmID, tfSalleID;
 
     private JXDatePicker datePicker;
@@ -255,8 +256,6 @@ public class Ajouter extends JFrame implements ActionListener {
         add(sections, BorderLayout.CENTER);
 
 
-
-
         //Deconection ou quitter etc
         JPanel menu = new JPanel(new FlowLayout(FlowLayout.CENTER));
         menu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -293,13 +292,14 @@ public class Ajouter extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (poster.isEmpty()){
+        if (poster.isEmpty()) {
             poster = "images/poster.jpg";
         }
 
         ajouterFilmToDatabase(titre, genre, classification, description, duree, date, poster);
 
     }
+
     public Film film;
 
 
@@ -393,22 +393,17 @@ public class Ajouter extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if("1".equals(idsalle)){
+        if ("1".equals(idsalle)) {
             nbplaces = "150";
-        }
-        else if("2".equals(idsalle)){
+        } else if ("2".equals(idsalle)) {
             nbplaces = "100";
-        }
-        else if("3".equals(idsalle)){
+        } else if ("3".equals(idsalle)) {
             nbplaces = "2800";
-        }
-        else if("4".equals(idsalle)){
+        } else if ("4".equals(idsalle)) {
             nbplaces = "300";
-        }
-        else if("5".equals(idsalle)){
+        } else if ("5".equals(idsalle)) {
             nbplaces = "430";
-        }
-        else if("6".equals(idsalle)){
+        } else if ("6".equals(idsalle)) {
             nbplaces = "10";
         }
 
@@ -446,9 +441,6 @@ public class Ajouter extends JFrame implements ActionListener {
             e.printStackTrace();
         }
     }
-
-
-
 
 
     public void actionPerformed(ActionEvent e) {

@@ -16,7 +16,7 @@ public class DAOReservation {
     public static ArrayList<Reservation> getReservations(int userId) throws SQLException {
         ArrayList<Reservation> userReservations = new ArrayList<>();
 
-        try (PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM réservation WHERE UserID = ?")){
+        try (PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM réservation WHERE UserID = ?")) {
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
 

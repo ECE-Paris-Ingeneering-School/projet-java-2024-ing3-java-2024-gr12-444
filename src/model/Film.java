@@ -10,17 +10,18 @@ public class Film {
     private String date;
     private String poster;
 
-    public Film(int filmId, String titre, String time, String genre, String description, String classification, String date, String poster){
-        this.filmId= filmId;
-        this.titre= titre;
-        this.time=time;
-        this.genre=genre;
-        this.description=description;
-        this.classification=classification;
-        this.date=date;
-        this.poster=poster;
+    public Film(int filmId, String titre, String time, String genre, String description, String classification, String date, String poster) {
+        this.filmId = filmId;
+        this.titre = titre;
+        this.time = time;
+        this.genre = genre;
+        this.description = description;
+        this.classification = classification;
+        this.date = date;
+        this.poster = poster;
 
     }
+
     public int getFilmId() {
         return filmId;
     }

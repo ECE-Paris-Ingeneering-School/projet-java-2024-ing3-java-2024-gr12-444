@@ -8,13 +8,13 @@ public class Seance {
     private String date;
     private int nbplace;
 
-    public Seance(int seanceId, int filmId, int salleID, String heureDeDebut,String date, int nbplace){
-        this.seanceId= seanceId;
-        this.filmId= filmId;
-        this.salleID= salleID;
-        this.heureDeDebut= heureDeDebut;
-        this.date=date;
-        this.nbplace=nbplace;
+    public Seance(int seanceId, int filmId, int salleID, String heureDeDebut, String date, int nbplace) {
+        this.seanceId = seanceId;
+        this.filmId = filmId;
+        this.salleID = salleID;
+        this.heureDeDebut = heureDeDebut;
+        this.date = date;
+        this.nbplace = nbplace;
 
     }
 

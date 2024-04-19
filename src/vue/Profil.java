@@ -114,6 +114,7 @@ public class Profil extends JFrame implements ActionListener {
         }
         reservationsList.setModel(model);
     }
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();

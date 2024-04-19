@@ -5,10 +5,10 @@ public class Salle {
     private String nom;
     private int nbPlaceSalle;
 
-    public Salle(int salleId, String nom,int nbPlaceSalle){
-        this.salleId= salleId;
-        this.nom=nom;
-        this.nbPlaceSalle=nbPlaceSalle;
+    public Salle(int salleId, String nom, int nbPlaceSalle) {
+        this.salleId = salleId;
+        this.nom = nom;
+        this.nbPlaceSalle = nbPlaceSalle;
     }
 
     public int getSalleId() {

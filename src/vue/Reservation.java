@@ -11,19 +11,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Reservation extends JFrame implements ActionListener{
+public class Reservation extends JFrame implements ActionListener {
     private JLabel titrePage, userLabel, sectionChoix;
     private Controller controller;
     private JButton close;
     private ArrayList<Seance> list;
 
 
-    public Reservation(User user, String titre, String time, String genre, String description, String classification, String date, String imgPath, Controller controller, int filmId){
+    public Reservation(User user, String titre, String time, String genre, String description, String classification, String date, String imgPath, Controller controller, int filmId) {
         this.controller = controller;
         controller.setFilmid(filmId);
 
         controller.seance();
-
 
 
         list = controller.getListSeance();
@@ -31,9 +30,6 @@ public class Reservation extends JFrame implements ActionListener{
             System.out.println("seanceid");
             System.out.println(list.get(i).getSeanceId());
         }
-
-
-
 
 
         setTitle("Reservation");
@@ -49,7 +45,7 @@ public class Reservation extends JFrame implements ActionListener{
         titrePage.setFont(new Font("Serif", Font.BOLD, 32));
         titrePage.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titrePage);
-        userLabel = new JLabel(user.nom +" "+ user.prenom);
+        userLabel = new JLabel(user.nom + " " + user.prenom);
         userLabel.setFont(new Font("Serif", Font.BOLD, 20));
         userLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         titrePanel.add(userLabel);
@@ -63,14 +59,14 @@ public class Reservation extends JFrame implements ActionListener{
         menu.add(close);
         add(menu, BorderLayout.SOUTH);
 
-        JPanel grille = new JPanel(new GridLayout(2,0));
+        JPanel grille = new JPanel(new GridLayout(2, 0));
         grille.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
 
         //Rappel du film
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
 
-        String[] lines= description.split("\\.");
+        String[] lines = description.split("\\.");
         StringBuilder miseEnPage = new StringBuilder("<html>");
         for (String line : lines) {
             miseEnPage.append(line).append("<br>");
@@ -98,7 +94,7 @@ public class Reservation extends JFrame implements ActionListener{
             controller.salle();
             System.out.println(controller.getSalle().getNom());
 
-            CarteSeance carteSeance= new CarteSeance(user,controller.getSalle().getNom(),list.get(i).getSeanceId(),list.get(i).getFilmId(),titre,list.get(i).getSalleID(), list.get(i).getHeureDeDebut(), list.get(i).getDate(), list.get(i).getNbplace(), panelX, this.controller);
+            CarteSeance carteSeance = new CarteSeance(user, controller.getSalle().getNom(), list.get(i).getSeanceId(), list.get(i).getFilmId(), titre, list.get(i).getSalleID(), list.get(i).getHeureDeDebut(), list.get(i).getDate(), list.get(i).getNbplace(), panelX, this.controller);
             panel1.add(panelX);
         }
 //        String Text1=
@@ -119,6 +115,7 @@ public class Reservation extends JFrame implements ActionListener{
 
         setVisible(true);
     }
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == close) {
             list.clear();
@@ -126,7 +123,6 @@ public class Reservation extends JFrame implements ActionListener{
         }
 
     }
-
 
 
 }

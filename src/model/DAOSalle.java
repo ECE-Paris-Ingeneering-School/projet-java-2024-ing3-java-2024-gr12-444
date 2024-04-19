@@ -7,9 +7,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
-public class DOASalle {
+public class DAOSalle {
 
     private Controller controller;
     private Salle salle;
@@ -23,12 +22,12 @@ public class DOASalle {
         this.salleid = salleid;
     }
 
-    public void salle(Controller controller){
+    public void salle(Controller controller) {
         this.controller = controller;
         Connection dbConnection = null;
         Statement statement = null;
 
-        String sql ="SELECT * FROM salle WHERE SalleID = '"+this.controller.getSalleidSalle()+ "'";
+        String sql = "SELECT * FROM salle WHERE SalleID = '" + this.controller.getSalleidSalle() + "'";
         try {
             Database database = new Database();
             dbConnection = database.createConnection();
@@ -37,7 +36,7 @@ public class DOASalle {
                 statement.executeQuery(sql);
                 ResultSet rs = statement.getResultSet();
                 while (rs.next()) {
-                    salle= new Salle(rs.getInt(1),rs.getString("Nom"), rs.getInt(3));
+                    salle = new Salle(rs.getInt(1), rs.getString("Nom"), rs.getInt(3));
                 }
 
                 System.out.println("read salle");
