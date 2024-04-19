@@ -26,7 +26,7 @@ public class Controller {
         this.daoFilm = new DAOFilm();
         this.daoSeance = new DAOSeance();
         this.daoSalle = new DAOSalle();
-        //this.daoPaiment = new DAOPaiment();
+        this.daoPaiment = new DAOPaiment();
     }
 
     public void setUsername(String username) {
@@ -60,6 +60,7 @@ public class Controller {
 
         try {
             ArrayList<Reservation> reservations = DAOReservation.getReservations(userId);
+            conn.close();
             return reservations;
         } catch (SQLException e) {
             e.printStackTrace();

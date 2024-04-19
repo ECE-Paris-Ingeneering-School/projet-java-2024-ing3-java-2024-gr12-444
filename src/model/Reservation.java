@@ -5,12 +5,34 @@ public class Reservation {
     private int seanceId;
     private int nbDeBillets;
     private double prix;
+    private String filmTitle;
+    private String date;
 
     public Reservation(int userId, int seanceId, int nbDeBillets, double prix) {
         this.userId = userId;
         this.seanceId = seanceId;
         this.nbDeBillets = nbDeBillets;
         this.prix = prix;
+    }
+
+    public String getFilmTitle() {
+        return filmTitle;
+    }
+
+    public void setFilmTitle(String filmTitle) {
+        this.filmTitle = filmTitle;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getNbDeBillets() {
+        return nbDeBillets;
     }
 
     @Override

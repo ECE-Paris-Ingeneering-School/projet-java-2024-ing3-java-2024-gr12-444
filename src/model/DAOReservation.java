@@ -16,7 +16,12 @@ public class DAOReservation {
     public static ArrayList<Reservation> getReservations(int userId) throws SQLException {
         ArrayList<Reservation> userReservations = new ArrayList<>();
 
-        try (PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM réservation WHERE UserID = ?")) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(
+                "SELECT r.*, s.Date, f.Titre " +
+                        "FROM réservation r " +
+                        "JOIN séance s ON r.SeanceID = s.SeanceID " +
+                        "JOIN films f ON s.FilmID = f.FilmID " +
+                        "WHERE r.UserID = ?")) {
             preparedStatement.setInt(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -24,7 +29,11 @@ public class DAOReservation {
                 int seanceId = resultSet.getInt("SeanceID");
                 int nbDeBillets = resultSet.getInt("NbDeBillets");
                 double prix = resultSet.getDouble("Prix");
+                String filmTitle = resultSet.getString("Titre");
+                String seanceDate = resultSet.getString("Date");
                 Reservation reservation = new Reservation(userId, seanceId, nbDeBillets, prix);
+                reservation.setFilmTitle(filmTitle);
+                reservation.setDate(seanceDate);
                 userReservations.add(reservation);
             }
         }
