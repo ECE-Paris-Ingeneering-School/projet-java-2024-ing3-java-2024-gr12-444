@@ -173,7 +173,7 @@ public class PaimentInterface extends JFrame implements ActionListener {
 
 
                 controller.reservation(user.userId, seanceId, nbBillet(), updateTotalPrice());
-                dispose;
+                dispose();
                 
                 
             }
