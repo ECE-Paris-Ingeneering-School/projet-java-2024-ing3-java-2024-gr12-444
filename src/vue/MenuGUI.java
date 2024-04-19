@@ -74,6 +74,7 @@ public class MenuGUI extends JFrame {
         btnInvite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                dispose();
                 AccueilInvite accueil = new AccueilInvite(controller);
             }
         });
