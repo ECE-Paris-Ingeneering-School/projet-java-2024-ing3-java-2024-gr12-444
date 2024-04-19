@@ -21,6 +21,9 @@ public class Controller {
 
     private DAOPaiment daoPaiment;
 
+    private DAOReduction daoReduction;
+    private Reduction reduction;
+
     public Controller() {
         this.daoUser = new DAOUser();
         this.daoFilm = new DAOFilm();
@@ -148,5 +151,24 @@ public class Controller {
 
     public void reservation(int userId, int seanceId, int nbBillet, double prix) {
         daoPaiment.reservation(this, userId, seanceId, nbBillet, prix);
+    }
+
+    public ArrayList<Reduction> getReductions(int seanceId) {
+        Connection conn = null;
+        conn = new Database().createConnection();
+        daoReduction = new DAOReduction(conn);
+
+        try {
+            ArrayList<Reduction> reductions = DAOReduction.getReduction(seanceId);
+            conn.close();
+            return reductions;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+public int getReduction() {
+        return reduction.getReduction();
     }
 }

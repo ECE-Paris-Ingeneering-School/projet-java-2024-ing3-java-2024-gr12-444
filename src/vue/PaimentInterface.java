@@ -2,11 +2,13 @@ package vue;
 
 import com.mysql.cj.util.StringInspector;
 import controller.Controller;
+import model.Reduction;
 import model.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class PaimentInterface extends JFrame implements ActionListener {
     private JTextField adultTicketsField;
@@ -20,9 +22,22 @@ public class PaimentInterface extends JFrame implements ActionListener {
     private JLabel totalLabel;
 
     private Controller controller;
+    private ArrayList<Reduction> reductions = new ArrayList<>();
+
 
     public PaimentInterface(User user, String titre, String nomSalle, String date, String heure, int seanceId, Controller controller) {
         this.controller = controller;
+        reductions= controller.getReductions(seanceId);
+
+        if (reductions != null && !reductions.isEmpty()) {
+            System.out.println(reductions.get(0).getReduction());
+        } else {
+            reductions = null;
+        }
+
+
+
+
         setTitle("Interface de paiement - Séance de cinéma");
         setSize(800, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,9 +45,12 @@ public class PaimentInterface extends JFrame implements ActionListener {
 
         JPanel ecran = new JPanel(new GridLayout(2, 1));
         JPanel panelX = new JPanel();
-        String Text =
-                "<html><h2>" + titre + "</h2><h3>" + nomSalle + "</h3><br>Heure de début :" + heure + "<br>Date :" + date + "<br>Seance ID :" + seanceId;
-
+        String Text;
+        if (reductions != null && !reductions.isEmpty()) {
+            Text = "<html><h2>" + titre + "</h2><h3>" + nomSalle + "</h3><br>Heure de début :" + heure + "<br>Date :" + date + "<br>Seance ID :" + seanceId +"<h3>  Réduction disponible : "+reductions.get(0).getReduction()+"%</h3></html>";
+        } else {
+            Text = "<html><h2>" + titre + "</h2><h3>" + nomSalle + "</h3><br>Heure de début :" + heure + "<br>Date :" + date + "<br>Seance ID :" + seanceId +"<h3>  Pas de réduction disponible</h3></html>";
+        }
         JLabel label = new JLabel(Text);
         panelX.add(label);
         ecran.add(panelX);
@@ -170,12 +188,14 @@ public class PaimentInterface extends JFrame implements ActionListener {
         validateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 validatePayment();
+                //faire le mail
+                if (user == null) {
+                    dispose();
+                }else {
+                    controller.reservation(user.userId, seanceId, nbBillet(), updateTotalPrice());
+                    dispose();
+                }
 
-
-                controller.reservation(user.userId, seanceId, nbBillet(), updateTotalPrice());
-                dispose();
-                
-                
             }
         });
         panel.add(validateButton, gbc);
@@ -197,7 +217,12 @@ public class PaimentInterface extends JFrame implements ActionListener {
             int seniorTickets = Integer.parseInt(seniorTicketsField.getText());
 
             double totalPrice = calculateTotalPrice(adultTickets, childTickets, seniorTickets);
-            totalLabel.setText("Total à payer : " + totalPrice + " euros");
+            if (reductions != null && !reductions.isEmpty()) {
+                totalPrice = totalPrice - (totalPrice * reductions.get(0).getReduction() / 100);
+                totalLabel.setText("Total à payer : " + totalPrice + " euros, avec une réduction de " + reductions.get(0).getReduction() + "%");
+            } else {
+                totalLabel.setText("Total à payer : " + totalPrice + " euros");
+            }
             return totalPrice;
         } catch (NumberFormatException ex) {
             totalLabel.setText("Veuillez saisir un nombre valide de billets.");
