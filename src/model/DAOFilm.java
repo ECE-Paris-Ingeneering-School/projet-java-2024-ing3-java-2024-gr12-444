@@ -77,11 +77,8 @@ public class DAOFilm {
         }
 
         try {
-            String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
-            String username = "root";
-            String password = "";
-
-            Connection conn = DriverManager.getConnection(url, username, password);
+            Database database = new Database();
+            Connection conn = database.createConnection();
             System.out.println("connection success");
 
             Statement statement = conn.createStatement();
