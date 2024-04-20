@@ -27,15 +27,13 @@ public class PaimentInterface extends JFrame implements ActionListener {
 
     public PaimentInterface(User user, String titre, String nomSalle, String date, String heure, int seanceId, Controller controller) {
         this.controller = controller;
-        reductions= controller.getReductions(seanceId);
+        reductions = controller.getReductions(seanceId);
 
         if (reductions != null && !reductions.isEmpty()) {
             System.out.println(reductions.get(0).getReduction());
         } else {
             reductions = null;
         }
-
-
 
 
         setTitle("Interface de paiement - Séance de cinéma");
@@ -47,9 +45,9 @@ public class PaimentInterface extends JFrame implements ActionListener {
         JPanel panelX = new JPanel();
         String Text;
         if (reductions != null && !reductions.isEmpty()) {
-            Text = "<html><h2>" + titre + "</h2><h3>" + nomSalle + "</h3><br>Heure de début :" + heure + "<br>Date :" + date + "<br>Seance ID :" + seanceId +"<h3>  Réduction disponible : "+reductions.get(0).getReduction()+"%</h3></html>";
+            Text = "<html><h2>" + titre + "</h2><h3>" + nomSalle + "</h3><br>Heure de début :" + heure + "<br>Date :" + date + "<br>Seance ID :" + seanceId + "<h3>  Réduction disponible : " + reductions.get(0).getReduction() + "%</h3></html>";
         } else {
-            Text = "<html><h2>" + titre + "</h2><h3>" + nomSalle + "</h3><br>Heure de début :" + heure + "<br>Date :" + date + "<br>Seance ID :" + seanceId +"<h3>  Pas de réduction disponible</h3></html>";
+            Text = "<html><h2>" + titre + "</h2><h3>" + nomSalle + "</h3><br>Heure de début :" + heure + "<br>Date :" + date + "<br>Seance ID :" + seanceId + "<h3>  Pas de réduction disponible</h3></html>";
         }
         JLabel label = new JLabel(Text);
         panelX.add(label);
@@ -187,12 +185,15 @@ public class PaimentInterface extends JFrame implements ActionListener {
         validateButton = new JButton("Valider le paiement");
         validateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (!validatePaymentFields()) {
+                    return;
+                }
                 validatePayment();
                 //faire le mail
                 if (user == null) {
                     controller.decreaseSeanceSeats(seanceId, nbBillet());
                     dispose();
-                }else {
+                } else {
                     controller.reservation(user.userId, seanceId, nbBillet(), updateTotalPrice());
                     controller.decreaseSeanceSeats(seanceId, nbBillet());
                     dispose();
@@ -210,6 +211,14 @@ public class PaimentInterface extends JFrame implements ActionListener {
         add(ecran);
 
         setVisible(true);
+    }
+
+    private boolean validatePaymentFields() {
+        if (cardNumberField.getText().isEmpty() || expiryDateField.getText().isEmpty() || cvvField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs de la carte bancaire.", "Erreur de paiement", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     private double updateTotalPrice() {
