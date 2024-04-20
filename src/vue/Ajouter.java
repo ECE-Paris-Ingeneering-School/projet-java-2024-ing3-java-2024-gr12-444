@@ -275,6 +275,8 @@ public class Ajouter extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+
+
     private void ajoutFilm() {
         String titre = tfTitre.getText();
         String genre = tfGenre.getText();
@@ -285,7 +287,9 @@ public class Ajouter extends JFrame implements ActionListener {
         java.util.Date selectedDate = datePicker.getDate();
         java.util.Date selectedTime = (java.util.Date) timeSpinner.getValue();
 
-        Date date = new Date(selectedDate.getTime());
+        controller.ajoutFilm(titre, genre, classification, description, poster, selectedDate, selectedTime);
+
+        /*Date date = new Date(selectedDate.getTime());
         Time duree = new Time(selectedTime.getTime());
 
         if (titre.isEmpty() || genre.isEmpty() || classification.isEmpty() || description.isEmpty()) {
@@ -295,16 +299,6 @@ public class Ajouter extends JFrame implements ActionListener {
         if (poster.isEmpty()) {
             poster = "images/poster.jpg";
         }
-
-        ajouterFilmToDatabase(titre, genre, classification, description, duree, date, poster);
-
-    }
-
-    public Film film;
-
-
-    private void ajouterFilmToDatabase(String titre, String genre, String classification, String description, Time duree, Date date, String poster) {
-        Film film = null;
 
         try {
             String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
@@ -333,25 +327,22 @@ public class Ajouter extends JFrame implements ActionListener {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
+
     }
+
 
     private void ajoutReduc() {
 
         String idSeance = tfIDSeanceReduc.getText();
         String reduc = tfReduc.getText();
 
-        if (idSeance.isEmpty() || reduc.isEmpty()) {
+        controller.ajoutReduc(idSeance, reduc);
+
+        /*if (idSeance.isEmpty() || reduc.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        ajouterReducToDatabase(idSeance, reduc);
-
-
-    }
-
-    private void ajouterReducToDatabase(String idSeance, String reduc) {
 
         try {
             String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
@@ -375,8 +366,11 @@ public class Ajouter extends JFrame implements ActionListener {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
+
+
     }
+
 
     private void ajoutSeance() {
         String idfilm = tfFilmID.getText();
@@ -385,7 +379,9 @@ public class Ajouter extends JFrame implements ActionListener {
         java.util.Date selectedDate2 = datePicker2.getDate();
         java.util.Date selectedTime2 = (java.util.Date) timeSpinner2.getValue();
 
-        Date date2 = new Date(selectedDate2.getTime());
+        controller.ajoutSeance(idfilm, idsalle, selectedDate2, selectedTime2);
+
+        /*Date date2 = new Date(selectedDate2.getTime());
         Time debut = new Time(selectedTime2.getTime());
         String nbplaces = "";
 
@@ -407,13 +403,6 @@ public class Ajouter extends JFrame implements ActionListener {
             nbplaces = "10";
         }
 
-        ajouterSeanceToDatabase(idfilm, idsalle, debut, date2, nbplaces);
-
-    }
-
-
-    private void ajouterSeanceToDatabase(String idfilm, String idsalle, Time debut, Date date, String nbplaces) {
-
         try {
             String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
             String username = "root";
@@ -428,7 +417,7 @@ public class Ajouter extends JFrame implements ActionListener {
             preparedStatement.setString(1, idfilm);
             preparedStatement.setString(2, idsalle);
             preparedStatement.setTime(3, debut);
-            preparedStatement.setDate(4, date);
+            preparedStatement.setDate(4, date2);
             preparedStatement.setString(5, nbplaces);
 
             preparedStatement.executeUpdate();
@@ -439,7 +428,8 @@ public class Ajouter extends JFrame implements ActionListener {
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
+
     }
 
 

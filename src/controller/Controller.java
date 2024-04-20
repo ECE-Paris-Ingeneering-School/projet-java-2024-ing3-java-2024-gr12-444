@@ -2,6 +2,7 @@ package controller;
 
 import database.Database;
 import model.*;
+import vue.Ajouter;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -30,6 +31,7 @@ public class Controller {
         this.daoSeance = new DAOSeance();
         this.daoSalle = new DAOSalle();
         this.daoPaiment = new DAOPaiment();
+
     }
 
     public void setUsername(String username) {
@@ -175,5 +177,22 @@ public class Controller {
     public void decreaseSeanceSeats(int seanceId, int nbPlaces) {
         daoSeance.decreaseSeanceSeats(seanceId, nbPlaces);
     }
+
+    public void ajoutFilm(String titre, String genre, String classification, String description, String poster, java.util.Date datePicker, java.util.Date timeSpinner) {
+        daoFilm.ajoutFilm(titre, genre, classification, description, poster, datePicker, timeSpinner);
+    }
+
+    public void ajoutReduc(String idSeance, String reduc){
+        if (daoReduction == null) {
+            Connection conn = new Database().createConnection();
+            daoReduction = new DAOReduction(conn);
+        }
+        daoReduction.ajoutReduc(idSeance, reduc);
+    }
+
+    public void ajoutSeance(String idfilm, String idsalle, java.util.Date datePicker, java.util.Date timeSpinner){
+        daoSeance.ajoutSeance(idfilm, idsalle, datePicker, timeSpinner);
+    }
+
 
 }

@@ -3,6 +3,7 @@ package model;
 import controller.*;
 import database.Database;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -57,6 +58,51 @@ public class DAOFilm {
                     e.printStackTrace();
                 }
             }
+        }
+
+    }
+
+    public void ajoutFilm(String titre, String genre, String classification, String description, String poster, java.util.Date datePicker, java.util.Date timeSpinner) {
+
+
+        Date date = new Date(datePicker.getTime());
+        Time duree = new Time(timeSpinner.getTime());
+
+        if (titre.isEmpty() || genre.isEmpty() || classification.isEmpty() || description.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (poster.isEmpty()) {
+            poster = "images/poster.jpg";
+        }
+
+        try {
+            String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
+            String username = "root";
+            String password = "";
+
+            Connection conn = DriverManager.getConnection(url, username, password);
+            System.out.println("connection success");
+
+            Statement statement = conn.createStatement();
+            String sql = "INSERT INTO films (Titre, Genre, Classification, Description, Durée, DateDeSortie, Poster)" + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, titre);
+            preparedStatement.setString(2, genre);
+            preparedStatement.setString(3, classification);
+            preparedStatement.setString(4, description);
+            preparedStatement.setTime(5, duree);
+            preparedStatement.setDate(6, date);
+            preparedStatement.setString(7, poster);
+
+            preparedStatement.executeUpdate();
+
+
+            //fermeture
+            statement.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

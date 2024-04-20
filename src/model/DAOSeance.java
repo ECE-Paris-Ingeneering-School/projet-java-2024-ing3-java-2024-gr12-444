@@ -3,6 +3,7 @@ package model;
 import controller.Controller;
 import database.Database;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -107,5 +108,58 @@ public class DAOSeance {
                 }
             }
         }
+    }
+
+    public void ajoutSeance(String idfilm, String idsalle, java.util.Date selectedDate2, java.util.Date selectedTime2) {
+
+        Date date2 = new Date(selectedDate2.getTime());
+        Time debut = new Time(selectedTime2.getTime());
+        String nbplaces = "";
+
+        if (idfilm.isEmpty() || idsalle.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if ("1".equals(idsalle)) {
+            nbplaces = "150";
+        } else if ("2".equals(idsalle)) {
+            nbplaces = "100";
+        } else if ("3".equals(idsalle)) {
+            nbplaces = "2800";
+        } else if ("4".equals(idsalle)) {
+            nbplaces = "300";
+        } else if ("5".equals(idsalle)) {
+            nbplaces = "430";
+        } else if ("6".equals(idsalle)) {
+            nbplaces = "10";
+        }
+
+        try {
+            String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
+            String username = "root";
+            String password = "";
+
+            Connection conn = DriverManager.getConnection(url, username, password);
+            System.out.println("connection success");
+
+            Statement statement = conn.createStatement();
+            String sql = "INSERT INTO séance (FilmID, SalleID, HeureDeDebut, Date, NbPlacesRestantes)" + "VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, idfilm);
+            preparedStatement.setString(2, idsalle);
+            preparedStatement.setTime(3, debut);
+            preparedStatement.setDate(4, date2);
+            preparedStatement.setString(5, nbplaces);
+
+            preparedStatement.executeUpdate();
+
+
+            //fermeture
+            statement.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

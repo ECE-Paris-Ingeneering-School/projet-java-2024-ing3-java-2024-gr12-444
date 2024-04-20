@@ -1,9 +1,7 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.swing.*;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DAOReduction {
@@ -29,5 +27,24 @@ public class DAOReduction {
         }
         return reductions;
     }
+
+    public void ajoutReduc(String idSeance, String reduc) {
+        if (idSeance.isEmpty() || reduc.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            String sql = "INSERT INTO réductions (IDseance, Réduction) VALUES (?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, idSeance);
+            preparedStatement.setString(2, reduc);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
