@@ -1,14 +1,20 @@
 package vue;
 
-import com.mysql.cj.util.StringInspector;
+import com.mysql.cj.Session;
 import controller.Controller;
 import model.Reduction;
 import model.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.PasswordAuthentication;
 import java.util.ArrayList;
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+
 
 public class PaimentInterface extends JFrame implements ActionListener {
     private JTextField adultTicketsField;
@@ -22,11 +28,13 @@ public class PaimentInterface extends JFrame implements ActionListener {
     private JLabel totalLabel;
 
     private Controller controller;
+    private User user;
     private ArrayList<Reduction> reductions = new ArrayList<>();
 
 
     public PaimentInterface(User user, String titre, String nomSalle, String date, String heure, int seanceId, Controller controller) {
         this.controller = controller;
+        this.user = user;
         reductions = controller.getReductions(seanceId);
 
         if (reductions != null && !reductions.isEmpty()) {
@@ -215,7 +223,7 @@ public class PaimentInterface extends JFrame implements ActionListener {
 
     private boolean validatePaymentFields() {
         if (cardNumberField.getText().isEmpty() || expiryDateField.getText().isEmpty() || cvvField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs de la carte bancaire.", "Erreur de paiement", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs !", "Erreur de paiement", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -284,9 +292,48 @@ public class PaimentInterface extends JFrame implements ActionListener {
 
     private void validatePayment() {
         // ajouter a la database  !!
+
+        if (user != null) {
+            sendConfirmationEmail(user);
+        }
+
         JOptionPane.showMessageDialog(this, "Paiement validé !", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    private void sendConfirmationEmail(User user) {
+        String email = user.mail;
+        String motDePasse = user.motDePasse;
+
+        String senderEmail = "cinemadegrenelle@gmail.com";
+        String senderPassword = "fxekozuylzptyedf";
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+        javax.mail.Session mailSession = javax.mail.Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new javax.mail.PasswordAuthentication(senderEmail, senderPassword);
+            }
+        });
+
+
+        try {
+            Message message = new MimeMessage(mailSession);
+            message.setFrom(new InternetAddress(senderEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+            message.setSubject("Confirmation de paiement");
+            message.setText("Bonjour " + user.nom + ",\n\nVotre paiement a été validé avec succès.");
+
+            Transport.send(message);
+
+            System.out.println("E-mail de confirmation envoyé avec succès à " + email);
+        } catch (MessagingException e) {
+            System.out.println("Erreur lors de l'envoi de l'e-mail de confirmation : " + e.getMessage());
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
