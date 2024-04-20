@@ -29,12 +29,14 @@ public class PaimentInterface extends JFrame implements ActionListener {
 
     private Controller controller;
     private User user;
+    private String titre;
     private ArrayList<Reduction> reductions = new ArrayList<>();
 
 
     public PaimentInterface(User user, String titre, String nomSalle, String date, String heure, int seanceId, Controller controller) {
         this.controller = controller;
         this.user = user;
+        this.titre = titre;
         reductions = controller.getReductions(seanceId);
 
         if (reductions != null && !reductions.isEmpty()) {
@@ -325,14 +327,43 @@ public class PaimentInterface extends JFrame implements ActionListener {
             message.setFrom(new InternetAddress(senderEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject("Confirmation de paiement");
-            message.setText("Bonjour " + user.nom + ",\n\nVotre paiement a été validé avec succès.");
 
-            Transport.send(message);
+            String filmName = titre;
+            double totalPrice = updateTotalPrice();
+            MimeMessage confirmationMail = draftEmail(user, filmName, totalPrice, mailSession);
+
+            Transport.send(confirmationMail);
 
             System.out.println("E-mail de confirmation envoyé avec succès à " + email);
         } catch (MessagingException e) {
             System.out.println("Erreur lors de l'envoi de l'e-mail de confirmation : " + e.getMessage());
         }
+    }
+
+    private MimeMessage draftEmail(User user, String filmName, double totalPrice, javax.mail.Session session) throws MessagingException {
+        String[] emailReceipients = {user.mail};
+        String emailSubject = "Confirmation de paiement";
+        String emailBody = "Bonjour " + user.prenom + ",\n\nVotre paiement a été validé avec succès.\n\n";
+        emailBody += "Voici les détails de votre réservation :\n";
+        emailBody += "- Film : " + filmName + "\n";
+        emailBody += "- Prix total : " + totalPrice + " euros\n\n";
+        emailBody += "Merci d'avoir choisi notre service de réservation en ligne. Nous sommes impatients de vous accueillir au cinéma !";
+
+        MimeMessage mimeMessage = new MimeMessage(session);
+
+        for (String recipient : emailReceipients) {
+            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+        }
+        mimeMessage.setSubject(emailSubject);
+
+        MimeBodyPart bodyPart = new MimeBodyPart();
+        bodyPart.setContent(emailBody, "text/plain");
+
+        MimeMultipart multiPart = new MimeMultipart();
+        multiPart.addBodyPart(bodyPart);
+
+        mimeMessage.setContent(multiPart);
+        return mimeMessage;
     }
 
     @Override
