@@ -168,7 +168,12 @@ public class Controller {
         return new ArrayList<>();
     }
 
-public int getReduction() {
+    public int getReduction() {
         return reduction.getReduction();
     }
+
+    public void decreaseSeanceSeats(int seanceId, int nbPlaces) {
+        daoSeance.decreaseSeanceSeats(seanceId, nbPlaces);
+    }
+
 }

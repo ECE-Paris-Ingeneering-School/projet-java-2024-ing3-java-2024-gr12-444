@@ -190,9 +190,11 @@ public class PaimentInterface extends JFrame implements ActionListener {
                 validatePayment();
                 //faire le mail
                 if (user == null) {
+                    controller.decreaseSeanceSeats(seanceId, nbBillet());
                     dispose();
                 }else {
                     controller.reservation(user.userId, seanceId, nbBillet(), updateTotalPrice());
+                    controller.decreaseSeanceSeats(seanceId, nbBillet());
                     dispose();
                 }
 

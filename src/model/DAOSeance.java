@@ -3,10 +3,7 @@ package model;
 import controller.Controller;
 import database.Database;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DAOSeance {
@@ -74,5 +71,41 @@ public class DAOSeance {
 
     public ArrayList<Seance> getList() {
         return list;
+    }
+
+    public void decreaseSeanceSeats(int seanceId, int nbPlaces) {
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+
+
+        String sql = "UPDATE séance SET NbPlacesRestantes = NbPlacesRestantes - ? WHERE séance.SeanceID = " + seanceId;
+        try {
+            Database database = new Database();
+            dbConnection = database.createConnection();
+            try {
+                preparedStatement = dbConnection.prepareStatement(sql);
+                preparedStatement.setInt(1, nbPlaces);
+                int resultSet = preparedStatement.executeUpdate();
+                System.out.println("decreaseSeanceSeats");
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            } finally {
+                if (preparedStatement != null) {
+                    try {
+                        preparedStatement.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } finally {
+            if (dbConnection != null) {
+                try {
+                    dbConnection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
