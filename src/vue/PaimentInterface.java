@@ -39,7 +39,7 @@ public class PaimentInterface extends JFrame implements ActionListener {
         this.titre = titre;
         reductions = controller.getReductions(seanceId);
 
-        if (reductions != null && !reductions.isEmpty()) {
+        if (reductions != null && !reductions.isEmpty() && user != null) {
             System.out.println(reductions.get(0).getReduction());
         } else {
             reductions = null;
@@ -341,7 +341,7 @@ public class PaimentInterface extends JFrame implements ActionListener {
     }
 
     private MimeMessage draftEmail(User user, String filmName, double totalPrice, javax.mail.Session session) throws MessagingException {
-        String[] emailReceipients = {user.mail};
+        String[] emailRecipients = {user.mail};
         String emailSubject = "Confirmation de paiement";
         String emailBody = "Bonjour " + user.prenom + ",\n\nVotre paiement a été validé avec succès.\n\n";
         emailBody += "Voici les détails de votre réservation :\n";
@@ -351,7 +351,7 @@ public class PaimentInterface extends JFrame implements ActionListener {
 
         MimeMessage mimeMessage = new MimeMessage(session);
 
-        for (String recipient : emailReceipients) {
+        for (String recipient : emailRecipients) {
             mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
         }
         mimeMessage.setSubject(emailSubject);
