@@ -50,13 +50,14 @@ public class ConnexionGUI extends JDialog {
                     System.out.println("user id " + user.userId);
                     //EMPLOYE
                     if (Integer.parseInt(user.typeMembre) == 0) {
+                        dispose();
                         new AccueilEmploye(controller, user);
                     }
                     //MEMBRE
                     else {
+                        dispose();
                         new AccueilMembre(controller, user);
                     }
-                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(ConnexionGUI.this, "Email ou mot de passe invalide", "Essayer encore", JOptionPane.ERROR_MESSAGE);
                 }
