@@ -114,49 +114,49 @@ public class Ajouter extends JFrame implements ActionListener {
             }
 
         });
-        GridBagConstraints gbc1 = new GridBagConstraints();
-        gbc1.gridx = 0;
-        gbc1.gridy = 0;
-        gbc1.insets = new Insets(0, 0, 10, 0);
-        sectionFilm.add(titreSection1, gbc1);
+        GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
+        gridBagConstraints1.gridx = 0;
+        gridBagConstraints1.gridy = 0;
+        gridBagConstraints1.insets = new Insets(0, 0, 10, 0);
+        sectionFilm.add(titreSection1, gridBagConstraints1);
 
-        gbc1.gridy = 1;
-        sectionFilm.add(titreFilm, gbc1);
-        gbc1.gridy = 2;
-        sectionFilm.add(tfTitre, gbc1);
+        gridBagConstraints1.gridy = 1;
+        sectionFilm.add(titreFilm, gridBagConstraints1);
+        gridBagConstraints1.gridy = 2;
+        sectionFilm.add(tfTitre, gridBagConstraints1);
 
-        gbc1.gridy = 3;
-        sectionFilm.add(genreFilm, gbc1);
-        gbc1.gridy = 4;
-        sectionFilm.add(tfGenre, gbc1);
+        gridBagConstraints1.gridy = 3;
+        sectionFilm.add(genreFilm, gridBagConstraints1);
+        gridBagConstraints1.gridy = 4;
+        sectionFilm.add(tfGenre, gridBagConstraints1);
 
-        gbc1.gridy = 5;
-        sectionFilm.add(classificationFilm, gbc1);
-        gbc1.gridy = 6;
-        sectionFilm.add(tfClassification, gbc1);
+        gridBagConstraints1.gridy = 5;
+        sectionFilm.add(classificationFilm, gridBagConstraints1);
+        gridBagConstraints1.gridy = 6;
+        sectionFilm.add(tfClassification, gridBagConstraints1);
 
-        gbc1.gridy = 7;
-        sectionFilm.add(desciptionFilm, gbc1);
-        gbc1.gridy = 8;
-        sectionFilm.add(tfDescription, gbc1);
+        gridBagConstraints1.gridy = 7;
+        sectionFilm.add(desciptionFilm, gridBagConstraints1);
+        gridBagConstraints1.gridy = 8;
+        sectionFilm.add(tfDescription, gridBagConstraints1);
 
-        gbc1.gridy = 9;
-        sectionFilm.add(dateFilm, gbc1);
-        gbc1.gridy = 10;
-        sectionFilm.add(datePicker, gbc1);
+        gridBagConstraints1.gridy = 9;
+        sectionFilm.add(dateFilm, gridBagConstraints1);
+        gridBagConstraints1.gridy = 10;
+        sectionFilm.add(datePicker, gridBagConstraints1);
 
-        gbc1.gridy = 11;
-        sectionFilm.add(dureeFilm, gbc1);
-        gbc1.gridy = 12;
-        sectionFilm.add(timeSpinner, gbc1);
+        gridBagConstraints1.gridy = 11;
+        sectionFilm.add(dureeFilm, gridBagConstraints1);
+        gridBagConstraints1.gridy = 12;
+        sectionFilm.add(timeSpinner, gridBagConstraints1);
 
-        gbc1.gridy = 13;
-        sectionFilm.add(posterFilm, gbc1);
-        gbc1.gridy = 14;
-        sectionFilm.add(tfPoster, gbc1);
+        gridBagConstraints1.gridy = 13;
+        sectionFilm.add(posterFilm, gridBagConstraints1);
+        gridBagConstraints1.gridy = 14;
+        sectionFilm.add(tfPoster, gridBagConstraints1);
 
-        gbc1.gridy = 15;
-        sectionFilm.add(boutonSection1, gbc1);
+        gridBagConstraints1.gridy = 15;
+        sectionFilm.add(boutonSection1, gridBagConstraints1);
         sections.add(sectionFilm);
 
         //Deuxième section
@@ -175,24 +175,24 @@ public class Ajouter extends JFrame implements ActionListener {
             }
 
         });
-        GridBagConstraints gbc2 = new GridBagConstraints();
-        gbc2.gridx = 0;
-        gbc2.gridy = 0;
-        gbc2.insets = new Insets(0, 0, 10, 0);
-        sectionReduc.add(titreSection2, gbc2);
+        GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
+        gridBagConstraints2.gridx = 0;
+        gridBagConstraints2.gridy = 0;
+        gridBagConstraints2.insets = new Insets(0, 0, 10, 0);
+        sectionReduc.add(titreSection2, gridBagConstraints2);
 
-        gbc2.gridy = 1;
-        sectionReduc.add(reducIDSeance, gbc2);
-        gbc2.gridy = 2;
-        sectionReduc.add(tfIDSeanceReduc, gbc2);
+        gridBagConstraints2.gridy = 1;
+        sectionReduc.add(reducIDSeance, gridBagConstraints2);
+        gridBagConstraints2.gridy = 2;
+        sectionReduc.add(tfIDSeanceReduc, gridBagConstraints2);
 
-        gbc2.gridy = 3;
-        sectionReduc.add(pourcentReduc, gbc2);
-        gbc2.gridy = 4;
-        sectionReduc.add(tfReduc, gbc2);
+        gridBagConstraints2.gridy = 3;
+        sectionReduc.add(pourcentReduc, gridBagConstraints2);
+        gridBagConstraints2.gridy = 4;
+        sectionReduc.add(tfReduc, gridBagConstraints2);
 
-        gbc2.gridy = 5;
-        sectionReduc.add(boutonSection2, gbc2);
+        gridBagConstraints2.gridy = 5;
+        sectionReduc.add(boutonSection2, gridBagConstraints2);
         sections.add(sectionReduc);
 
         //Troisième section
@@ -227,34 +227,34 @@ public class Ajouter extends JFrame implements ActionListener {
             }
 
         });
-        GridBagConstraints gbc3 = new GridBagConstraints();
-        gbc3.gridx = 0;
-        gbc3.gridy = 0;
-        gbc3.insets = new Insets(0, 0, 10, 0);
-        sectionSeance.add(titreSection3, gbc3);
+        GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
+        gridBagConstraints3.gridx = 0;
+        gridBagConstraints3.gridy = 0;
+        gridBagConstraints3.insets = new Insets(0, 0, 10, 0);
+        sectionSeance.add(titreSection3, gridBagConstraints3);
 
-        gbc3.gridy = 1;
-        sectionSeance.add(filmID, gbc3);
-        gbc3.gridy = 2;
-        sectionSeance.add(tfFilmID, gbc3);
+        gridBagConstraints3.gridy = 1;
+        sectionSeance.add(filmID, gridBagConstraints3);
+        gridBagConstraints3.gridy = 2;
+        sectionSeance.add(tfFilmID, gridBagConstraints3);
 
-        gbc3.gridy = 3;
-        sectionSeance.add(salleID, gbc3);
-        gbc3.gridy = 4;
-        sectionSeance.add(tfSalleID, gbc3);
+        gridBagConstraints3.gridy = 3;
+        sectionSeance.add(salleID, gridBagConstraints3);
+        gridBagConstraints3.gridy = 4;
+        sectionSeance.add(tfSalleID, gridBagConstraints3);
 
-        gbc3.gridy = 5;
-        sectionSeance.add(dateSeance, gbc3);
-        gbc3.gridy = 6;
-        sectionSeance.add(datePicker2, gbc3);
+        gridBagConstraints3.gridy = 5;
+        sectionSeance.add(dateSeance, gridBagConstraints3);
+        gridBagConstraints3.gridy = 6;
+        sectionSeance.add(datePicker2, gridBagConstraints3);
 
-        gbc3.gridy = 7;
-        sectionSeance.add(heureSeance, gbc3);
-        gbc3.gridy = 8;
-        sectionSeance.add(timeSpinner2, gbc3);
+        gridBagConstraints3.gridy = 7;
+        sectionSeance.add(heureSeance, gridBagConstraints3);
+        gridBagConstraints3.gridy = 8;
+        sectionSeance.add(timeSpinner2, gridBagConstraints3);
 
-        gbc3.gridy = 9;
-        sectionSeance.add(boutonSection3, gbc3);
+        gridBagConstraints3.gridy = 9;
+        sectionSeance.add(boutonSection3, gridBagConstraints3);
         sections.add(sectionSeance);
 
         add(sections, BorderLayout.CENTER);

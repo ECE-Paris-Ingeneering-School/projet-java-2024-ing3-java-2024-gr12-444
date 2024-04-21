@@ -65,19 +65,19 @@ public class Supprimer extends JFrame implements ActionListener {
             }
 
         });
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(0, 0, 10, 0);
-        sectionSupprimer.add(titreSection, gbc);
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new Insets(0, 0, 10, 0);
+        sectionSupprimer.add(titreSection, gridBagConstraints);
 
-        gbc.gridy = 1;
-        sectionSupprimer.add(idFilm, gbc);
-        gbc.gridy = 2;
-        sectionSupprimer.add(tfIDFilm, gbc);
+        gridBagConstraints.gridy = 1;
+        sectionSupprimer.add(idFilm, gridBagConstraints);
+        gridBagConstraints.gridy = 2;
+        sectionSupprimer.add(tfIDFilm, gridBagConstraints);
 
-        gbc.gridy = 3;
-        sectionSupprimer.add(boutonSection, gbc);
+        gridBagConstraints.gridy = 3;
+        sectionSupprimer.add(boutonSection, gridBagConstraints);
 
         add(sectionSupprimer, BorderLayout.CENTER);
 
