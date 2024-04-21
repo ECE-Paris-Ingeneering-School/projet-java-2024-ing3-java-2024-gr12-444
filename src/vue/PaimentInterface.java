@@ -220,6 +220,31 @@ public class PaimentInterface extends JFrame implements ActionListener {
         ecran.add(panel);
         add(ecran);
 
+        if (user != null) {
+            if (Integer.parseInt(user.getTypeMembre()) == 1) {
+                adultTicketsField.setEnabled(false);
+                adultMinusButton.setEnabled(false);
+                adultPlusButton.setEnabled(false);
+                seniorTicketsField.setEnabled(false);
+                seniorMinusButton.setEnabled(false);
+                seniorPlusButton.setEnabled(false);
+            } else if (Integer.parseInt(user.getTypeMembre()) == 2) {
+                adultTicketsField.setEnabled(false);
+                adultMinusButton.setEnabled(false);
+                adultPlusButton.setEnabled(false);
+                childTicketsField.setEnabled(false);
+                childMinusButton.setEnabled(false);
+                childPlusButton.setEnabled(false);
+            } else if (Integer.parseInt(user.getTypeMembre()) == 3) {
+                seniorTicketsField.setEnabled(false);
+                seniorMinusButton.setEnabled(false);
+                seniorPlusButton.setEnabled(false);
+                childTicketsField.setEnabled(false);
+                childMinusButton.setEnabled(false);
+                childPlusButton.setEnabled(false);
+            }
+        }
+
         setVisible(true);
     }
 
@@ -240,9 +265,11 @@ public class PaimentInterface extends JFrame implements ActionListener {
             double totalPrice = calculateTotalPrice(adultTickets, childTickets, seniorTickets);
             if (reductions != null && !reductions.isEmpty()) {
                 totalPrice = totalPrice - (totalPrice * reductions.get(0).getReduction() / 100);
-                totalLabel.setText("Total à payer : " + totalPrice + " euros, avec une réduction de " + reductions.get(0).getReduction() + "%");
+                String totalPrice2f = String.format("%.2f", totalPrice);
+                totalLabel.setText("Total à payer : " + totalPrice2f + " euros, avec une réduction de " + reductions.get(0).getReduction() + "%");
             } else {
-                totalLabel.setText("Total à payer : " + totalPrice + " euros");
+                String totalPrice2f = String.format("%.2f", totalPrice);
+                totalLabel.setText("Total à payer : " + totalPrice2f + " euros");
             }
             return totalPrice;
         } catch (NumberFormatException ex) {
@@ -267,7 +294,7 @@ public class PaimentInterface extends JFrame implements ActionListener {
         double seniorPrice = 8.0;
 
         // Calcul du total
-        return (adultTickets * adultPrice) + (childTickets * childPrice) + (seniorTickets * seniorPrice);
+        return (adultTickets * adultPrice) + (childTickets * childPrice * 0.8) + (seniorTickets * seniorPrice * 0.85);
     }
 
     private void increaseTicket(JTextField field) {

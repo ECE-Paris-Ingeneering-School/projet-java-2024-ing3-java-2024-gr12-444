@@ -28,4 +28,8 @@ public class User {
     public int getUserId() {
         return userId;
     }
+
+    public String getTypeMembre() {
+        return typeMembre;
+    }
 }

@@ -82,7 +82,15 @@ public class DAOUser {
             preparedStatement.setString(3, age);
             preparedStatement.setString(4, mail);
             preparedStatement.setString(5, motDePasse);
-            preparedStatement.setInt(6, 3);
+            if (Integer.parseInt(age) > 0 && Integer.parseInt(age) < 18) {
+                preparedStatement.setInt(6, 1);
+            }
+            else if (Integer.parseInt(age) >= 18 && Integer.parseInt(age) < 60) {
+                preparedStatement.setInt(6, 3);
+            }
+            else if (Integer.parseInt(age) >= 60){
+                preparedStatement.setInt(6, 2);
+            }
 
             int result = preparedStatement.executeUpdate();
 
