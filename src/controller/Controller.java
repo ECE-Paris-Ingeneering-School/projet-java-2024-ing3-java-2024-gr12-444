@@ -334,5 +334,50 @@ public class Controller {
         daoFilm.supprimerFilm(idfilm);
     }
 
+    /**
+     * Méthode qui permet de modifier un film
+     *
+     * @param idFilm         L'id du film a changer
+     * @param titre          Le titre du film
+     * @param genre          Le genre du film
+     * @param classification La classification du film
+     * @param description    La description
+     * @param poster         Le poster du film
+     * @param datePicker     La date de sortie du film
+     * @param timeSpinner    L'heure de la séance du film
+     */
+    public void modifierFilm(String idFilm, String titre, String genre, String classification, String description, String poster, java.util.Date datePicker, java.util.Date timeSpinner) {
+        daoFilm.modifierFilm(idFilm, titre, genre, classification, description, poster, datePicker, timeSpinner);
+    }
+
+    /**
+     * Méthode qui permet de modifier une reduction
+     *
+     * @param idReduc l'ID de la reduc à changer
+     * @param idSeance l'ID de la séance
+     * @param reduc    Le montant de la réduction
+     */
+    public void modifierReduc(String idReduc, String idSeance, String reduc) {
+        if (daoReduction == null) {
+            Connection conn = new Database().createConnection();
+            daoReduction = new DAOReduction(conn);
+        }
+        daoReduction.modifierReduc(idReduc, idSeance, reduc);
+    }
+
+    /**
+     * Méthode qui permet de modifier une seance
+     *
+     * @param idSeance    L'ID de la seance a changer
+     * @param idfilm      L'ID du film
+     * @param idsalle     L'ID de la salle
+     * @param datePicker  La date de la séance
+     * @param timeSpinner L'heure de la séance
+     */
+    public void modifierSeance(String idSeance, String idfilm, String idsalle, java.util.Date datePicker, java.util.Date timeSpinner) {
+        daoSeance.modifierSeance(idSeance, idfilm, idsalle, datePicker, timeSpinner);
+    }
+
+
 
 }

@@ -196,4 +196,66 @@ public class DAOSeance {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * Méthode qui permet de modifier une seance
+     *
+     * @param idSeance    L'ID de la seance a changer
+     * @param idfilm      L'ID du film
+     * @param idsalle     L'ID de la salle
+     * @param selectedDate2   La date de la séance
+     * @param selectedTime2   L'heure de début de la séance
+     */
+    public void modifierSeance(String idSeance, String idfilm, String idsalle, java.util.Date selectedDate2, java.util.Date selectedTime2) {
+
+        Date date2 = new Date(selectedDate2.getTime());
+        Time debut = new Time(selectedTime2.getTime());
+        String nbplaces = "";
+
+        if (idSeance.isEmpty() || idfilm.isEmpty() || idsalle.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if ("1".equals(idsalle)) {
+            nbplaces = "150";
+        } else if ("2".equals(idsalle)) {
+            nbplaces = "100";
+        } else if ("3".equals(idsalle)) {
+            nbplaces = "2800";
+        } else if ("4".equals(idsalle)) {
+            nbplaces = "300";
+        } else if ("5".equals(idsalle)) {
+            nbplaces = "430";
+        } else if ("6".equals(idsalle)) {
+            nbplaces = "10";
+        }
+
+        try {
+            Database database = new Database();
+            Connection conn = database.createConnection();
+
+            Statement statement = conn.createStatement();
+            String sql = "UPDATE séance SET FilmID = ?, SalleID = ?, HeureDeDebut = ?, Date = ?, NbPlacesRestantes = ? WHERE SeanceID = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, idfilm);
+            preparedStatement.setString(2, idsalle);
+            preparedStatement.setTime(3, debut);
+            preparedStatement.setDate(4, date2);
+            preparedStatement.setString(5, nbplaces);
+            preparedStatement.setString(6, idSeance);
+
+            int resultat = preparedStatement.executeUpdate();
+            if (resultat > 0) {
+                JOptionPane.showMessageDialog(null, "La séance a été modifiée avec succès", "Succès", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Impossible de trouver une séance avec cet ID", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+
+            statement.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -157,6 +157,64 @@ public class DAOFilm {
     }
 
     /**
+     * Méthode qui permet de modifier un film
+     *
+     * @param idFilm         L'id du film a changer
+     * @param titre          Le titre du film
+     * @param genre          Le genre du film
+     * @param classification La classification du film
+     * @param description    La description
+     * @param poster         Le poster du film
+     * @param datePicker     La date de sortie du film
+     * @param timeSpinner    L'heure de la séance du film
+     */
+    public void modifierFilm(String idFilm, String titre, String genre, String classification, String description, String poster, java.util.Date datePicker, java.util.Date timeSpinner) {
+
+
+        Date date = new Date(datePicker.getTime());
+        Time duree = new Time(timeSpinner.getTime());
+
+        if (idFilm.isEmpty() || titre.isEmpty() || genre.isEmpty() || classification.isEmpty() || description.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (poster.isEmpty()) {
+            poster = "images/poster.jpg";
+        }
+
+        try {
+            Database database = new Database();
+            Connection conn = database.createConnection();
+            System.out.println("connection success");
+
+            Statement statement = conn.createStatement();
+            String sql = "UPDATE films SET Titre = ?, Genre = ?, Classification = ?, Description = ?, Durée = ?, DateDeSortie = ?, Poster = ? WHERE FilmID = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, titre);
+            preparedStatement.setString(2, genre);
+            preparedStatement.setString(3, classification);
+            preparedStatement.setString(4, description);
+            preparedStatement.setTime(5, duree);
+            preparedStatement.setDate(6, date);
+            preparedStatement.setString(7, poster);
+            preparedStatement.setString(8, idFilm);
+
+            int resultat = preparedStatement.executeUpdate();
+            if (resultat > 0) {
+                JOptionPane.showMessageDialog(null, "Le film a été modifié avec succès", "Succès", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Impossible de trouver un film avec cet ID", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+
+            statement.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
      * Méthode qui récupère la liste des films
      *
      * @return La liste des films

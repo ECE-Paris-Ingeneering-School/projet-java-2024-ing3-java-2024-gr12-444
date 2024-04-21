@@ -66,4 +66,35 @@ public class DAOReduction {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Méthode qui permet de modifier une reduction
+     *
+     * @param idReduc l'ID de la reduc à changer
+     * @param idSeance l'ID de la séance
+     * @param reduc    Le montant de la réduction
+     */
+    public void modifierReduc(String idReduc, String idSeance, String reduc) {
+        if (idReduc.isEmpty() || idSeance.isEmpty() || reduc.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            String sql = "UPDATE réductions SET IDseance = ?, Réduction = ? WHERE IDRéductions = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, idSeance);
+            preparedStatement.setString(2, reduc);
+            preparedStatement.setString(3, idReduc);
+
+            int resultat = preparedStatement.executeUpdate();
+            if (resultat > 0) {
+                JOptionPane.showMessageDialog(null, "La réduction a été modifiée avec succès", "Succès", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Impossible de trouver une réduction avec cet ID", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
