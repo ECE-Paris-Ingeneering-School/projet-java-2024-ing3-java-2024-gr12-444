@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import controller.*;
 import model.Film;
 
+/**
+ * Classe qui représente l'interface graphique pour la modification des films
+ */
 public class Modifier extends JFrame implements ActionListener {
 
     private Controller controller;
@@ -17,23 +20,24 @@ public class Modifier extends JFrame implements ActionListener {
 
     private ArrayList<Film> list;
 
-
+    /**
+     * Constructeur de la classe Modifier
+     *
+     * @param controller Le contrôleur de l'application
+     */
     public Modifier(Controller controller) {
         this.controller = controller;
         controller.film();
         list = controller.getListFilm();
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getTitre());
-        }
 
-
+        // Configuration de la fenêtre
         setTitle("Modifier");
         setSize(600, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(0, 1));
 
-        //titre et user
+        // Titre
         JPanel titrePanel = new JPanel(new GridLayout(1, 2));
         titrePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         titre = new JLabel("Modifier : ");
@@ -42,21 +46,18 @@ public class Modifier extends JFrame implements ActionListener {
         titrePanel.add(titre);
         add(titrePanel, BorderLayout.NORTH);
 
-        //Deconection ou quitter etc
+        // Menu
         JPanel menu = new JPanel(new FlowLayout(FlowLayout.CENTER));
         menu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
         quitter = new JButton("Quitter");
         quitter.addActionListener(this);
         menu.add(quitter);
-
         add(menu, BorderLayout.SOUTH);
 
-        //sections
+        // Sections
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(list.size(), 1));
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
-
         JScrollPane scrollPanel = new JScrollPane(panel);
         scrollPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
         add(scrollPanel, BorderLayout.CENTER);
@@ -64,10 +65,14 @@ public class Modifier extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Méthode appelée lorsqu'une action est effectuée
+     *
+     * @param e L'événement à traiter
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();
         }
-
     }
 }

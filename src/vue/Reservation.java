@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Classe qui représente l'interface graphique qui permet à l'utilisateur de réserver une séance
+ */
 public class Reservation extends JFrame implements ActionListener {
     private JLabel titrePage, userLabel, sectionChoix;
     private Controller controller;
@@ -19,16 +22,18 @@ public class Reservation extends JFrame implements ActionListener {
 
 
     /**
-     * @param user
-     * @param titre
-     * @param time
-     * @param genre
-     * @param description
-     * @param classification
-     * @param date
-     * @param imgPath
-     * @param controller
-     * @param filmId
+     * Constructeur de la classe Reservation
+     *
+     * @param user           L'utilisateur effectuant la réservation
+     * @param titre          Le titre du film
+     * @param time           L'heure de la séance
+     * @param genre          Le genre du film
+     * @param description    La description du film
+     * @param classification La classification du film
+     * @param date           La date de la séance
+     * @param imgPath        Le chemin vers l'image du film
+     * @param controller     Le contrôleur de l'application
+     * @param filmId         L'identifiant du film
      */
     public Reservation(User user, String titre, String time, String genre, String description, String classification, String date, String imgPath, Controller controller, int filmId) {
         this.controller = controller;
@@ -132,13 +137,15 @@ public class Reservation extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Méthode appelée lorsqu'une action est effectuée
+     *
+     * @param e L'événement à traiter
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == close) {
             list.clear();
             this.dispose();
         }
-
     }
-
-
 }

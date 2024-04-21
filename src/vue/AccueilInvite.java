@@ -6,9 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import controller.*;
+import controller.Controller;
 import model.Film;
 
+/**
+ * Classe qui représente l'interface graphique de l'accueil pour les invités
+ */
 public class AccueilInvite extends JFrame implements ActionListener {
 
     private Controller controller;
@@ -17,26 +20,24 @@ public class AccueilInvite extends JFrame implements ActionListener {
 
     private ArrayList<Film> list;
 
-
     /**
-     * @param controller
+     * Constructeur de la classe AccueilInvite
+     *
+     * @param controller Le contrôleur de l'application
      */
     public AccueilInvite(Controller controller) {
         this.controller = controller;
         controller.film();
         list = controller.getListFilm();
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).getTitre());
-        }
 
-
+        // Configuration de la fenêtre
         setTitle("Accueil");
         setSize(1600, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(0, 1));
 
-        //titre et user
+        // Titre et nom de l'utilisateur
         JPanel titrePanel = new JPanel(new GridLayout(1, 2));
         titrePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         titre = new JLabel("Cinema de Grenelle");
@@ -49,10 +50,9 @@ public class AccueilInvite extends JFrame implements ActionListener {
         titrePanel.add(user);
         add(titrePanel, BorderLayout.NORTH);
 
-        //Deconection ou quitter etc
+        // Boutons de déconnexion, quitter et se connecter
         JPanel menu = new JPanel(new GridLayout(0, 3, 10, 3));
         menu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
         quitter = new JButton("Quitter");
         quitter.addActionListener(this);
         menu.add(quitter);
@@ -64,7 +64,7 @@ public class AccueilInvite extends JFrame implements ActionListener {
         menu.add(connect);
         add(menu, BorderLayout.SOUTH);
 
-        //sections
+        // Sections pour afficher les films
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(list.size(), 1));
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -73,18 +73,20 @@ public class AccueilInvite extends JFrame implements ActionListener {
         scrollPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
         add(scrollPanel, BorderLayout.CENTER);
 
-
+        // Affichage des films
         for (int i = 0; i < list.size(); i++) {
             JPanel panelt = new JPanel();
             Card card = new Card(null, list.get(i).getTitre(), list.get(i).getTime(), list.get(i).getGenre(), list.get(i).getDescription(), list.get(i).getClassification(), list.get(i).getDate(), list.get(i).getPoster(), panelt, this.controller, list.get(i).getFilmId());
             panel.add(panelt);
-
         }
+
         setVisible(true);
     }
 
     /**
-     * @param e the event to be processed
+     * Méthode de gestion des actions sur les composants de l'interface graphique
+     *
+     * @param e L'événement à traiter
      */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
@@ -92,14 +94,11 @@ public class AccueilInvite extends JFrame implements ActionListener {
         } else if (e.getSource() == disconnect) {
             this.dispose();
             list.clear();
-            //Form form = new Form(controller);
             MenuGUI menuGUI = new MenuGUI(controller);
         } else if (e.getSource() == connect) {
             this.dispose();
             list.clear();
-            //LoginInterface loginInterface = new LoginInterface(this.controller);
             ConnexionGUI connexionGUI = new ConnexionGUI(null, this.controller);
         }
     }
-
 }

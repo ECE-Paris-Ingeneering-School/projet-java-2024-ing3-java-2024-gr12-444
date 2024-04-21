@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe qui représente l'interface graphique qui permet à un nouvel utilisateur de créer un compte dans l'application
+ */
 public class InscriptionGUI extends JDialog {
     private JTextField tfPrenom;
     private JTextField tfNom;
@@ -21,12 +24,16 @@ public class InscriptionGUI extends JDialog {
     private Controller controller;
 
     /**
-     * @param p
-     * @param controller
+     * Contrôleur de la classe InscriptionGUI
+     *
+     * @param p          La fenêtre parente à laquelle cette boîte de dialogue est attachée
+     * @param controller Le contrôleur de l'application
      */
     public InscriptionGUI(JFrame p, Controller controller) {
         super(p);
         this.controller = controller;
+
+        //Configuration de la fenêtre
         setTitle("Créer un nouveau compte");
         setContentPane(inscriptionPanel);
         setMinimumSize(new Dimension(800, 600));
@@ -41,6 +48,7 @@ public class InscriptionGUI extends JDialog {
                 registerUser();
             }
         });
+
         //BOUTON ANNULER
         btnAnnuler.addActionListener(new ActionListener() {
             @Override
@@ -54,6 +62,9 @@ public class InscriptionGUI extends JDialog {
         setVisible(true);
     }
 
+    /**
+     * Méthode qui enregistre un nouvel utilisateur
+     */
     private void registerUser() {
         String prenom = tfPrenom.getText();
         String nom = tfNom.getText();

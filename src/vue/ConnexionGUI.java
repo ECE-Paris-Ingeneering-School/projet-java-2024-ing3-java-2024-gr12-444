@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe qui représente l'interface graphique qui permet à l'utilisateur de se connecter à l'application
+ */
 public class ConnexionGUI extends JDialog {
     public User user;
     private JPanel panel1;
@@ -20,12 +23,16 @@ public class ConnexionGUI extends JDialog {
     private Controller controller;
 
     /**
-     * @param p
-     * @param controller
+     * Contrôleur de la classe ConnexionGUI
+     *
+     * @param p          La fenêtre parente à laquelle cette boîte de dialogue est attachée
+     * @param controller Le contrôleur de l'application
      */
     public ConnexionGUI(JFrame p, Controller controller) {
         super(p);
         this.controller = controller;
+
+        //Configuration de la fenêtre
         setTitle("Connexion");
         setContentPane(connexionPanel);
         setMinimumSize(new Dimension(800, 600));
@@ -63,6 +70,7 @@ public class ConnexionGUI extends JDialog {
                 }
             }
         });
+
         //BOUTON ANNULER
         btnAnnuler.addActionListener(new ActionListener() {
             @Override

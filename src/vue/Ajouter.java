@@ -17,6 +17,9 @@ import org.jdesktop.swingx.JXDatePicker;
 import controller.*;
 import model.Film;
 
+/**
+ * Classe qui représente l'interface graphique pour l'ajout de films, de réductions et de séances
+ */
 public class Ajouter extends JFrame implements ActionListener {
 
     private Controller controller;
@@ -38,6 +41,11 @@ public class Ajouter extends JFrame implements ActionListener {
     private ArrayList<Film> list;
 
 
+    /**
+     * Constructeur de la classe Ajouter
+     *
+     * @param controller Le contrôleur de l'application
+     */
     public Ajouter(Controller controller) {
         this.controller = controller;
         controller.film();
@@ -46,27 +54,26 @@ public class Ajouter extends JFrame implements ActionListener {
             System.out.println(list.get(i).getTitre());
         }
 
-
+        // Configuration de la fenêtre
         setTitle("Ajouter");
         setSize(1000, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(0, 1));
 
-        //titre et user
+        //Titre
         JPanel titrePanel = new JPanel(new GridLayout(1, 2));
         titrePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         titre = new JLabel("Ajouter : ");
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titre);
-
         add(titrePanel, BorderLayout.NORTH);
 
-        //les sections
+        //Sections
         JPanel sections = new JPanel(new GridLayout(1, 3));
 
-        //première section
+        //Première section
         JPanel sectionFilm = new JPanel(new GridBagLayout());
         JLabel titreSection1 = new JLabel("Ajout d'un film :");
 
@@ -152,7 +159,7 @@ public class Ajouter extends JFrame implements ActionListener {
         sectionFilm.add(boutonSection1, gbc1);
         sections.add(sectionFilm);
 
-        //deuxième section
+        //Deuxième section
         JPanel sectionReduc = new JPanel(new GridBagLayout());
         JLabel titreSection2 = new JLabel("Ajout d'une reduction");
         JButton boutonSection2 = new JButton("Ajout de la réduction");
@@ -188,7 +195,7 @@ public class Ajouter extends JFrame implements ActionListener {
         sectionReduc.add(boutonSection2, gbc2);
         sections.add(sectionReduc);
 
-        //troisième section
+        //Troisième section
         JPanel sectionSeance = new JPanel(new GridBagLayout());
         JLabel titreSection3 = new JLabel("Ajout d'une seance");
         JButton boutonSection3 = new JButton("Ajout de la seance");
@@ -253,7 +260,7 @@ public class Ajouter extends JFrame implements ActionListener {
         add(sections, BorderLayout.CENTER);
 
 
-        //Deconection ou quitter etc
+        //Bouton Quitter
         JPanel menu = new JPanel(new FlowLayout(FlowLayout.CENTER));
         menu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -272,7 +279,9 @@ public class Ajouter extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-
+    /**
+     * Méthode appelée lors de l'ajout d'un film
+     */
     private void ajoutFilm() {
         String titre = tfTitre.getText();
         String genre = tfGenre.getText();
@@ -284,23 +293,24 @@ public class Ajouter extends JFrame implements ActionListener {
         java.util.Date selectedTime = (java.util.Date) timeSpinner.getValue();
 
         controller.ajoutFilm(titre, genre, classification, description, poster, selectedDate, selectedTime);
-
-
-
     }
 
 
+    /**
+     * Méthode appelée lors de l'ajout d'une réduction
+     */
     private void ajoutReduc() {
 
         String idSeance = tfIDSeanceReduc.getText();
         String reduc = tfReduc.getText();
 
         controller.ajoutReduc(idSeance, reduc);
-
-
     }
 
 
+    /**
+     * Méthode appelée lors de l'ajout d'une séance
+     */
     private void ajoutSeance() {
         String idfilm = tfFilmID.getText();
         String idsalle = tfSalleID.getText();
@@ -309,15 +319,17 @@ public class Ajouter extends JFrame implements ActionListener {
         java.util.Date selectedTime2 = (java.util.Date) timeSpinner2.getValue();
 
         controller.ajoutSeance(idfilm, idsalle, selectedDate2, selectedTime2);
-
     }
 
 
+    /**
+     * Méthode de gestion des actions sur les composants de l'interface graphique
+     * @param e L'événement à traiter
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();
         }
-
     }
 }
 

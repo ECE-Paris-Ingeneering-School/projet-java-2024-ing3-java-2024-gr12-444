@@ -16,6 +16,9 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 
+/**
+ * Classe qui représente l'interface graphique pour effectuer le paiement d'une séance de cinéma
+ */
 public class PaimentInterface extends JFrame implements ActionListener {
     private JTextField adultTicketsField;
     private JTextField childTicketsField;
@@ -34,13 +37,15 @@ public class PaimentInterface extends JFrame implements ActionListener {
 
 
     /**
-     * @param user
-     * @param titre
-     * @param nomSalle
-     * @param date
-     * @param heure
-     * @param seanceId
-     * @param controller
+     * Constructeur de la classe PaiementInterface
+     *
+     * @param user       L'utilisateur effectuant le paiement
+     * @param titre      Le titre du film de la séance
+     * @param nomSalle   Le nom de la salle de cinéma
+     * @param date       La date de la séance
+     * @param heure      L'heure de la séance
+     * @param seanceId   L'identifiant de la séance
+     * @param controller Le contrôleur de l'application
      */
     public PaimentInterface(User user, String titre, String nomSalle, String date, String heure, int seanceId, Controller controller) {
         this.controller = controller;
@@ -54,7 +59,7 @@ public class PaimentInterface extends JFrame implements ActionListener {
             reductions = null;
         }
 
-
+        // Configuration de la fenêtre
         setTitle("Interface de paiement - Séance de cinéma");
         setSize(800, 650);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -229,6 +234,7 @@ public class PaimentInterface extends JFrame implements ActionListener {
         ecran.add(panel);
         add(ecran);
 
+        //Gère l'activation des champs de billets en fonction du type de membre
         if (user != null) {
             if (Integer.parseInt(user.getTypeMembre()) == 1) {
                 adultTicketsField.setEnabled(false);
@@ -257,6 +263,11 @@ public class PaimentInterface extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Méthode qui valide les champs de paiement pour s'assurer qu'ils sont tous remplis
+     *
+     * @return true si tous les champs sont remplis, sinon false
+     */
     private boolean validatePaymentFields() {
         if (cardNumberField.getText().isEmpty() || expiryDateField.getText().isEmpty() || cvvField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs !", "Erreur de paiement", JOptionPane.ERROR_MESSAGE);
@@ -265,6 +276,11 @@ public class PaimentInterface extends JFrame implements ActionListener {
         return true;
     }
 
+    /**
+     * Méthode qui met à jour le prix total en fonction du nombre de billets et des réductions
+     *
+     * @return Le prix total mis à jour
+     */
     private double updateTotalPrice() {
         try {
             int adultTickets = Integer.parseInt(adultTicketsField.getText());
@@ -287,6 +303,11 @@ public class PaimentInterface extends JFrame implements ActionListener {
         return 0;
     }
 
+    /**
+     * Méthode qui calcule nombre total de billets
+     *
+     * @return Le nombre total de billets
+     */
     private int nbBillet() {
         int adultTickets = Integer.parseInt(adultTicketsField.getText());
         int childTickets = Integer.parseInt(childTicketsField.getText());
@@ -296,6 +317,14 @@ public class PaimentInterface extends JFrame implements ActionListener {
         return nbBillet;
     }
 
+    /**
+     * Méthode qui calcule le prix total en fonction du nombre de billets
+     *
+     * @param adultTickets  Le nombre de billets adultes
+     * @param childTickets  Le nombre de billets enfants
+     * @param seniorTickets Le nombre de billets seniors
+     * @return Le prix total calculé
+     */
     private double calculateTotalPrice(int adultTickets, int childTickets, int seniorTickets) {
         // Prix des billets
         double adultPrice = 10.0;
@@ -306,11 +335,21 @@ public class PaimentInterface extends JFrame implements ActionListener {
         return (adultTickets * adultPrice) + (childTickets * childPrice * 0.8) + (seniorTickets * seniorPrice * 0.85);
     }
 
+    /**
+     * Méthode qui incrémente le nombre de billets dans le champ spécifié
+     *
+     * @param field Le champ de texte du nombre de billets
+     */
     private void increaseTicket(JTextField field) {
         int currentTickets = Integer.parseInt(field.getText());
         field.setText(String.valueOf(currentTickets + 1));
     }
 
+    /**
+     * Méthode qui décrémente le nombre de billets dans le champ spécifié
+     *
+     * @param field Le champ de texte du nombre de billets
+     */
     private void decreaseTicket(JTextField field) {
         int currentTickets = Integer.parseInt(field.getText());
         if (currentTickets > 0) {
@@ -318,6 +357,9 @@ public class PaimentInterface extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Méthode qui réinitialise tous les champs de saisie
+     */
     private void resetFields() {
         adultTicketsField.setText("0");
         childTicketsField.setText("0");
@@ -328,6 +370,9 @@ public class PaimentInterface extends JFrame implements ActionListener {
         totalLabel.setText("");
     }
 
+    /**
+     * Méthode qui valide le paiement et envoie une confirmation par mail
+     */
     private void validatePayment() {
         // ajouter a la database  !!
 
@@ -338,6 +383,11 @@ public class PaimentInterface extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(this, "Paiement validé !", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Méthode qui envoie un mail de confirmation de paiement à l'utilisateur
+     *
+     * @param user L'utilisateur pour lequel envoyer le mail
+     */
     private void sendConfirmationEmail(User user) {
         String email = user.mail;
         String motDePasse = user.motDePasse;
@@ -376,6 +426,16 @@ public class PaimentInterface extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Méthode qui rédige le contenu du mail de confirmation de paiement
+     *
+     * @param user       L'utilisateur pour lequel rédiger l'e-mail
+     * @param filmName   Le nom du film réservé
+     * @param totalPrice Le prix total payé
+     * @param session    La session de messagerie
+     * @return Le message de l'e-mail de confirmation
+     * @throws MessagingException Si une erreur survient lors de la rédaction de l'e-mail
+     */
     private MimeMessage draftEmail(User user, String filmName, double totalPrice, javax.mail.Session session) throws MessagingException {
         String[] emailRecipients = {user.mail};
         String emailSubject = "Confirmation de paiement";
@@ -402,11 +462,14 @@ public class PaimentInterface extends JFrame implements ActionListener {
         return mimeMessage;
     }
 
+    /**
+     * Méthode appelée lorsqu'une action est effectuée
+     *
+     * @param e L'événement à traiter
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
-
-
 }

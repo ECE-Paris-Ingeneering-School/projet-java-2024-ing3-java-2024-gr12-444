@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import controller.*;
 import model.Film;
 
+/**
+ * Classe qui représente l'interface graphique qui permet de supprimer des éléments
+ */
 public class Supprimer extends JFrame implements ActionListener {
 
     private Controller controller;
@@ -17,7 +20,11 @@ public class Supprimer extends JFrame implements ActionListener {
 
     private ArrayList<Film> list;
 
-
+    /**
+     * Contrôleur de la classe Supprimer
+     *
+     * @param controller Le contrôleur de l'application
+     */
     public Supprimer(Controller controller) {
         this.controller = controller;
         controller.film();
@@ -26,14 +33,14 @@ public class Supprimer extends JFrame implements ActionListener {
             System.out.println(list.get(i).getTitre());
         }
 
-
+        //Configuration de la fenêtre
         setTitle("Supprimer");
         setSize(600, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(0, 1));
 
-        //titre et user
+        //Titre et utilisateur
         JPanel titrePanel = new JPanel(new GridLayout(1, 2));
         titrePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         titre = new JLabel("Supprimer : ");
@@ -42,7 +49,7 @@ public class Supprimer extends JFrame implements ActionListener {
         titrePanel.add(titre);
         add(titrePanel, BorderLayout.NORTH);
 
-        //Deconection ou quitter etc
+        //Quitter
         JPanel menu = new JPanel(new FlowLayout(FlowLayout.CENTER));
         menu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -52,7 +59,7 @@ public class Supprimer extends JFrame implements ActionListener {
 
         add(menu, BorderLayout.SOUTH);
 
-        //sections
+        //Sections
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(list.size(), 1));
         panel.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -64,10 +71,14 @@ public class Supprimer extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Méthode appelée lorsqu'une action est effectuée
+     *
+     * @param e L'événement à traiter
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();
         }
-
     }
 }
