@@ -11,6 +11,9 @@ import model.Film;
 import model.Reservation;
 import model.User;
 
+/**
+ * Classe qui représente l'interface graphique qui permet à l'utilisateur de consulter son profil
+ */
 public class Profil extends JFrame implements ActionListener {
 
     private Controller controller;
@@ -23,8 +26,10 @@ public class Profil extends JFrame implements ActionListener {
     private JPanel reservationsPanel;
 
     /**
-     * @param controller
-     * @param user
+     * Contrôleur de la classe Profil
+     *
+     * @param controller Le contrôleur de l'application
+     * @param user L'utilisateur dont le profil est affiché
      */
     public Profil(Controller controller, User user) {
         this.controller = controller;
@@ -83,6 +88,9 @@ public class Profil extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Méthode qui charge les réservations de l'utilisateur
+     */
     private void chargerReservations() {
         reservations = controller.getReservations(user.getUserId());
         for (Reservation reservation : reservations) {
@@ -91,6 +99,12 @@ public class Profil extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Méthode qui crée un panneau représentant une réservation
+     *
+     * @param reservation La réservation à afficher
+     * @return Le panneau représentant la réservation
+     */
     private JPanel createReservationPanel(Reservation reservation) {
         JPanel panel = new JPanel(new GridLayout(4, 2));
         panel.setBorder(BorderFactory.createEtchedBorder());
@@ -127,6 +141,11 @@ public class Profil extends JFrame implements ActionListener {
         return panel;
     }
 
+    /**
+     * Méthode appelée lorsqu'une action est effectuée
+     *
+     * @param e L'événement à traiter
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();
