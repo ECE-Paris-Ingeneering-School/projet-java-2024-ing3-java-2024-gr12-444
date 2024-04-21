@@ -2,30 +2,30 @@ package database;
 
 import java.sql.*;
 
-
+/**
+ * Classe qui permet de gérer la connexion à la base de données.
+ */
 public class Database {
     Connection conn = null;
 
     /**
-     * @return Connection
+     * Méthode qui crée et retourne une connexion à la base de données.
+     *
+     * @return La connexion à la base de données.
      */
     public Connection createConnection() {
         try {
 
-            // db parameters
+            // Paramètres de la base de données
             String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
             String user = "root";
             String password = "";
 
-            //Class.forName("com.mysql.jdbc.Driver");
-            // create a connection to the database
+            // Créer une connexion à la base de données
             conn = DriverManager.getConnection(url, user, password);
-            //System.out.println("connection success");
         } catch (Exception e) {
-            System.out.println("Error Occured " + e.toString());
+            System.out.println("Erreur survenue " + e.toString());
         }
         return conn;
     }
-
-
 }
