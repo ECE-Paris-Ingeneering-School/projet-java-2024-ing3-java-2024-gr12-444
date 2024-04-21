@@ -20,7 +20,7 @@ import model.Film;
 public class Ajouter extends JFrame implements ActionListener {
 
     private Controller controller;
-    private JLabel titre, user;
+    private JLabel titre;
     private JButton quitter, ajoutFilm, ajoutReduc, ajoutSeance;
 
     private JTextField tfTitre, tfGenre, tfClassification, tfDescription, tfPoster;
@@ -60,10 +60,7 @@ public class Ajouter extends JFrame implements ActionListener {
         titre.setFont(new Font("Serif", Font.BOLD, 32));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titre);
-        user = new JLabel(controller.getUsername());
-        user.setFont(new Font("Serif", Font.BOLD, 20));
-        user.setHorizontalAlignment(SwingConstants.LEFT);
-        titrePanel.add(user);
+
         add(titrePanel, BorderLayout.NORTH);
 
         //les sections
@@ -276,7 +273,6 @@ public class Ajouter extends JFrame implements ActionListener {
     }
 
 
-
     private void ajoutFilm() {
         String titre = tfTitre.getText();
         String genre = tfGenre.getText();
@@ -289,45 +285,7 @@ public class Ajouter extends JFrame implements ActionListener {
 
         controller.ajoutFilm(titre, genre, classification, description, poster, selectedDate, selectedTime);
 
-        /*Date date = new Date(selectedDate.getTime());
-        Time duree = new Time(selectedTime.getTime());
 
-        if (titre.isEmpty() || genre.isEmpty() || classification.isEmpty() || description.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (poster.isEmpty()) {
-            poster = "images/poster.jpg";
-        }
-
-        try {
-            String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
-            String username = "root";
-            String password = "";
-
-            Connection conn = DriverManager.getConnection(url, username, password);
-            System.out.println("connection success");
-
-            Statement statement = conn.createStatement();
-            String sql = "INSERT INTO films (Titre, Genre, Classification, Description, Durée, DateDeSortie, Poster)" + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, titre);
-            preparedStatement.setString(2, genre);
-            preparedStatement.setString(3, classification);
-            preparedStatement.setString(4, description);
-            preparedStatement.setTime(5, duree);
-            preparedStatement.setDate(6, date);
-            preparedStatement.setString(7, poster);
-
-            preparedStatement.executeUpdate();
-
-
-            //fermeture
-            statement.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
 
     }
 
@@ -338,35 +296,6 @@ public class Ajouter extends JFrame implements ActionListener {
         String reduc = tfReduc.getText();
 
         controller.ajoutReduc(idSeance, reduc);
-
-        /*if (idSeance.isEmpty() || reduc.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        try {
-            String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
-            String username = "root";
-            String password = "";
-
-            Connection conn = DriverManager.getConnection(url, username, password);
-            System.out.println("connection success");
-
-            Statement statement = conn.createStatement();
-            String sql = "INSERT INTO réductions (IDseance, Réduction)" + "VALUES (?, ?)";
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, idSeance);
-            preparedStatement.setString(2, reduc);
-
-            preparedStatement.executeUpdate();
-
-
-            //fermeture
-            statement.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
 
 
     }
@@ -380,55 +309,6 @@ public class Ajouter extends JFrame implements ActionListener {
         java.util.Date selectedTime2 = (java.util.Date) timeSpinner2.getValue();
 
         controller.ajoutSeance(idfilm, idsalle, selectedDate2, selectedTime2);
-
-        /*Date date2 = new Date(selectedDate2.getTime());
-        Time debut = new Time(selectedTime2.getTime());
-        String nbplaces = "";
-
-        if (idfilm.isEmpty() || idsalle.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if ("1".equals(idsalle)) {
-            nbplaces = "150";
-        } else if ("2".equals(idsalle)) {
-            nbplaces = "100";
-        } else if ("3".equals(idsalle)) {
-            nbplaces = "2800";
-        } else if ("4".equals(idsalle)) {
-            nbplaces = "300";
-        } else if ("5".equals(idsalle)) {
-            nbplaces = "430";
-        } else if ("6".equals(idsalle)) {
-            nbplaces = "10";
-        }
-
-        try {
-            String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
-            String username = "root";
-            String password = "";
-
-            Connection conn = DriverManager.getConnection(url, username, password);
-            System.out.println("connection success");
-
-            Statement statement = conn.createStatement();
-            String sql = "INSERT INTO séance (FilmID, SalleID, HeureDeDebut, Date, NbPlacesRestantes)" + "VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, idfilm);
-            preparedStatement.setString(2, idsalle);
-            preparedStatement.setTime(3, debut);
-            preparedStatement.setDate(4, date2);
-            preparedStatement.setString(5, nbplaces);
-
-            preparedStatement.executeUpdate();
-
-
-            //fermeture
-            statement.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
 
     }
 

@@ -20,6 +20,10 @@ public class AccueilEmploye extends JFrame implements ActionListener {
     private ArrayList<Film> list;
 
 
+    /**
+     * @param controller
+     * @param user
+     */
     public AccueilEmploye(Controller controller, User user) {
         this.controller = controller;
         this.user = user;
@@ -88,28 +92,6 @@ public class AccueilEmploye extends JFrame implements ActionListener {
         add(scrollPanel, BorderLayout.CENTER);
 
 
-        //Panel 1 : premier film
-        // JPanel panelX = new JPanel();
-        // panelX.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-//
-        // String urText2="<html>PANEL X You can<br>use basic HTML<br>in Swing<br> components,"
-        //         +"Hope<br> I helped!";
-        // JLabel lac2=new JLabel(urText2);
-        // lac2.setIcon(new ImageIcon("images/test.jpeg"));
-        // lac2.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        // panelX.add(lac2);
-        // buttonX = new JButton("Reserver");
-        // buttonX.addActionListener(this);
-        // panelX.add(buttonX);
-
-
-        //ajout des panels de fiche de film
-        // panel.add(panelX);
-
-
-        // Card card1 = new Card("a", "a");
-
-
         for (int i = 0; i < list.size(); i++) {
             JPanel panelt = new JPanel();
             Card card = new Card(user, list.get(i).getTitre(), list.get(i).getTime(), list.get(i).getGenre(), list.get(i).getDescription(), list.get(i).getClassification(), list.get(i).getDate(), list.get(i).getPoster(), panelt, this.controller, list.get(i).getFilmId());
@@ -117,10 +99,12 @@ public class AccueilEmploye extends JFrame implements ActionListener {
 
         }
 
-
         setVisible(true);
     }
 
+    /**
+     * @param e the event to be processed
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitter) {
             this.dispose();

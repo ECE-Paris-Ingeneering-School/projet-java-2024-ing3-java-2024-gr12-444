@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public class DAOReservation {
     private static Connection conn;
 
+    /**
+     * @param conn
+     */
     public DAOReservation(Connection conn) {
         this.conn = conn;
     }

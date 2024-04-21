@@ -7,6 +7,9 @@ import java.util.ArrayList;
 public class DAOReduction {
     private static Connection conn;
 
+    /**
+     * @param conn
+     */
     public DAOReduction(Connection conn) {
         this.conn = conn;
     }
@@ -28,6 +31,10 @@ public class DAOReduction {
         return reductions;
     }
 
+    /**
+     * @param idSeance
+     * @param reduc
+     */
     public void ajoutReduc(String idSeance, String reduc) {
         if (idSeance.isEmpty() || reduc.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);

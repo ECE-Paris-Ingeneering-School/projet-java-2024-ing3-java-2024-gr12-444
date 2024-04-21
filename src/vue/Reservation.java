@@ -18,6 +18,18 @@ public class Reservation extends JFrame implements ActionListener {
     private ArrayList<Seance> list;
 
 
+    /**
+     * @param user
+     * @param titre
+     * @param time
+     * @param genre
+     * @param description
+     * @param classification
+     * @param date
+     * @param imgPath
+     * @param controller
+     * @param filmId
+     */
     public Reservation(User user, String titre, String time, String genre, String description, String classification, String date, String imgPath, Controller controller, int filmId) {
         this.controller = controller;
         controller.setFilmid(filmId);

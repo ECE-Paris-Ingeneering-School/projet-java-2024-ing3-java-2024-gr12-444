@@ -10,6 +10,16 @@ public class Film {
     private String date;
     private String poster;
 
+    /**
+     * @param filmId
+     * @param titre
+     * @param time
+     * @param genre
+     * @param description
+     * @param classification
+     * @param date
+     * @param poster
+     */
     public Film(int filmId, String titre, String time, String genre, String description, String classification, String date, String poster) {
         this.filmId = filmId;
         this.titre = titre;

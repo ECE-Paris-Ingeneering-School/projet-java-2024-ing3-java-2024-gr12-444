@@ -5,6 +5,11 @@ public class Reduction {
     private int seanceId;
     private int reduction;
 
+    /**
+     * @param reductionId
+     * @param seanceId
+     * @param reduction
+     */
     public Reduction(int reductionId, int seanceId, int reduction) {
         this.reductionId = reductionId;
         this.seanceId = seanceId;

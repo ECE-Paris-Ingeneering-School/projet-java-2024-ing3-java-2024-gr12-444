@@ -13,14 +13,23 @@ public class DAOSeance {
     private Seance seance;
     private ArrayList<Seance> list = new ArrayList<>();
 
+    /**
+     * @return filmid
+     */
     public int getFilmid() {
         return filmid;
     }
 
+    /**
+     * @param filmid
+     */
     public void setFilmid(int filmid) {
         this.filmid = filmid;
     }
 
+    /**
+     * @param controller
+     */
     public void seance(Controller controller) {
         this.controller = controller;
         Connection dbConnection = null;
@@ -66,14 +75,24 @@ public class DAOSeance {
         }
     }
 
+    /**
+     * @return seance
+     */
     public Seance getSeance() {
         return seance;
     }
 
+    /**
+     * @return list
+     */
     public ArrayList<Seance> getList() {
         return list;
     }
 
+    /**
+     * @param seanceId
+     * @param nbPlaces
+     */
     public void decreaseSeanceSeats(int seanceId, int nbPlaces) {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
@@ -110,6 +129,12 @@ public class DAOSeance {
         }
     }
 
+    /**
+     * @param idfilm
+     * @param idsalle
+     * @param selectedDate2
+     * @param selectedTime2
+     */
     public void ajoutSeance(String idfilm, String idsalle, java.util.Date selectedDate2, java.util.Date selectedTime2) {
 
         Date date2 = new Date(selectedDate2.getTime());
@@ -135,11 +160,8 @@ public class DAOSeance {
         }
 
         try {
-            String url = "jdbc:mysql://127.0.0.1:3308/projetjava";
-            String username = "root";
-            String password = "";
-
-            Connection conn = DriverManager.getConnection(url, username, password);
+            Database database = new Database();
+            Connection conn = database.createConnection();
             System.out.println("connection success");
 
             Statement statement = conn.createStatement();

@@ -15,13 +15,17 @@ public class Profil extends JFrame implements ActionListener {
 
     private Controller controller;
     private User user;
-    private JLabel titre, username;
+    private JLabel titre;
     private JLabel prenom, nom, email, age;
     private JButton quitter;
     private ArrayList<Film> list;
     private ArrayList<Reservation> reservations;
     private JPanel reservationsPanel;
 
+    /**
+     * @param controller
+     * @param user
+     */
     public Profil(Controller controller, User user) {
         this.controller = controller;
         this.user = user;
@@ -41,10 +45,6 @@ public class Profil extends JFrame implements ActionListener {
         titre.setFont(new Font("Serif", Font.BOLD, 25));
         titre.setHorizontalAlignment(SwingConstants.LEFT);
         titrePanel.add(titre);
-        username = new JLabel(controller.getUsername());
-        username.setFont(new Font("Serif", Font.BOLD, 20));
-        username.setHorizontalAlignment(SwingConstants.RIGHT);
-        titrePanel.add(username);
         add(titrePanel, BorderLayout.NORTH);
 
         //Affichage du prénom, nom, email et âge de l'utilisateur

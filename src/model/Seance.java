@@ -8,6 +8,14 @@ public class Seance {
     private String date;
     private int nbplace;
 
+    /**
+     * @param seanceId
+     * @param filmId
+     * @param salleID
+     * @param heureDeDebut
+     * @param date
+     * @param nbplace
+     */
     public Seance(int seanceId, int filmId, int salleID, String heureDeDebut, String date, int nbplace) {
         this.seanceId = seanceId;
         this.filmId = filmId;

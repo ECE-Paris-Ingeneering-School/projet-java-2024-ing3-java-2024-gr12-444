@@ -14,14 +14,23 @@ public class DAOSalle {
     private Salle salle;
     private int salleid;
 
+    /**
+     * @return salleid
+     */
     public int getSalleid() {
         return salleid;
     }
 
+    /**
+     * @param salleid
+     */
     public void setSalleid(int salleid) {
         this.salleid = salleid;
     }
 
+    /**
+     * @param controller
+     */
     public void salle(Controller controller) {
         this.controller = controller;
         Connection dbConnection = null;
@@ -63,6 +72,9 @@ public class DAOSalle {
 
     }
 
+    /**
+     * @return salle
+     */
     public Salle getSalle() {
         return salle;
     }

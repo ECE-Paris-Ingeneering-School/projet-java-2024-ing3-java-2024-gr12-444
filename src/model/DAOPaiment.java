@@ -8,6 +8,13 @@ import java.sql.*;
 public class DAOPaiment {
     private Controller controller;
 
+    /**
+     * @param controller
+     * @param userId
+     * @param seanceId
+     * @param nbBillet
+     * @param prix
+     */
     public void reservation(Controller controller, int userId, int seanceId, int nbBillet, double prix) {
         this.controller = controller;
 

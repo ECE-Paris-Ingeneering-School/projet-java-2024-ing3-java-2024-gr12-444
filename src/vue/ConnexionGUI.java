@@ -19,6 +19,10 @@ public class ConnexionGUI extends JDialog {
     private JCheckBox voirMotDePasseCheckBox;
     private Controller controller;
 
+    /**
+     * @param p
+     * @param controller
+     */
     public ConnexionGUI(JFrame p, Controller controller) {
         super(p);
         this.controller = controller;

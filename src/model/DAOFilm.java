@@ -12,6 +12,9 @@ public class DAOFilm {
 
     private ArrayList<Film> list = new ArrayList<>();
 
+    /**
+     * @param controller
+     */
     public void film(Controller controller) {
         this.controller = controller;
 

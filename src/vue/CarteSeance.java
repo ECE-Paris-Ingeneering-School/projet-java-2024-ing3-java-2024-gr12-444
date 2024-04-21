@@ -12,6 +12,19 @@ public class CarteSeance {
 
     private JButton buttonX;
 
+    /**
+     * @param user
+     * @param nom
+     * @param seanceId
+     * @param filmId
+     * @param titre
+     * @param salleId
+     * @param heure
+     * @param date
+     * @param nbplace
+     * @param panelX
+     * @param controller
+     */
     public CarteSeance(User user, String nom, int seanceId, int filmId, String titre, int salleId, String heure, String date, int nbplace, JPanel panelX, Controller controller) {
 
 

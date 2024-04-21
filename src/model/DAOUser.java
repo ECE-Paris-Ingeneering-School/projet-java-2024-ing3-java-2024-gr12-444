@@ -26,6 +26,11 @@ public class DAOUser {
         this.password = password;
     }
 
+    /**
+     * @param email
+     * @param motDePasse
+     * @return
+     */
     public static User getUser(String email, String motDePasse) {
         User user = null;
         Connection conn = null;
@@ -69,6 +74,14 @@ public class DAOUser {
         return user;
     }
 
+    /**
+     * @param prenom
+     * @param nom
+     * @param age
+     * @param mail
+     * @param motDePasse
+     * @return
+     */
     public static User addUser(String prenom, String nom, String age, String mail, String motDePasse) {
         User user = null;
         Connection conn = null;
@@ -119,64 +132,3 @@ public class DAOUser {
         return user;
     }
 }
-
-
-    /*public Boolean verifUser(Controller controller) {
-        this.controller = controller;
-        Connection dbConnection = null;
-        Statement statement = null;
-
-        // controller.pass();
-
-        String sql = "SELECT * FROM user WHERE Email = '" + this.controller.getUsername() + "' AND MotDePasse = '"
-                + this.controller.getPassword() + "'";
-        // SELECT * FROM user WHERE username = 'mama' AND password= "mama";
-
-        try {
-            Database database = new Database();
-            dbConnection = database.createConnection();
-            try {
-                statement = dbConnection.createStatement();
-                statement.executeQuery(sql);
-                ResultSet rs = statement.getResultSet();
-                if (rs.next()) {
-                    System.out.println(rs.getMetaData());
-                    System.out.println("ID :"+rs.getInt("UserID"));
-                    System.out.println("Type membre :"+rs.getInt("TypeMembre"));
-                    typemembre = rs.getInt("TypeMembre");
-
-                    System.out.println("User found");
-                    return true;
-                } else {
-                    System.out.println("User not found");
-                    return false;
-                }
-
-                // System.out.println("read");
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            } finally {
-                if (statement != null) {
-                    try {
-                        statement.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        } finally {
-            if (dbConnection != null) {
-                try {
-                    dbConnection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-
-public int getTypemembre() {
-    return typemembre;
-}
-*/

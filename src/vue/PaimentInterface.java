@@ -33,6 +33,15 @@ public class PaimentInterface extends JFrame implements ActionListener {
     private ArrayList<Reduction> reductions = new ArrayList<>();
 
 
+    /**
+     * @param user
+     * @param titre
+     * @param nomSalle
+     * @param date
+     * @param heure
+     * @param seanceId
+     * @param controller
+     */
     public PaimentInterface(User user, String titre, String nomSalle, String date, String heure, int seanceId, Controller controller) {
         this.controller = controller;
         this.user = user;

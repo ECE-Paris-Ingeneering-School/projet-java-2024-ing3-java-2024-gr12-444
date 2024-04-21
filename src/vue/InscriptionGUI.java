@@ -20,6 +20,10 @@ public class InscriptionGUI extends JDialog {
     private JPanel inscriptionPanel;
     private Controller controller;
 
+    /**
+     * @param p
+     * @param controller
+     */
     public InscriptionGUI(JFrame p, Controller controller) {
         super(p);
         this.controller = controller;

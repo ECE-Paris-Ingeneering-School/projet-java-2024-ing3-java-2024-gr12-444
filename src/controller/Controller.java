@@ -34,30 +34,31 @@ public class Controller {
 
     }
 
-    public void setUsername(String username) {
-        daoUser.setUsername(username);
-    }
-
-    public void setPassword(String password) {
-        daoUser.setPassword(password);
-    }
-
-    public String getUsername() {
-        return daoUser.getUsername();
-    }
-
-    public String getPassword() {
-        return daoUser.getPassword();
-    }
-
+    /**
+     * @param email
+     * @param motDePasse
+     * @return
+     */
     public User connect(String email, String motDePasse) {
         return DAOUser.getUser(email, motDePasse);
     }
 
+    /**
+     * @param prenom
+     * @param nom
+     * @param age
+     * @param mail
+     * @param motDePasse
+     * @return
+     */
     public User registerUser(String prenom, String nom, String age, String mail, String motDePasse) {
         return DAOUser.addUser(prenom, nom, age, mail, motDePasse);
     }
 
+    /**
+     * @param userId
+     * @return
+     */
     public ArrayList<Reservation> getReservations(int userId) {
         Connection conn = null;
         conn = new Database().createConnection();
@@ -72,12 +73,7 @@ public class Controller {
         }
         return new ArrayList<>();
     }
-/*
-    public Boolean verifUser() {
-        return daoUser.verifUser(this);
-    }
-*/
-    /*public int getTypemembre(){return daoUser.getTypemembre();}*/
+
 
     public void film() {
         daoFilm.film(this);
@@ -95,6 +91,9 @@ public class Controller {
         daoSeance.setFilmid(filmid);
     }
 
+    /**
+     * @return
+     */
     public ArrayList<Film> getListFilm() {
         return daoFilm.getList();
     }
@@ -143,7 +142,6 @@ public class Controller {
 
     public void setSalleid(int salleID) {
         daoSalle.setSalleid(salleID);
-
     }
 
     public void salle() {
@@ -151,10 +149,20 @@ public class Controller {
     }
 
 
+    /**
+     * @param userId
+     * @param seanceId
+     * @param nbBillet
+     * @param prix
+     */
     public void reservation(int userId, int seanceId, int nbBillet, double prix) {
         daoPaiment.reservation(this, userId, seanceId, nbBillet, prix);
     }
 
+    /**
+     * @param seanceId
+     * @return
+     */
     public ArrayList<Reduction> getReductions(int seanceId) {
         Connection conn = null;
         conn = new Database().createConnection();
@@ -174,14 +182,31 @@ public class Controller {
         return reduction.getReduction();
     }
 
+    /**
+     * @param seanceId
+     * @param nbPlaces
+     */
     public void decreaseSeanceSeats(int seanceId, int nbPlaces) {
         daoSeance.decreaseSeanceSeats(seanceId, nbPlaces);
     }
 
+    /**
+     * @param titre
+     * @param genre
+     * @param classification
+     * @param description
+     * @param poster
+     * @param datePicker
+     * @param timeSpinner
+     */
     public void ajoutFilm(String titre, String genre, String classification, String description, String poster, java.util.Date datePicker, java.util.Date timeSpinner) {
         daoFilm.ajoutFilm(titre, genre, classification, description, poster, datePicker, timeSpinner);
     }
 
+    /**
+     * @param idSeance
+     * @param reduc
+     */
     public void ajoutReduc(String idSeance, String reduc){
         if (daoReduction == null) {
             Connection conn = new Database().createConnection();
@@ -190,6 +215,12 @@ public class Controller {
         daoReduction.ajoutReduc(idSeance, reduc);
     }
 
+    /**
+     * @param idfilm
+     * @param idsalle
+     * @param datePicker
+     * @param timeSpinner
+     */
     public void ajoutSeance(String idfilm, String idsalle, java.util.Date datePicker, java.util.Date timeSpinner){
         daoSeance.ajoutSeance(idfilm, idsalle, datePicker, timeSpinner);
     }

@@ -16,6 +16,9 @@ public class MenuGUI extends JFrame {
     private JButton btnInvite;
     private Controller controller;
 
+    /**
+     * @param controller
+     */
     public MenuGUI(Controller controller) {
         this.controller = controller;
         setTitle("Menu");

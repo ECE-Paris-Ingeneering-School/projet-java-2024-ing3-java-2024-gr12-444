@@ -5,6 +5,11 @@ public class Salle {
     private String nom;
     private int nbPlaceSalle;
 
+    /**
+     * @param salleId
+     * @param nom
+     * @param nbPlaceSalle
+     */
     public Salle(int salleId, String nom, int nbPlaceSalle) {
         this.salleId = salleId;
         this.nom = nom;

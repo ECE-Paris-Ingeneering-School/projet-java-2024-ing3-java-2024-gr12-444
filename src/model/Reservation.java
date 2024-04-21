@@ -8,6 +8,12 @@ public class Reservation {
     private String filmTitle;
     private String date;
 
+    /**
+     * @param userId
+     * @param seanceId
+     * @param nbDeBillets
+     * @param prix
+     */
     public Reservation(int userId, int seanceId, int nbDeBillets, double prix) {
         this.userId = userId;
         this.seanceId = seanceId;

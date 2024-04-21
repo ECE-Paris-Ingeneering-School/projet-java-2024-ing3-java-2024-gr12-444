@@ -11,6 +11,19 @@ import java.awt.event.ActionListener;
 public class Card {
     private JButton buttonX;
 
+    /**
+     * @param user
+     * @param titre
+     * @param time
+     * @param genre
+     * @param description
+     * @param classification
+     * @param date
+     * @param imgPath
+     * @param panelX
+     * @param controller
+     * @param filmId
+     */
     public Card(User user, String titre, String time, String genre, String description, String classification, String date, String imgPath, JPanel panelX, Controller controller, int filmId) {
         panelX.setBorder(BorderFactory.createLineBorder(Color.GREEN));
         panelX.setLayout(new BorderLayout());
