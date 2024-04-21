@@ -331,8 +331,25 @@ public class PaimentInterface extends JFrame implements ActionListener {
         double childPrice = 7.0;
         double seniorPrice = 8.0;
 
-        // Calcul du total
-        return (adultTickets * adultPrice) + (childTickets * childPrice * 0.8) + (seniorTickets * seniorPrice * 0.85);
+        if (user != null) {
+            if (Integer.parseInt(user.getTypeMembre()) == 1) {
+                adultPrice = 10.0;
+                childPrice = 7.0* 0.8;
+                seniorPrice = 8.0;
+                return (adultTickets * adultPrice) + (childTickets * childPrice) + (seniorTickets * seniorPrice);
+            } else if (Integer.parseInt(user.getTypeMembre()) == 2) {
+                adultPrice = 10.0;
+                childPrice = 7.0;
+                seniorPrice = 8.0* 0.8;
+                return (adultTickets * adultPrice) + (childTickets * childPrice) + (seniorTickets * seniorPrice);
+            } else if (Integer.parseInt(user.getTypeMembre()) == 3 || Integer.parseInt(user.getTypeMembre()) == 0){
+                adultPrice = 10.0;
+                childPrice = 7.0;
+                seniorPrice = 8.0;
+                return (adultTickets * adultPrice) + (childTickets * childPrice) + (seniorTickets * seniorPrice);
+            }
+        }
+        return (adultTickets * adultPrice) + (childTickets * childPrice) + (seniorTickets * seniorPrice);
     }
 
     /**
