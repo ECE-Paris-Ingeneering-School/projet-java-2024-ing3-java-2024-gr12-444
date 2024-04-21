@@ -2,7 +2,6 @@ package controller;
 
 import database.Database;
 import model.*;
-import vue.Ajouter;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -23,7 +22,7 @@ public class Controller {
 
     private final DAOSalle daoSalle;
 
-    private DAOPaiment daoPaiment;
+    private DAOPaiement daoPaiment;
 
     private DAOReduction daoReduction;
     private Reduction reduction;
@@ -33,7 +32,7 @@ public class Controller {
         this.daoFilm = new DAOFilm();
         this.daoSeance = new DAOSeance();
         this.daoSalle = new DAOSalle();
-        this.daoPaiment = new DAOPaiment();
+        this.daoPaiment = new DAOPaiement();
 
     }
 

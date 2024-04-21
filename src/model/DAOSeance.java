@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Classe qui gère les opérations liées aux séances dans la base de données
+ */
 public class DAOSeance {
     private Controller controller;
     private int filmid;
@@ -14,21 +17,27 @@ public class DAOSeance {
     private ArrayList<Seance> list = new ArrayList<>();
 
     /**
-     * @return filmid
+     * Méthode qui obtient l'ID du film associé à la séance
+     *
+     * @return L'ID du film associé à la séance
      */
     public int getFilmid() {
         return filmid;
     }
 
     /**
-     * @param filmid
+     * Méthode qui définit l'ID du film associé à la séance
+     *
+     * @param filmid L'ID du film associé à la séance à définir
      */
     public void setFilmid(int filmid) {
         this.filmid = filmid;
     }
 
     /**
-     * @param controller
+     * Méthode qui initialise les séances en fonction de l'ID du film
+     *
+     * @param controller Le contrôleur utilisé pour récupérer l'ID du film
      */
     public void seance(Controller controller) {
         this.controller = controller;
@@ -76,27 +85,32 @@ public class DAOSeance {
     }
 
     /**
-     * @return seance
+     * Méthode qui obtient la séance actuelle
+     *
+     * @return La séance actuelle
      */
     public Seance getSeance() {
         return seance;
     }
 
     /**
-     * @return list
+     * Méthode qui obtient la liste des séances
+     *
+     * @return La liste des séances
      */
     public ArrayList<Seance> getList() {
         return list;
     }
 
     /**
-     * @param seanceId
-     * @param nbPlaces
+     * Méthode qui réduit le nombre de places restantes pour une séance donnée
+     *
+     * @param seanceId L'ID de la séance
+     * @param nbPlaces Le nombre de places à réduire
      */
     public void decreaseSeanceSeats(int seanceId, int nbPlaces) {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
-
 
         String sql = "UPDATE séance SET NbPlacesRestantes = NbPlacesRestantes - ? WHERE séance.SeanceID = " + seanceId;
         try {
@@ -130,10 +144,12 @@ public class DAOSeance {
     }
 
     /**
-     * @param idfilm
-     * @param idsalle
-     * @param selectedDate2
-     * @param selectedTime2
+     * Méthode qui ajoute une nouvelle séance à la base de données
+     *
+     * @param idfilm          L'ID du film de la séance
+     * @param idsalle         L'ID de la salle de la séance
+     * @param selectedDate2   La date de la séance
+     * @param selectedTime2   L'heure de début de la séance
      */
     public void ajoutSeance(String idfilm, String idsalle, java.util.Date selectedDate2, java.util.Date selectedTime2) {
 
@@ -162,7 +178,6 @@ public class DAOSeance {
         try {
             Database database = new Database();
             Connection conn = database.createConnection();
-            System.out.println("connection success");
 
             Statement statement = conn.createStatement();
             String sql = "INSERT INTO séance (FilmID, SalleID, HeureDeDebut, Date, NbPlacesRestantes)" + "VALUES (?, ?, ?, ?, ?)";
@@ -175,13 +190,10 @@ public class DAOSeance {
 
             preparedStatement.executeUpdate();
 
-
-            //fermeture
             statement.close();
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

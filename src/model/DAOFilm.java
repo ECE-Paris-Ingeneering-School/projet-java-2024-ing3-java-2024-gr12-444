@@ -7,13 +7,18 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Classe qui gère les opérations liées aux films dans la base de données
+ */
 public class DAOFilm {
     private Controller controller;
 
     private ArrayList<Film> list = new ArrayList<>();
 
     /**
-     * @param controller
+     * Récupère les données des films depuis la base de données et les stocke dans une liste
+     *
+     * @param controller Le contrôleur associé
      */
     public void film(Controller controller) {
         this.controller = controller;
@@ -21,7 +26,6 @@ public class DAOFilm {
         Connection dbConnection = null;
         Statement statement = null;
 
-        //faire la requete
         String sql = "SELECT * FROM films WHERE 1";
 
         try {
@@ -40,8 +44,6 @@ public class DAOFilm {
                             rs.getString(8));
                     list.add(film);
                 }
-
-                // System.out.println("read");
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             } finally {
@@ -65,6 +67,17 @@ public class DAOFilm {
 
     }
 
+    /**
+     * Méthode qui ajoute un nouveau film à la base de données
+     *
+     * @param titre          Le titre du film
+     * @param genre          Le genre du film
+     * @param classification La classification du film
+     * @param description    La description du film
+     * @param poster         Le chemin vers le poster du film
+     * @param datePicker     La date de sortie du film
+     * @param timeSpinner    La durée du film
+     */
     public void ajoutFilm(String titre, String genre, String classification, String description, String poster, java.util.Date datePicker, java.util.Date timeSpinner) {
 
 
@@ -97,8 +110,6 @@ public class DAOFilm {
 
             preparedStatement.executeUpdate();
 
-
-            //fermeture
             statement.close();
             conn.close();
         } catch (Exception e) {
@@ -107,10 +118,12 @@ public class DAOFilm {
 
     }
 
+    /**
+     * Méthode qui récupère la liste des films
+     *
+     * @return La liste des films
+     */
     public ArrayList<Film> getList() {
         return list;
     }
-
-
 }
-

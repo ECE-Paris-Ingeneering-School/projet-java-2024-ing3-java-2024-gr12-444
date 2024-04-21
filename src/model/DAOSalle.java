@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Classe qui gère les opérations liées aux salles dans la base de données
+ */
 public class DAOSalle {
 
     private Controller controller;
@@ -15,21 +18,27 @@ public class DAOSalle {
     private int salleid;
 
     /**
-     * @return salleid
+     * Méthode qui obtient l'ID de la salle
+     *
+     * @return L'ID de la salle
      */
     public int getSalleid() {
         return salleid;
     }
 
     /**
-     * @param salleid
+     * Méthode qui définit l'ID de la salle
+     *
+     * @param salleid L'ID de la salle à définir
      */
     public void setSalleid(int salleid) {
         this.salleid = salleid;
     }
 
     /**
-     * @param controller
+     * Méthode qui initialise la salle en fonction de l'ID fourni
+     *
+     * @param controller Le contrôleur utilisé pour récupérer l'ID de la salle
      */
     public void salle(Controller controller) {
         this.controller = controller;
@@ -73,7 +82,9 @@ public class DAOSalle {
     }
 
     /**
-     * @return salle
+     * Méthode qui obtient l'objet Salle
+     *
+     * @return L'objet Salle
      */
     public Salle getSalle() {
         return salle;

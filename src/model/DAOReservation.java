@@ -6,16 +6,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Classe qui gère les opérations de réservation dans la base de données
+ */
 public class DAOReservation {
     private static Connection conn;
 
     /**
-     * @param conn
+     * Constructeur de la classe DAOReservation
+     *
+     * @param conn La connexion à la base de données
      */
     public DAOReservation(Connection conn) {
         this.conn = conn;
     }
 
+    /**
+     * Méthode qui récupère les réservations d'un utilisateur donné
+     *
+     * @param userId L'ID de l'utilisateur pour lequel récupérer les réservations
+     * @return Une liste d'objets Reservation.
+     * @throws SQLException Si une erreur SQL survient lors de l'exécution de la requête
+     */
     public static ArrayList<Reservation> getReservations(int userId) throws SQLException {
         ArrayList<Reservation> userReservations = new ArrayList<>();
 
@@ -43,4 +55,3 @@ public class DAOReservation {
         return userReservations;
     }
 }
-

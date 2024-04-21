@@ -5,15 +5,20 @@ import database.Database;
 
 import java.sql.*;
 
-public class DAOPaiment {
+/**
+ * Classe qui gère les opérations de paiement dans la base de données
+ */
+public class DAOPaiement {
     private Controller controller;
 
     /**
-     * @param controller
-     * @param userId
-     * @param seanceId
-     * @param nbBillet
-     * @param prix
+     * Méthode qui effectue une réservation pour un utilisateur
+     *
+     * @param controller Le contrôleur associé
+     * @param userId     L'ID de l'utilisateur effectuant la réservation
+     * @param seanceId   L'ID de la séance pour laquelle la réservation est effectuée
+     * @param nbBillet   Le nombre de billets réservés
+     * @param prix       Le prix total de la réservation
      */
     public void reservation(Controller controller, int userId, int seanceId, int nbBillet, double prix) {
         this.controller = controller;
@@ -22,9 +27,7 @@ public class DAOPaiment {
         Statement statement = null;
         PreparedStatement preparedStatement = null;
 
-        //faire la requete
         String sql = "INSERT INTO `réservation`(`UserID`, `SeanceID`, `NbDeBillets`, `Prix`) VALUES (?,?,?,?)";
-
 
         try {
             Database database = new Database();

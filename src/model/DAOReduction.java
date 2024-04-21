@@ -4,16 +4,28 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Classe qui gère les opérations de réduction dans la base de données
+ */
 public class DAOReduction {
     private static Connection conn;
 
     /**
-     * @param conn
+     * Constructeur de la classe DAOReduction
+     *
+     * @param conn La connexion à la base de données
      */
     public DAOReduction(Connection conn) {
         this.conn = conn;
     }
 
+    /**
+     * Méthode qui récupère les réductions associées à une séance donnée
+     *
+     * @param seanceId L'ID de la séance pour laquelle récupérer les réductions
+     * @return Une liste d'objets Reduction.
+     * @throws SQLException Si une erreur SQL survient lors de l'exécution de la requête
+     */
     public static ArrayList<Reduction> getReduction(int seanceId) throws SQLException {
         ArrayList<Reduction> reductions = new ArrayList<>();
 
@@ -32,8 +44,10 @@ public class DAOReduction {
     }
 
     /**
-     * @param idSeance
-     * @param reduc
+     * Méthode qui ajoute une nouvelle réduction dans la base de données
+     *
+     * @param idSeance L'ID de la séance associée à la réduction
+     * @param reduc    Le montant de la réduction à ajouter
      */
     public void ajoutReduc(String idSeance, String reduc) {
         if (idSeance.isEmpty() || reduc.isEmpty()) {
@@ -52,6 +66,4 @@ public class DAOReduction {
             e.printStackTrace();
         }
     }
-
 }
-

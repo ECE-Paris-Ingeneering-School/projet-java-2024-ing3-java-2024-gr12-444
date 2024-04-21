@@ -5,31 +5,56 @@ import database.Database;
 
 import java.sql.*;
 
+/**
+ * Classe qui gère les opérations liées aux utilisateurs dans la base de données
+ */
 public class DAOUser {
     private String username;
     private String password;
     private int typemembre;
 
+    /**
+     * Méthode qui obtient le nom d'utilisateur
+     *
+     * @return Le nom d'utilisateur
+     */
     public String getUsername() {
         return this.username;
     }
 
+    /**
+     * Méthode qui obtient le mot de passe
+     *
+     * @return Le mot de passe
+     */
     public String getPassword() {
         return this.password;
     }
 
+    /**
+     * Méthode qui définit le nom d'utilisateur
+     *
+     * @param username Le nom d'utilisateur à définir
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Méthode qui définit le mot de passe
+     *
+     * @param password Le mot de passe à définir
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     * @param email
-     * @param motDePasse
-     * @return
+     * Méthode qui récupère un utilisateur à partir de son adresse e-mail et de son mot de passe
+     *
+     * @param email      L'adresse e-mail de l'utilisateur
+     * @param motDePasse Le mot de passe de l'utilisateur
+     * @return L'utilisateur correspondant aux informations fournies
      */
     public static User getUser(String email, String motDePasse) {
         User user = null;
@@ -75,12 +100,14 @@ public class DAOUser {
     }
 
     /**
-     * @param prenom
-     * @param nom
-     * @param age
-     * @param mail
-     * @param motDePasse
-     * @return
+     * Méthode qui ajoute un nouvel utilisateur à la base de données
+     *
+     * @param prenom     Le prénom de l'utilisateur
+     * @param nom        Le nom de l'utilisateur
+     * @param age        L'âge de l'utilisateur
+     * @param mail       L'adresse e-mail de l'utilisateur
+     * @param motDePasse Le mot de passe de l'utilisateur
+     * @return L'utilisateur ajouté à la base de données
      */
     public static User addUser(String prenom, String nom, String age, String mail, String motDePasse) {
         User user = null;
@@ -97,11 +124,9 @@ public class DAOUser {
             preparedStatement.setString(5, motDePasse);
             if (Integer.parseInt(age) > 0 && Integer.parseInt(age) < 18) {
                 preparedStatement.setInt(6, 1);
-            }
-            else if (Integer.parseInt(age) >= 18 && Integer.parseInt(age) < 60) {
+            } else if (Integer.parseInt(age) >= 18 && Integer.parseInt(age) < 60) {
                 preparedStatement.setInt(6, 3);
-            }
-            else if (Integer.parseInt(age) >= 60){
+            } else if (Integer.parseInt(age) >= 60) {
                 preparedStatement.setInt(6, 2);
             }
 
