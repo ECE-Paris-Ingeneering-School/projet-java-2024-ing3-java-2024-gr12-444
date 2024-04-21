@@ -14,6 +14,7 @@ public class Supprimer extends JFrame implements ActionListener {
     private Controller controller;
     private JLabel titre;
     private JButton quitter;
+    private JTextField tfIDFilm;
 
     private ArrayList<Film> list;
 
@@ -42,6 +43,37 @@ public class Supprimer extends JFrame implements ActionListener {
         titrePanel.add(titre);
         add(titrePanel, BorderLayout.NORTH);
 
+
+
+        JPanel sectionSupprimer = new JPanel(new GridBagLayout());
+        JLabel titreSection = new JLabel("Supprimer un film : ");
+        JButton boutonSection = new JButton("Suppression du film");
+        JLabel idFilm = new JLabel("ID du film à supprimer :");
+        tfIDFilm = new JTextField(10);
+        boutonSection.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                supprimerFilm();
+                Supprimer.this.dispose();
+            }
+
+        });
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(0, 0, 10, 0);
+        sectionSupprimer.add(titreSection, gbc);
+
+        gbc.gridy = 1;
+        sectionSupprimer.add(idFilm, gbc);
+        gbc.gridy = 2;
+        sectionSupprimer.add(tfIDFilm, gbc);
+
+        gbc.gridy = 3;
+        sectionSupprimer.add(boutonSection, gbc);
+
+        add(sectionSupprimer, BorderLayout.CENTER);
+
         //Deconection ou quitter etc
         JPanel menu = new JPanel(new FlowLayout(FlowLayout.CENTER));
         menu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -52,16 +84,17 @@ public class Supprimer extends JFrame implements ActionListener {
 
         add(menu, BorderLayout.SOUTH);
 
-        //sections
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(list.size(), 1));
-        panel.setBorder(BorderFactory.createLineBorder(Color.RED));
-
-        JScrollPane scrollPanel = new JScrollPane(panel);
-        scrollPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-        add(scrollPanel, BorderLayout.CENTER);
 
         setVisible(true);
+    }
+
+    private void supprimerFilm() {
+
+        String idFilm = tfIDFilm.getText();
+
+        controller.supprimerFilm(idFilm);
+
+
     }
 
     public void actionPerformed(ActionEvent e) {

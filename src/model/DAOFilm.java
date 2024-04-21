@@ -119,6 +119,44 @@ public class DAOFilm {
     }
 
     /**
+     * Méthode qui permet de supprimer un film
+     *
+     * @param idfilm      L'ID du film à supprimer
+     */
+    public void supprimerFilm(String idfilm) {
+
+
+        if (idfilm.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs", "Essayer encore", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            Database database = new Database();
+            Connection conn = database.createConnection();
+            System.out.println("connection success");
+
+            Statement statement = conn.createStatement();
+            String sql = "DELETE FROM films WHERE FilmID = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, idfilm);
+            int resultat = preparedStatement.executeUpdate();
+
+            if (resultat > 0) {
+                JOptionPane.showMessageDialog(null, "Le film a été supprimé avec succès", "Succès", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Impossible de trouver un film avec cet ID", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+
+            statement.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
      * Méthode qui récupère la liste des films
      *
      * @return La liste des films

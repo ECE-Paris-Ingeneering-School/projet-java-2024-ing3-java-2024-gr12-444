@@ -324,4 +324,15 @@ public class Controller {
     public void ajoutSeance(String idfilm, String idsalle, java.util.Date datePicker, java.util.Date timeSpinner) {
         daoSeance.ajoutSeance(idfilm, idsalle, datePicker, timeSpinner);
     }
+
+    /**
+     * Méthode qui permet de supprimer un film
+     *
+     * @param idfilm      L'ID du film à supprimer
+     */
+    public void supprimerFilm(String idfilm){
+        daoFilm.supprimerFilm(idfilm);
+    }
+
+
 }
